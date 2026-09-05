@@ -1,0 +1,15 @@
+@use '../../styles/abstracts/breakpoints' as bp;
+
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+
+  @include bp.respond-to('md') {
+    padding-inline: var(--space-6);
+  }
+
+  @include bp.respond-to('lg') {
+    max-width: 1120px;
+  }
+}
