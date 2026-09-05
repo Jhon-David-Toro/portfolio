@@ -1,0 +1,98 @@
+{
+  "nav": {
+    "ariaLabel": "Principal",
+    "about": "Sobre mí",
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "skills": "Habilidades",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "eyebrow": "Desarrollador de Software",
+    "tagline": "Desarrollador de software enfocado en frontend, construyendo interfaces web modernas y escalables — con experiencia complementaria en backend."
+  },
+  "about": {
+    "heading": "Sobre mí",
+    "body": "Soy un desarrollador de software con más de 2 años de experiencia profesional, principalmente enfocado en desarrollo frontend, con experiencia complementaria en backend y desarrollo full stack. He participado en el desarrollo, mantenimiento y evolución de aplicaciones web, trabajando en proyectos empresariales y soluciones orientadas a las necesidades específicas de los clientes. Mi experiencia se centra en la construcción de interfaces de usuario modernas, responsivas y escalables, utilizando arquitecturas basadas en componentes, integración de APIs REST y buenas prácticas de desarrollo de software."
+  },
+  "experience": {
+    "heading": "Experiencia",
+    "present": "Presente",
+    "items": {
+      "epam": {
+        "role": "Software Engineer",
+        "highlights": []
+      },
+      "neoris": {
+        "role": "Software Development Analyst",
+        "highlights": [
+          "Diseñé, desarrollé y mantuve componentes web reutilizables y encapsulados bajo una arquitectura basada en componentes, priorizando modularidad, reutilización y mantenibilidad.",
+          "Construí y mantuve componentes web con Lit, aprovechando el renderizado reactivo y plantillas ligeras para entregar interfaces eficientes y reutilizables.",
+          "Desarrollé pruebas unitarias con Mocha, Sinon y Open Web Components (open-wc), cubriendo comportamiento de componentes, lógica de negocio, eventos y dependencias mediante mocks y stubs.",
+          "Implementé pruebas end-to-end con Cucumber para validar flujos completos de la aplicación y alinearlos con escenarios de usuario y procesos de negocio reales.",
+          "Apliqué prácticas estrictas de calidad de código con ESLint, cobertura de pruebas, baja complejidad y estándares consistentes para mantener un código limpio y escalable.",
+          "Traduje requisitos funcionales en soluciones técnicas alineadas con la lógica de negocio del cliente, asegurando que componentes y flujos soportaran los procesos esperados."
+        ]
+      },
+      "fisapay": {
+        "role": "Software Engineer",
+        "highlights": [
+          "Brindé soporte y mantenimiento a sistemas de software en entornos frontend y backend, asegurando la estabilidad, el rendimiento y la mejora continua de las aplicaciones.",
+          "Gestioné y optimicé bases de datos, centrándome en la indexación, el rendimiento de las consultas, la organización de los datos y la eficiencia general de la base de datos.",
+          "Brindé soporte y mejoré una aplicación Angular 14 implementando nuevas funcionalidades, manteniendo las características existentes, resolviendo problemas y mejorando la usabilidad y el rendimiento.",
+          "Brindé soporte y mantuve la funcionalidad backend usando .NET y ASP.NET Core, incluyendo API, lógica de negocio, acceso a datos e integraciones entre aplicaciones frontend y servicios backend.",
+          "Brindé soporte técnico al cliente identificando, analizando y resolviendo problemas relacionados con la plataforma, y me comuniqué con los usuarios para entender requisitos y brindar soluciones apropiadas."
+        ]
+      },
+      "emberalab": {
+        "role": "Desarrollador de Software",
+        "highlights": [
+          "Implementé interfaces responsivas y visualmente consistentes a partir de diseños en Figma, con un enfoque pixel-perfect.",
+          "Participé en el desarrollo y mantenimiento de múltiples proyectos de software en entornos frontend.",
+          "Desarrollé aplicaciones web con Angular 18 y 19, integrando servicios mediante GraphQL, estilos con Sass y manejo reactivo con RxJS.",
+          "Construí interfaces interactivas con React 18, usando Framer Motion para animaciones, Tailwind CSS para estilos y herramientas de analítica para monitorear el comportamiento de usuario.",
+          "Contribuí al backend con un prototipo de chatbot de WhatsApp en Go, orientado a automatizar interacciones y procesamiento de mensajes.",
+          "Desarrollé, personalicé y mantuve sitios en WordPress con funcionalidades adaptadas a los requerimientos de cada proyecto."
+        ]
+      }
+    }
+  },
+  "projects": {
+    "heading": "Proyectos",
+    "mock": {
+      "note": "Proyectos de ejemplo — muy pronto agregaré casos de estudio reales aquí."
+    },
+    "items": {
+      "project-one": {
+        "title": "Proyecto Uno",
+        "summary": "Proyecto de ejemplo usado para previsualizar este diseño. Será reemplazado por un caso de estudio real."
+      },
+      "project-two": {
+        "title": "Proyecto Dos",
+        "summary": "Otro proyecto de ejemplo para probar la cuadrícula de proyectos."
+      },
+      "project-three": {
+        "title": "Proyecto Tres",
+        "summary": "Marcador de posición final antes de agregar contenido real."
+      }
+    }
+  },
+  "skills": {
+    "heading": "Habilidades",
+    "groups": {
+      "languagesFrameworks": "Lenguajes y Frameworks",
+      "stylingData": "Estilos y Datos",
+      "testingQuality": "Testing y Calidad",
+      "toolsPractices": "Herramientas y Prácticas"
+    }
+  },
+  "notFound": {
+    "heading": "Página no encontrada"
+  },
+  "contact": {
+    "heading": "Contacto",
+    "intro": "¿Tienes un proyecto en mente o quieres conversar? Escríbeme por correo o revisa mi trabajo en GitHub.",
+    "emailCta": "Escríbeme",
+    "githubCta": "Ver GitHub"
+  }
+}

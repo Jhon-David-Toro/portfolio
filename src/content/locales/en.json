@@ -1,0 +1,98 @@
+{
+  "nav": {
+    "ariaLabel": "Primary",
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact"
+  },
+  "hero": {
+    "eyebrow": "Software Developer",
+    "tagline": "Frontend-focused software developer building modern, scalable web interfaces — with complementary backend experience."
+  },
+  "about": {
+    "heading": "About",
+    "body": "I'm a software developer with over 2 years of professional experience, primarily focused on frontend development, with complementary backend and full-stack experience. I've worked on the development, maintenance, and evolution of web applications across enterprise projects and client-specific solutions. My experience centers on building modern, responsive, and scalable user interfaces using component-based architectures, REST API integration, and solid software engineering practices."
+  },
+  "experience": {
+    "heading": "Experience",
+    "present": "Present",
+    "items": {
+      "epam": {
+        "role": "Software Engineer",
+        "highlights": []
+      },
+      "neoris": {
+        "role": "Software Development Analyst",
+        "highlights": [
+          "Designed, built, and maintained reusable, encapsulated web components under a component-based architecture, prioritizing modularity, reusability, and maintainability.",
+          "Built and maintained web components with Lit, leveraging reactive rendering and lightweight templates to ship efficient, reusable interfaces.",
+          "Wrote unit tests with Mocha, Sinon, and Open Web Components (open-wc), covering component behavior, business logic, events, and dependencies via mocks and stubs.",
+          "Implemented end-to-end tests with Cucumber to validate complete application flows against real user scenarios and business processes.",
+          "Applied strict code quality practices — ESLint, test coverage, low complexity, and consistent standards — to keep the codebase clean and scalable.",
+          "Translated functional requirements into technical solutions aligned with the client's business logic, ensuring components and flows supported the expected processes."
+        ]
+      },
+      "fisapay": {
+        "role": "Software Engineer",
+        "highlights": [
+          "Supported and maintained software systems across frontend and backend environments, ensuring stability, performance, and continuous improvement.",
+          "Managed and optimized databases, focusing on indexing, query performance, data organization, and overall database efficiency.",
+          "Supported and enhanced an Angular 14 application — building new features, maintaining existing ones, fixing issues, and improving usability and performance.",
+          "Supported backend functionality built with .NET and ASP.NET Core, including APIs, business logic, data access, and integrations between frontend applications and backend services.",
+          "Provided technical support to clients by identifying, analyzing, and resolving platform issues, communicating with users to understand requirements and deliver appropriate solutions."
+        ]
+      },
+      "emberalab": {
+        "role": "Software Developer",
+        "highlights": [
+          "Implemented responsive, visually consistent interfaces from Figma designs with a pixel-perfect approach.",
+          "Contributed to the development and maintenance of multiple frontend software projects.",
+          "Built web applications with Angular 18 and 19, integrating services via GraphQL, styling with Sass, and reactive state management with RxJS.",
+          "Built interactive interfaces with React 18, using Framer Motion for animations, Tailwind CSS for styling, and analytics tooling to monitor user behavior.",
+          "Contributed to the backend with a Go-based WhatsApp chatbot prototype aimed at automating interactions and message processing.",
+          "Developed, customized, and maintained WordPress sites with functionality tailored to each project's requirements."
+        ]
+      }
+    }
+  },
+  "projects": {
+    "heading": "Projects",
+    "mock": {
+      "note": "Placeholder projects — real case studies coming soon."
+    },
+    "items": {
+      "project-one": {
+        "title": "Project One",
+        "summary": "Sample project used to preview this layout. Will be replaced with a real case study."
+      },
+      "project-two": {
+        "title": "Project Two",
+        "summary": "Another placeholder project to test the project grid."
+      },
+      "project-three": {
+        "title": "Project Three",
+        "summary": "Final placeholder before real content is added."
+      }
+    }
+  },
+  "skills": {
+    "heading": "Skills",
+    "groups": {
+      "languagesFrameworks": "Languages & Frameworks",
+      "stylingData": "Styling & Data",
+      "testingQuality": "Testing & Quality",
+      "toolsPractices": "Tools & Practices"
+    }
+  },
+  "notFound": {
+    "heading": "Page not found"
+  },
+  "contact": {
+    "heading": "Contact",
+    "intro": "Have a project in mind or just want to talk? Reach out by email or check out my work on GitHub.",
+    "emailCta": "Email me",
+    "githubCta": "View GitHub"
+  }
+}

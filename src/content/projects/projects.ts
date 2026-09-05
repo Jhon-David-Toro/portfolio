@@ -1,9 +1,17 @@
-import type { Project } from './project.types'
+import type { ProjectMeta } from './project.types'
 
-// No case studies are written yet — Phase 3 populates this. The accessor
-// below already gives pages a real, working contract to depend on.
-const projects: readonly Project[] = []
+// Placeholder projects, standing in until real case studies are added.
+// Their title/summary come from content/locales/{en,es}.json.
+const projects: readonly ProjectMeta[] = [
+  { slug: 'project-one' },
+  { slug: 'project-two' },
+  { slug: 'project-three' },
+]
 
-export function getProjectBySlug(slug: string): Project | undefined {
-  return projects.find((project) => project.slug === slug)
+export function getProjects(): readonly ProjectMeta[] {
+  return projects
+}
+
+export function projectExists(slug: string): boolean {
+  return projects.some((project) => project.slug === slug)
 }

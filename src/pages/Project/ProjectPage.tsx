@@ -1,19 +1,20 @@
 import { useParams } from 'react-router'
-import { getProjectBySlug } from '../../content/projects/projects'
+import { useTranslation } from 'react-i18next'
+import { projectExists } from '../../content/projects/projects'
 import { NotFoundPage } from '../NotFound/NotFoundPage'
 
 export function ProjectPage() {
   const { slug } = useParams<{ slug: string }>()
-  const project = slug ? getProjectBySlug(slug) : undefined
+  const { t } = useTranslation()
 
-  if (!project) {
+  if (!slug || !projectExists(slug)) {
     return <NotFoundPage />
   }
 
   return (
     <article aria-labelledby="project-title">
-      <h1 id="project-title">{project.title}</h1>
-      <p>{project.summary}</p>
+      <h1 id="project-title">{t(`projects.items.${slug}.title`)}</h1>
+      <p>{t(`projects.items.${slug}.summary`)}</p>
     </article>
   )
 }

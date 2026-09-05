@@ -1,12 +1,19 @@
-// Section landmarks matching the header's anchors. Content (Hero, About,
-// Projects, Skills, Contact copy) is introduced in a later phase.
+import { AboutSection } from '../../features/about/AboutSection'
+import { ContactSection } from '../../features/contact/ContactSection'
+import { ExperienceSection } from '../../features/experience/ExperienceSection'
+import { HeroSection } from '../../features/hero/HeroSection'
+import { ProjectsSection } from '../../features/projects/ProjectsSection'
+import { SkillsSection } from '../../features/skills/SkillsSection'
+
 export function HomePage() {
   return (
     <>
-      <section id="about" aria-label="About" />
-      <section id="projects" aria-label="Projects" />
-      <section id="skills" aria-label="Skills" />
-      <section id="contact" aria-label="Contact" />
+      <HeroSection />
+      <AboutSection />
+      <ExperienceSection />
+      <ProjectsSection />
+      <SkillsSection />
+      <ContactSection />
     </>
   )
 }
