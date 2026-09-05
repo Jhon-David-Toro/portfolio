@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react'
+import { motion } from 'motion/react'
+import { fadeUpVariants } from '../../core/motion/variants'
 import { Container } from '../Container/Container'
 import styles from './Section.module.scss'
 
@@ -11,8 +13,16 @@ type SectionProps = {
 
 export function Section({ id, children, ...aria }: SectionProps) {
   return (
-    <section id={id} className={styles.section} {...aria}>
+    <motion.section
+      id={id}
+      className={styles.section}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-80px' }}
+      variants={fadeUpVariants}
+      {...aria}
+    >
       <Container>{children}</Container>
-    </section>
+    </motion.section>
   )
 }

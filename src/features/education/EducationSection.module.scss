@@ -1,0 +1,42 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.item {
+  padding-block-start: var(--space-4);
+  border-top: 1px solid var(--color-border);
+
+  &:first-child {
+    padding-block-start: 0;
+    border-top: none;
+  }
+}
+
+.program {
+  font-size: var(--font-size-lg);
+}
+
+.meta {
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.coursesHeading {
+  margin-top: var(--space-10);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badgeList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
