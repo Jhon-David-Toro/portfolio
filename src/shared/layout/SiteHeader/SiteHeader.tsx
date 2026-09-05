@@ -3,9 +3,7 @@ import { Link } from 'react-router'
 import { useActiveSection } from '../../../core/scroll/useActiveSection'
 import { BottomNav, type BottomNavItem } from '../../../design-system/BottomNav/BottomNav'
 import { Container } from '../../../design-system/Container/Container'
-import { LanguageSwitcher } from '../../../design-system/LanguageSwitcher/LanguageSwitcher'
 import { Navigation, type NavItem } from '../../../design-system/Navigation/Navigation'
-import { ThemeToggle } from '../../../design-system/ThemeToggle/ThemeToggle'
 import styles from './SiteHeader.module.scss'
 
 const SECTION_IDS = ['about', 'experience', 'education', 'projects', 'skills', 'contact'] as const
@@ -47,8 +45,9 @@ export function SiteHeader() {
             </div>
 
             <div className={styles.controls}>
-              <ThemeToggle />
-              <LanguageSwitcher />
+              <a className={styles.cvLink} href="/jhon-toro-cv.pdf" download>
+                {t('nav.downloadCv')}
+              </a>
             </div>
           </div>
         </Container>

@@ -1,40 +1,71 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  max-width: 480px;
-  margin-top: var(--space-6);
+  gap: var(--space-6);
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--space-2);
+}
 
-  label {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
+.label {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+// Minimal "underline" style — no filled box, no border-radius. Lets the
+// typography carry the field rather than a generic bordered input box.
+.input,
+.textarea {
+  padding-block: var(--space-2);
+  border-style: none none solid none;
+  border-width: 0 0 1px 0;
+  border-color: transparent transparent var(--color-border) transparent;
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-lg);
+  transition: border-bottom-color var(--motion-duration-fast) var(--motion-easing-standard);
+
+  &::placeholder {
     color: var(--color-text-secondary);
   }
 
-  input,
-  textarea {
-    padding: var(--space-3);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background-color: var(--color-surface);
-    color: var(--color-text-primary);
-    resize: vertical;
-    transition: border-color var(--motion-duration-fast) var(--motion-easing-standard);
-
-    &:focus-visible {
-      border-color: var(--color-accent);
-    }
+  // The thickening + color change together (not color alone) is the focus
+  // indicator — replaces the global outline ring, which would look heavy on
+  // a borderless field. Padding compensates by 1px so the field doesn't
+  // shift when the border grows from 1px to 2px. Longhand properties here
+  // (not the `border-bottom` shorthand) — mixing it with the `border-*`
+  // longhands set above produced a real, reproducible bug where the color
+  // silently failed to update on focus while width/style did.
+  &:focus-visible {
+    padding-bottom: calc(var(--space-2) - 1px);
+    border-bottom-width: 2px;
+    border-bottom-color: var(--color-accent);
+    outline: none;
   }
 }
 
+.textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.formFooter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+
 .status {
-  min-height: 1.5em;
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
 }

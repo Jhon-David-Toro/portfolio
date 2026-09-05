@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { fadeUpVariants, staggerContainerVariants } from '../../core/motion/variants'
 import { profile } from '../../content/profile/profile'
@@ -32,6 +33,7 @@ export function HeroSection() {
 
   return (
     <Section aria-label={t('hero.eyebrow')}>
+      <span className={styles.backdrop} aria-hidden="true" />
       <motion.div
         ref={containerRef}
         variants={staggerContainerVariants}
@@ -39,7 +41,10 @@ export function HeroSection() {
       >
         <motion.div variants={fadeUpVariants} className={styles.eyebrowRow}>
           <span className={styles.eyebrowLine} aria-hidden="true" />
-          <p className={styles.eyebrow}>{t('hero.eyebrow')}</p>
+          <p className={styles.eyebrow}>
+            <span aria-hidden="true">$ </span>
+            {t('hero.eyebrow')}
+          </p>
         </motion.div>
 
         <motion.h1 variants={fadeUpVariants} className={styles.name}>
@@ -62,12 +67,12 @@ export function HeroSection() {
         </motion.div>
 
         <motion.div variants={fadeUpVariants} className={styles.actions}>
-          <a href="#projects" className={styles.primaryAction}>
+          <Link to="/#projects" className={styles.primaryAction}>
             {t('hero.viewWork')}
-          </a>
-          <a href="#contact" className={styles.secondaryAction}>
+          </Link>
+          <Link to="/#contact" className={styles.secondaryAction}>
             {t('hero.getInTouch')}
-          </a>
+          </Link>
         </motion.div>
       </motion.div>
     </Section>

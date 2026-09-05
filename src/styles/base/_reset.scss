@@ -54,6 +54,14 @@ a {
   text-decoration: none;
 }
 
+// Removes the default flash/rectangle WebKit/Chrome draw on tap — most
+// visible on the mobile bottom nav. :focus-visible below still covers
+// keyboard accessibility, so this only affects the transient touch flash.
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

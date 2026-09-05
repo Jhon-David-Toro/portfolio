@@ -11,4 +11,9 @@ $spacing-steps: 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32;
   // height and the scroll container's bottom padding can never drift apart.
   --bottom-nav-height: 4.5rem;
   --space-safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  // Single source of truth for the sticky header's footprint — SiteHeader
+  // enforces this as a min-height, so SettingsMenu's mobile top offset
+  // always clears it exactly.
+  --site-header-height: 4.5rem;
 }

@@ -15,7 +15,14 @@
     "education": "Education",
     "projects": "Projects",
     "skills": "Skills",
-    "contact": "Contact"
+    "contact": "Contact",
+    "downloadCv": "Download CV"
+  },
+  "settings": {
+    "openLabel": "Settings",
+    "heading": "Settings",
+    "themeLabel": "Theme",
+    "languageLabel": "Language"
   },
   "hero": {
     "eyebrow": "Software Developer",
@@ -131,6 +138,7 @@
     "intro": "Have a project in mind or just want to talk? Reach out by email or check out my work on GitHub.",
     "emailCta": "Email me",
     "githubCta": "View GitHub",
+    "formDivider": "Or send a message",
     "form": {
       "nameLabel": "Name",
       "emailLabel": "Email",
@@ -140,5 +148,10 @@
       "success": "Thanks! Your message was sent successfully.",
       "error": "Couldn't send the message. Please try again or email me directly."
     }
+  },
+  "footer": {
+    "email": "Email",
+    "github": "GitHub",
+    "rights": "All rights reserved."
   }
 }

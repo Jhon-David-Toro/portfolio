@@ -15,8 +15,6 @@ import styles from './ProjectsSection.module.scss'
 export function ProjectsSection() {
   const { t } = useTranslation()
   const projects = getProjects()
-  const featuredProject = projects.find((project) => project.featured)
-  const standardProjects = projects.filter((project) => !project.featured)
   const [openSlug, setOpenSlug] = useState<string | null>(null)
   const titleId = useId()
 
@@ -31,58 +29,33 @@ export function ProjectsSection() {
       <h2 id="projects-heading">{t('projects.heading')}</h2>
       <p className={styles.note}>{t('projects.mock.note')}</p>
 
-      <motion.div variants={staggerContainerVariants}>
-        {featuredProject && (
-          <motion.div variants={fadeUpVariants}>
+      <motion.ol className={styles.grid} variants={staggerContainerVariants}>
+        {projects.map((project, index) => (
+          <motion.li key={project.slug} variants={fadeUpVariants}>
             <motion.button
               type="button"
-              className={styles.featuredButton}
-              whileHover={{ scale: 1.01 }}
+              className={styles.card}
+              whileHover={{ y: -4 }}
               whileTap={{ scale: 0.99 }}
               transition={{ duration: durations.fast }}
               onClick={() => {
-                setOpenSlug(featuredProject.slug)
+                setOpenSlug(project.slug)
               }}
             >
-              <span className={styles.featuredNumber}>01</span>
-              <span className={styles.featuredBody}>
-                <span className={styles.featuredTitle}>
-                  {t(`projects.items.${featuredProject.slug}.title`)}
-                </span>
-                <span className={styles.featuredSummary}>
-                  {t(`projects.items.${featuredProject.slug}.summary`)}
-                </span>
-                <span className={styles.tags}>
-                  {featuredProject.tags.map((tag) => (
-                    <Badge key={tag}>{tag}</Badge>
-                  ))}
-                </span>
+              <span className={styles.cardNumber}>{String(index + 1).padStart(2, '0')}</span>
+              <span className={styles.cardTitle}>{t(`projects.items.${project.slug}.title`)}</span>
+              <span className={styles.cardSummary}>
+                {t(`projects.items.${project.slug}.summary`)}
+              </span>
+              <span className={styles.tags}>
+                {project.tags.map((tag) => (
+                  <Badge key={tag}>{tag}</Badge>
+                ))}
               </span>
             </motion.button>
-          </motion.div>
-        )}
-
-        <ol className={styles.standardList}>
-          {standardProjects.map((project, index) => (
-            <motion.li key={project.slug} variants={fadeUpVariants}>
-              <button
-                type="button"
-                className={styles.standardButton}
-                onClick={() => {
-                  setOpenSlug(project.slug)
-                }}
-              >
-                <span className={styles.standardNumber}>
-                  {String(index + 2).padStart(2, '0')}
-                </span>
-                <span className={styles.standardTitle}>
-                  {t(`projects.items.${project.slug}.title`)}
-                </span>
-              </button>
-            </motion.li>
-          ))}
-        </ol>
-      </motion.div>
+          </motion.li>
+        ))}
+      </motion.ol>
 
       {openProject && (
         <Modal

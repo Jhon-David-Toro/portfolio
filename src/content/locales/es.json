@@ -15,7 +15,14 @@
     "education": "Educación",
     "projects": "Proyectos",
     "skills": "Habilidades",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "downloadCv": "Descargar CV"
+  },
+  "settings": {
+    "openLabel": "Ajustes",
+    "heading": "Ajustes",
+    "themeLabel": "Tema",
+    "languageLabel": "Idioma"
   },
   "hero": {
     "eyebrow": "Desarrollador de Software",
@@ -131,6 +138,7 @@
     "intro": "¿Tienes un proyecto en mente o quieres conversar? Escríbeme por correo o revisa mi trabajo en GitHub.",
     "emailCta": "Escríbeme",
     "githubCta": "Ver GitHub",
+    "formDivider": "O envíame un mensaje",
     "form": {
       "nameLabel": "Nombre",
       "emailLabel": "Correo electrónico",
@@ -140,5 +148,10 @@
       "success": "¡Gracias! Tu mensaje fue enviado correctamente.",
       "error": "No se pudo enviar el mensaje. Intenta de nuevo o escríbeme directamente por correo."
     }
+  },
+  "footer": {
+    "email": "Correo",
+    "github": "GitHub",
+    "rights": "Todos los derechos reservados."
   }
 }

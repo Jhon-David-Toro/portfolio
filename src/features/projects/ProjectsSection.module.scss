@@ -7,86 +7,74 @@
   font-style: italic;
 }
 
-.featuredButton {
+.grid {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-4);
-  width: 100%;
-  padding-block: var(--space-8);
-  border-top: 1px solid var(--color-border);
+  gap: var(--space-6);
   margin-top: var(--space-8);
-  text-align: left;
 
   @include bp.respond-to('md') {
-    gap: var(--space-10);
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include bp.respond-to('lg') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  // <ol>'s <li> is only a semantic wrapper here — the grid sizing lives on
+  // .grid itself, so each item just needs to stretch to fill its cell.
+  > li {
+    height: 100%;
   }
 }
 
-.featuredNumber {
-  font-family: var(--font-family-display);
-  font-size: var(--font-size-display-sm);
-  color: var(--color-border);
-  transition: color var(--motion-duration-base) var(--motion-easing-standard);
-}
-
-.featuredButton:hover .featuredNumber,
-.featuredButton:focus-visible .featuredNumber {
-  color: var(--color-accent);
-}
-
-.featuredBody {
+.card {
   display: flex;
+  height: 100%;
   flex-direction: column;
   gap: var(--space-3);
-  min-width: 0;
+  width: 100%;
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  text-align: left;
+  transition:
+    border-color var(--motion-duration-base) var(--motion-easing-standard),
+    box-shadow var(--motion-duration-base) var(--motion-easing-standard);
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
 }
 
-.featuredTitle {
+.cardNumber {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  transition: color var(--motion-duration-base) var(--motion-easing-standard);
+
+  .card:hover &,
+  .card:focus-visible & {
+    color: var(--color-accent);
+  }
+}
+
+.cardTitle {
   font-family: var(--font-family-display);
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-xl);
   color: var(--color-text-primary);
 }
 
-.featuredSummary {
-  max-width: 60ch;
+.cardSummary {
+  display: -webkit-box;
+  flex-grow: 1;
+  overflow: hidden;
   color: var(--color-text-secondary);
-  font-size: var(--font-size-lg);
   line-height: var(--line-height-relaxed);
-}
-
-.standardList {
-  border-bottom: 1px solid var(--color-border);
-}
-
-.standardButton {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-6);
-  width: 100%;
-  padding-block: var(--space-6);
-  border-top: 1px solid var(--color-border);
-  text-align: left;
-  transition: gap var(--motion-duration-base) var(--motion-easing-standard);
-}
-
-.standardButton:hover,
-.standardButton:focus-visible {
-  gap: var(--space-8);
-}
-
-.standardNumber {
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
-}
-
-.standardButton:hover .standardNumber,
-.standardButton:focus-visible .standardNumber {
-  color: var(--color-accent);
-}
-
-.standardTitle {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .tags {

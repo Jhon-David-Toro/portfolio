@@ -18,6 +18,22 @@
   }
 }
 
+// Painted over the static track above, scaling in from the top as the
+// reader scrolls through the section — see ExperienceSection.tsx's
+// useScroll/useTransform binding. transform: scaleY(1) is the fallback when
+// reduced motion drops the inline scaleY binding, so the fill still shows.
+.progressLine {
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: calc(var(--track-width) / 2 - 0.5px);
+  z-index: 1;
+  width: 1px;
+  transform: scaleY(1);
+  transform-origin: top;
+  background-color: var(--color-accent);
+}
+
 .node {
   position: relative;
   display: grid;

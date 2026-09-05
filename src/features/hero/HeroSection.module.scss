@@ -1,3 +1,15 @@
+// Faint dot-grid, fading out toward the bottom of the section — a subtle
+// technical/blueprint accent scoped to the Hero only (not a global texture).
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+  opacity: 0.6;
+}
+
 .eyebrowRow {
   display: flex;
   align-items: center;
@@ -14,6 +26,7 @@
 
 .eyebrow {
   color: var(--color-accent);
+  font-family: var(--font-family-mono);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;

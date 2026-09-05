@@ -2,7 +2,7 @@ import type { ProjectMeta } from './project.types'
 
 /** Project metadata used by the portfolio project views. */
 const projects: readonly ProjectMeta[] = [
-  { slug: 'project-one', tags: ['React', 'TypeScript', 'GraphQL', 'MySQL'], featured: true },
+  { slug: 'project-one', tags: ['React', 'TypeScript', 'GraphQL', 'MySQL'] },
   { slug: 'project-two', tags: ['Angular', 'RxJS', 'Node.js'] },
   { slug: 'project-three', tags: ['Lit Element', 'TypeScript', 'Cucumber'] },
 ]

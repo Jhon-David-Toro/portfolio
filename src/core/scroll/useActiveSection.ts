@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 
+// How far down the viewport counts as "reached" — matches roughly where a
+// reader's eye sits after a section heading scrolls into place.
+const ACTIVE_LINE_RATIO = 0.25
+
 /**
  * Tracks the section currently visible in the viewport.
  *
@@ -20,25 +24,44 @@ export function useActiveSection(sectionIds: readonly string[]): string | null {
       return
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const intersecting = entries.find((entry) => entry.isIntersecting)
-        if (intersecting) {
-          setActiveId(intersecting.target.id)
-        }
-      },
-      { rootMargin: '-20% 0px -70% 0px' },
-    )
+    let frame = 0
 
-    for (const element of elements) {
-      observer.observe(element)
+    // Recomputed from live geometry on every scroll/resize rather than from
+    // IntersectionObserver threshold crossings — a thin observer band can
+    // let a short section (e.g. Skills) cross it entirely between two paint
+    // frames during a fast scroll, silently skipping it. Walking elements in
+    // top-to-bottom order and keeping the last one whose top has passed the
+    // line can't skip anything, since it's a fresh, complete read each time.
+    function updateActiveSection() {
+      frame = 0
+      const line = window.innerHeight * ACTIVE_LINE_RATIO
+
+      let current: string | null = null
+      for (const element of elements) {
+        if (element.getBoundingClientRect().top <= line) {
+          current = element.id
+        }
+      }
+      setActiveId(current)
     }
 
-    // Cleanup (not the setup body) is the sanctioned place to reset state
-    // tied to this effect — runs when sectionIds/pathname change, e.g.
-    // navigating to a route with none of these sections.
+    function scheduleUpdate() {
+      if (frame) {
+        return
+      }
+      frame = requestAnimationFrame(updateActiveSection)
+    }
+
+    updateActiveSection()
+    window.addEventListener('scroll', scheduleUpdate, { passive: true })
+    window.addEventListener('resize', scheduleUpdate)
+
     return () => {
-      observer.disconnect()
+      if (frame) {
+        cancelAnimationFrame(frame)
+      }
+      window.removeEventListener('scroll', scheduleUpdate)
+      window.removeEventListener('resize', scheduleUpdate)
       setActiveId(null)
     }
   }, [sectionIds, pathname])

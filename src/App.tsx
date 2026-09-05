@@ -4,7 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { AppRoutes } from './app/router/AppRoutes'
 import { FocusOnNavigate } from './app/router/FocusOnNavigate'
 import { ScrollToHash } from './app/router/ScrollToHash'
+import { SettingsMenu } from './shared/layout/SettingsMenu/SettingsMenu'
 import { SkipLink } from './shared/layout/SkipLink/SkipLink'
+import { SiteFooter } from './shared/layout/SiteFooter/SiteFooter'
 import { SiteHeader } from './shared/layout/SiteHeader/SiteHeader'
 
 /** Renders the application shell, providers, navigation, and active route. */
@@ -18,9 +20,11 @@ function App() {
         <ScrollToHash />
         <FocusOnNavigate />
         <SiteHeader />
+        <SettingsMenu />
         <main id="main-content" tabIndex={-1}>
           <AppRoutes />
         </main>
+        <SiteFooter />
       </BrowserRouter>
     </MotionConfig>
   )

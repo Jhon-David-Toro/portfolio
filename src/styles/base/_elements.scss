@@ -1,7 +1,5 @@
 // Base element styling driven entirely by semantic tokens, so it holds for
 // both themes without any per-theme overrides here.
-@use '../abstracts/breakpoints' as bp;
-
 body {
   font-family: var(--font-family-sans);
   font-size: var(--font-size-base);
@@ -9,14 +7,11 @@ body {
   background-color: var(--color-background);
 }
 
-// Clears the fixed mobile bottom nav so it never covers the last section's
-// content — see design-system/BottomNav.
+// Auto-numbers page sections as "// 01", "// 02", ... purely in CSS, scoped
+// to h2s inside the routed page content — h1 (Hero, ProjectPage, NotFound)
+// and the project modal's h3 are untouched.
 #main-content {
-  padding-bottom: calc(var(--bottom-nav-height) + var(--space-safe-bottom));
-
-  @include bp.respond-to('md') {
-    padding-bottom: 0;
-  }
+  counter-reset: section;
 }
 
 // Section titles (h2) and sub-headings (h3) get one deliberate, consistent
@@ -35,6 +30,17 @@ h6 {
 
 h2 {
   font-size: var(--font-size-3xl);
+}
+
+#main-content h2::before {
+  counter-increment: section;
+  content: '// ' counter(section, decimal-leading-zero);
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
 }
 
 h3 {
