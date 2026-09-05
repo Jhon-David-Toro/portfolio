@@ -1,0 +1,20 @@
+// Semantic color tokens as CSS custom properties. Light values live here on
+// :root; dark overrides live in themes/_dark.scss so a value is only ever
+// authored once per theme.
+:root {
+  color-scheme: light dark;
+
+  --color-background: #ffffff;
+  --color-surface: #f5f5f7;
+  --color-surface-raised: #ffffff;
+
+  --color-text-primary: #16171d;
+  --color-text-secondary: #52525b;
+
+  --color-border: #e4e4e7;
+
+  --color-accent: #6d28d9;
+  --color-accent-foreground: #ffffff;
+
+  --color-focus-ring: #6d28d9;
+}

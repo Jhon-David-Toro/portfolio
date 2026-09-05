@@ -1,0 +1,9 @@
+// 4px-based spacing scale, generated so every step stays a clean multiple.
+$spacing-base: 0.25rem; // 4px
+$spacing-steps: 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32;
+
+:root {
+  @each $step in $spacing-steps {
+    --space-#{$step}: #{$step * $spacing-base};
+  }
+}

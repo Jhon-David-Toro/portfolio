@@ -1,0 +1,13 @@
+// Single global stylesheet entry point, imported once from src/main.tsx.
+// Feature/component styles are expected to be co-located SCSS modules that
+// `@use` ./abstracts/breakpoints directly — they don't need this file.
+@use './tokens/colors';
+@use './tokens/typography';
+@use './tokens/spacing';
+@use './tokens/radius';
+@use './tokens/shadows';
+@use './tokens/z-index';
+@use './tokens/motion';
+@use './themes/dark';
+@use './base/reset';
+@use './base/elements';

@@ -1,0 +1,21 @@
+@use 'sass:map';
+
+// Compile-time breakpoint map. Values are min-widths for a mobile-first cascade.
+$breakpoints: (
+  sm: 480px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+);
+
+/// Emits a min-width media query for one of the breakpoints above.
+/// @param {String} $breakpoint - key from $breakpoints (sm | md | lg | xl)
+@mixin respond-to($breakpoint) {
+  @if not map.has-key($breakpoints, $breakpoint) {
+    @error "Unknown breakpoint `#{$breakpoint}`. Available: #{map.keys($breakpoints)}.";
+  }
+
+  @media (min-width: map.get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}

@@ -1,0 +1,16 @@
+// Semantic stacking layers. Reach for the name, not a number, at call sites.
+$z-layers: (
+  'base': 0,
+  'sticky': 10,
+  'dropdown': 20,
+  'overlay': 30,
+  'modal': 40,
+  'toast': 50,
+  'tooltip': 60,
+);
+
+:root {
+  @each $name, $value in $z-layers {
+    --z-#{$name}: #{$value};
+  }
+}
