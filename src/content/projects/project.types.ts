@@ -5,4 +5,6 @@
 export type ProjectMeta = {
   readonly slug: string
   readonly tags: readonly string[]
+  /** Gets the large editorial treatment in ProjectsSection. At most one. */
+  readonly featured?: boolean
 }

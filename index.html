@@ -4,7 +4,63 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio</title>
+
+    <title>Jhon David Toro Muriel — Desarrollador de Software</title>
+    <meta
+      name="description"
+      content="Portfolio de Jhon David Toro Muriel, desarrollador de software especializado en frontend con experiencia complementaria en backend. Experiencia, proyectos y contacto."
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@400;500;600;700&display=swap"
+    />
+
+    <!--
+      Sets data-theme before first paint so an explicit preference doesn't
+      flash the other theme. Absence of a stored preference is left alone —
+      styles/themes/_dark.scss already follows the OS preference live via
+      `:not([data-theme='light'])`, and useTheme() picks up from there.
+    -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          if (stored === 'light' || stored === 'dark') {
+            document.documentElement.dataset.theme = stored;
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Jhon David Toro Muriel — Desarrollador de Software" />
+    <meta
+      property="og:description"
+      content="Portfolio de Jhon David Toro Muriel, desarrollador de software especializado en frontend con experiencia complementaria en backend."
+    />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Jhon David Toro Muriel — Desarrollador de Software" />
+    <meta
+      name="twitter:description"
+      content="Portfolio de Jhon David Toro Muriel, desarrollador de software especializado en frontend con experiencia complementaria en backend."
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Jhon David Toro Muriel",
+        "jobTitle": "Software Developer",
+        "sameAs": ["https://github.com/Jhon-Toro"]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

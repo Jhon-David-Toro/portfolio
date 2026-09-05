@@ -6,4 +6,9 @@ $spacing-steps: 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32;
   @each $step in $spacing-steps {
     --space-#{$step}: #{$step * $spacing-base};
   }
+
+  // Single source of truth for the mobile bottom nav's footprint, so its own
+  // height and the scroll container's bottom padding can never drift apart.
+  --bottom-nav-height: 4.5rem;
+  --space-safe-bottom: env(safe-area-inset-bottom, 0px);
 }

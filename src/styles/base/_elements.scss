@@ -1,5 +1,7 @@
 // Base element styling driven entirely by semantic tokens, so it holds for
 // both themes without any per-theme overrides here.
+@use '../abstracts/breakpoints' as bp;
+
 body {
   font-family: var(--font-family-sans);
   font-size: var(--font-size-base);
@@ -7,6 +9,19 @@ body {
   background-color: var(--color-background);
 }
 
+// Clears the fixed mobile bottom nav so it never covers the last section's
+// content — see design-system/BottomNav.
+#main-content {
+  padding-bottom: calc(var(--bottom-nav-height) + var(--space-safe-bottom));
+
+  @include bp.respond-to('md') {
+    padding-bottom: 0;
+  }
+}
+
+// Section titles (h2) and sub-headings (h3) get one deliberate, consistent
+// size everywhere instead of falling back to the browser's UA default — h1
+// is sized per-component (Hero, ProjectPage) since it varies more.
 h1,
 h2,
 h3,
@@ -16,6 +31,14 @@ h6 {
   font-family: var(--font-family-heading);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
+}
+
+h2 {
+  font-size: var(--font-size-3xl);
+}
+
+h3 {
+  font-size: var(--font-size-xl);
 }
 
 :focus-visible {

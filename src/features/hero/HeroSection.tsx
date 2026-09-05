@@ -1,25 +1,73 @@
-import { motion } from 'motion/react'
+import { useRef } from 'react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { fadeUpVariants, staggerContainerVariants } from '../../core/motion/variants'
 import { profile } from '../../content/profile/profile'
+import { Badge } from '../../design-system/Badge/Badge'
 import { Section } from '../../design-system/Section/Section'
 import styles from './HeroSection.module.scss'
 
+// Curated for a quick-glance stack in the Hero — same real technologies from
+// content/skills/skills.ts, just a smaller, higher-signal subset than the
+// full Skills section list.
+const FEATURED_STACK = ['TypeScript', 'React', 'Angular', 'Node.js'] as const
+
 export function HeroSection() {
   const { t } = useTranslation()
+  const containerRef = useRef<HTMLDivElement>(null)
+  const prefersReducedMotion = useReducedMotion()
+
+  // Subtle "recede" as the Hero scrolls out of view — signals a scene change
+  // into the rest of the page. useTransform binds a raw MotionValue via
+  // `style`, which bypasses MotionConfig's automatic reduced-motion handling
+  // (that only governs animate/variants/whileInView), so it's disabled by
+  // hand below rather than assumed safe.
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start'],
+  })
+  const scrollOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.4])
+  const scrollY = useTransform(scrollYProgress, [0, 1], [0, 40])
 
   return (
     <Section aria-label={t('hero.eyebrow')}>
-      <motion.div variants={staggerContainerVariants}>
-        <motion.p variants={fadeUpVariants} className={styles.eyebrow}>
-          {t('hero.eyebrow')}
-        </motion.p>
+      <motion.div
+        ref={containerRef}
+        variants={staggerContainerVariants}
+        style={prefersReducedMotion ? undefined : { opacity: scrollOpacity, y: scrollY }}
+      >
+        <motion.div variants={fadeUpVariants} className={styles.eyebrowRow}>
+          <span className={styles.eyebrowLine} aria-hidden="true" />
+          <p className={styles.eyebrow}>{t('hero.eyebrow')}</p>
+        </motion.div>
+
         <motion.h1 variants={fadeUpVariants} className={styles.name}>
           {profile.name}
         </motion.h1>
+
         <motion.p variants={fadeUpVariants} className={styles.tagline}>
           {t('hero.tagline')}
         </motion.p>
+
+        <motion.div variants={fadeUpVariants} className={styles.meta}>
+          <span className={styles.location}>{profile.location}</span>
+          <ul className={styles.stack}>
+            {FEATURED_STACK.map((tech) => (
+              <li key={tech}>
+                <Badge>{tech}</Badge>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        <motion.div variants={fadeUpVariants} className={styles.actions}>
+          <a href="#projects" className={styles.primaryAction}>
+            {t('hero.viewWork')}
+          </a>
+          <a href="#contact" className={styles.secondaryAction}>
+            {t('hero.getInTouch')}
+          </a>
+        </motion.div>
       </motion.div>
     </Section>
   )

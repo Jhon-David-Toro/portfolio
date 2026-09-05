@@ -1,21 +1,96 @@
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.eyebrowLine {
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background-color: var(--color-accent);
+}
+
 .eyebrow {
-  margin-bottom: var(--space-2);
   color: var(--color-accent);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-wide);
 }
 
 .name {
-  max-width: 16ch;
-  font-size: var(--font-size-4xl);
+  max-width: 18ch;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-display-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-display);
+  letter-spacing: var(--tracking-tight);
 }
 
 .tagline {
-  max-width: 60ch;
-  margin-top: var(--space-4);
+  max-width: 56ch;
+  margin-top: var(--space-6);
   color: var(--color-text-secondary);
   font-size: var(--font-size-lg);
   line-height: var(--line-height-relaxed);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.location {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.primaryAction {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--space-6);
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  color: var(--color-accent-foreground);
+  font-weight: var(--font-weight-medium);
+  transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  transition: border-color var(--motion-duration-fast) var(--motion-easing-standard);
+
+  &:hover {
+    border-color: var(--color-accent);
+  }
 }

@@ -13,13 +13,13 @@ export function ContactSection() {
       <p className={styles.intro}>{t('contact.intro')}</p>
       <ul className={styles.links}>
         <li>
-          <a className={styles.link} href={`mailto:${profile.email}`}>
+          <a className={styles.primaryLink} href={`mailto:${profile.email}`}>
             {t('contact.emailCta')}
           </a>
         </li>
         <li>
           <a
-            className={styles.link}
+            className={styles.secondaryLink}
             href={profile.github}
             target="_blank"
             rel="noopener noreferrer"

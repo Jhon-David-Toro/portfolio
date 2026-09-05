@@ -1,9 +1,15 @@
 {
   "common": {
-    "close": "Close"
+    "close": "Close",
+    "skipToContent": "Skip to content"
+  },
+  "theme": {
+    "switchToDark": "Switch to dark mode",
+    "switchToLight": "Switch to light mode"
   },
   "nav": {
     "ariaLabel": "Primary",
+    "bottomAriaLabel": "Section navigation",
     "about": "About",
     "experience": "Experience",
     "education": "Education",
@@ -13,15 +19,24 @@
   },
   "hero": {
     "eyebrow": "Software Developer",
-    "tagline": "Frontend-focused software developer building modern, scalable web interfaces — with complementary backend experience."
+    "tagline": "Frontend-focused software developer building modern, scalable web interfaces — with complementary backend experience.",
+    "viewWork": "View my work",
+    "getInTouch": "Get in touch"
   },
   "about": {
     "heading": "About",
-    "body": "I'm a software developer with over 2 years of professional experience, primarily focused on frontend development, with complementary backend and full-stack experience. I've worked on the development, maintenance, and evolution of web applications across enterprise projects and client-specific solutions. My experience centers on building modern, responsive, and scalable user interfaces using component-based architectures, REST API integration, and solid software engineering practices."
+    "lead": "I'm a software developer with over 2 years of professional experience, primarily focused on frontend development, with complementary backend and full-stack experience.",
+    "body": "I've worked on the development, maintenance, and evolution of web applications across enterprise projects and client-specific solutions. My experience centers on building modern, responsive, and scalable user interfaces using component-based architectures, REST API integration, and solid software engineering practices.",
+    "focusAreas": ["Frontend Development", "Component Architecture", "REST APIs", "Full-Stack"]
   },
   "experience": {
     "heading": "Experience",
     "present": "Present",
+    "workMode": {
+      "remote": "Remote",
+      "hybrid": "Hybrid",
+      "onsite": "On-site"
+    },
     "items": {
       "epam": {
         "role": "Software Engineer",

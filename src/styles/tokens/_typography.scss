@@ -12,14 +12,36 @@ $font-sizes: (
   '5xl': 3.5rem,
 );
 
+// Fluid display sizes for editorial/large type (Hero name, section numerals,
+// featured project titles). clamp() scales them without breakpoint sprawl —
+// min size on small phones, preferred size interpolated by viewport width,
+// capped on large screens.
+$display-font-sizes: (
+  'sm': clamp(2rem, 1.6rem + 1.6vw, 2.75rem),
+  'md': clamp(2.75rem, 2rem + 3vw, 4rem),
+  'lg': clamp(3.25rem, 2.25rem + 4.5vw, 5.5rem),
+);
+
 :root {
+  // Inter for UI/body — proven small-size hinting for the many compact
+  // surfaces (nav, badges, form labels). Fraunces only for large display
+  // type — that pairing is what reads "editorial", not either face alone.
   --font-family-sans:
-    system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-family-heading: var(--font-family-sans);
+    'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-family-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  // All content headings (section titles, role/program sub-headings) use the
+  // display face — that's what carries the editorial identity through the
+  // whole page, not just the Hero. UI chrome (nav, badges, buttons, form
+  // labels) reads --font-family-sans directly and stays Inter throughout.
+  --font-family-heading: var(--font-family-display);
   --font-family-mono: ui-monospace, Consolas, 'SF Mono', monospace;
 
   @each $name, $size in $font-sizes {
     --font-size-#{$name}: #{$size};
+  }
+
+  @each $name, $size in $display-font-sizes {
+    --font-size-display-#{$name}: #{$size};
   }
 
   --font-weight-regular: 400;
@@ -30,4 +52,9 @@ $font-sizes: (
   --line-height-tight: 1.2;
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.7;
+  --line-height-display: 1.05;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;
 }

@@ -1,8 +1,24 @@
+@use '../../styles/abstracts/breakpoints' as bp;
+
 .groups {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
   margin-top: var(--space-6);
+}
+
+.group {
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--color-border);
+
+  &:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  @include bp.respond-to('md') {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: var(--space-8);
+    align-items: baseline;
+  }
 }
 
 .groupLabel {
@@ -11,11 +27,31 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--tracking-wide);
+
+  @include bp.respond-to('md') {
+    margin-bottom: 0;
+  }
 }
 
-.badgeList {
+.itemList {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+}
+
+.item {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-secondary);
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+
+  &:hover {
+    color: var(--color-accent);
+  }
+
+  &:not(:last-child)::after {
+    content: '·';
+    margin-inline: var(--space-3);
+    color: var(--color-border);
+  }
 }

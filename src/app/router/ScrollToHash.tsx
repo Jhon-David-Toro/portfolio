@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router'
 
-// Synchronizes browser scroll position with the URL hash. Needed because
-// client-side navigation (e.g. from a project page back to `/#about`) does
-// not trigger the browser's native scroll-to-anchor behavior the way a full
-// page load does.
+// Synchronizes browser scroll position (and focus) with the URL hash. Needed
+// because client-side navigation (e.g. from a project page back to
+// `/#about`) does not trigger the browser's native scroll-to-anchor
+// behavior — or the focus move a full page load would give a screen-reader
+// user — the way a full page load does.
 export function ScrollToHash() {
   const { hash } = useLocation()
 
@@ -13,7 +14,7 @@ export function ScrollToHash() {
       return
     }
 
-    const target = document.querySelector(hash)
+    const target = document.querySelector<HTMLElement>(hash)
     if (!target) {
       return
     }
@@ -26,6 +27,7 @@ export function ScrollToHash() {
       behavior: prefersReducedMotion ? 'auto' : 'smooth',
       block: 'start',
     })
+    target.focus({ preventScroll: true })
   }, [hash])
 
   return null

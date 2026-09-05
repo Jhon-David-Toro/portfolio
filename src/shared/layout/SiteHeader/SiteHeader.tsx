@@ -1,31 +1,61 @@
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router'
+import { useActiveSection } from '../../../core/scroll/useActiveSection'
+import { BottomNav, type BottomNavItem } from '../../../design-system/BottomNav/BottomNav'
 import { Container } from '../../../design-system/Container/Container'
 import { LanguageSwitcher } from '../../../design-system/LanguageSwitcher/LanguageSwitcher'
 import { Navigation, type NavItem } from '../../../design-system/Navigation/Navigation'
+import { ThemeToggle } from '../../../design-system/ThemeToggle/ThemeToggle'
 import styles from './SiteHeader.module.scss'
+
+// Module-scope so the array reference is stable across renders — required
+// for useActiveSection's effect to only set up its observer once per route.
+const SECTION_IDS = ['about', 'experience', 'education', 'projects', 'skills', 'contact'] as const
 
 export function SiteHeader() {
   const { t } = useTranslation()
+  const activeId = useActiveSection(SECTION_IDS)
 
-  // Anchors into the Home page's sections, plus a link back to `/` so the
-  // header works the same whether you're on Home or a project case study.
   const navItems: readonly NavItem[] = [
-    { label: t('nav.about'), to: '/#about' },
-    { label: t('nav.experience'), to: '/#experience' },
-    { label: t('nav.education'), to: '/#education' },
-    { label: t('nav.projects'), to: '/#projects' },
-    { label: t('nav.skills'), to: '/#skills' },
-    { label: t('nav.contact'), to: '/#contact' },
+    { id: 'about', label: t('nav.about'), to: '/#about' },
+    { id: 'experience', label: t('nav.experience'), to: '/#experience' },
+    { id: 'education', label: t('nav.education'), to: '/#education' },
+    { id: 'projects', label: t('nav.projects'), to: '/#projects' },
+    { id: 'skills', label: t('nav.skills'), to: '/#skills' },
+    { id: 'contact', label: t('nav.contact'), to: '/#contact' },
+  ]
+
+  // Curated subset for the mobile bottom nav — see BottomNav.tsx.
+  const bottomNavItems: readonly BottomNavItem[] = [
+    { id: 'about', label: t('nav.about'), to: '/#about', icon: 'about' },
+    { id: 'experience', label: t('nav.experience'), to: '/#experience', icon: 'experience' },
+    { id: 'projects', label: t('nav.projects'), to: '/#projects', icon: 'projects' },
+    { id: 'skills', label: t('nav.skills'), to: '/#skills', icon: 'skills' },
+    { id: 'contact', label: t('nav.contact'), to: '/#contact', icon: 'contact' },
   ]
 
   return (
-    <header className={styles.header}>
-      <Container>
-        <div className={styles.row}>
-          <Navigation items={navItems} ariaLabel={t('nav.ariaLabel')} />
-          <LanguageSwitcher />
-        </div>
-      </Container>
-    </header>
+    <>
+      <header className={styles.header}>
+        <Container>
+          <div className={styles.row}>
+            <Link to="/" className={styles.brand}>
+              JT
+            </Link>
+
+            <div className={styles.desktopNav}>
+              <Navigation items={navItems} ariaLabel={t('nav.ariaLabel')} activeId={activeId} />
+            </div>
+
+            <div className={styles.controls}>
+              <ThemeToggle />
+              <LanguageSwitcher />
+            </div>
+          </div>
+        </Container>
+      </header>
+
+      <BottomNav items={bottomNavItems} activeId={activeId} ariaLabel={t('nav.bottomAriaLabel')} />
+    </>
   )
 }

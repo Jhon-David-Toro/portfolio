@@ -1,9 +1,15 @@
 {
   "common": {
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "skipToContent": "Saltar al contenido"
+  },
+  "theme": {
+    "switchToDark": "Cambiar a modo oscuro",
+    "switchToLight": "Cambiar a modo claro"
   },
   "nav": {
     "ariaLabel": "Principal",
+    "bottomAriaLabel": "Navegación de secciones",
     "about": "Sobre mí",
     "experience": "Experiencia",
     "education": "Educación",
@@ -13,15 +19,24 @@
   },
   "hero": {
     "eyebrow": "Desarrollador de Software",
-    "tagline": "Desarrollador de software enfocado en frontend, construyendo interfaces web modernas y escalables — con experiencia complementaria en backend."
+    "tagline": "Desarrollador de software enfocado en frontend, construyendo interfaces web modernas y escalables — con experiencia complementaria en backend.",
+    "viewWork": "Ver proyectos",
+    "getInTouch": "Hablemos"
   },
   "about": {
     "heading": "Sobre mí",
-    "body": "Soy un desarrollador de software con más de 2 años de experiencia profesional, principalmente enfocado en desarrollo frontend, con experiencia complementaria en backend y desarrollo full stack. He participado en el desarrollo, mantenimiento y evolución de aplicaciones web, trabajando en proyectos empresariales y soluciones orientadas a las necesidades específicas de los clientes. Mi experiencia se centra en la construcción de interfaces de usuario modernas, responsivas y escalables, utilizando arquitecturas basadas en componentes, integración de APIs REST y buenas prácticas de desarrollo de software."
+    "lead": "Soy un desarrollador de software con más de 2 años de experiencia profesional, principalmente enfocado en desarrollo frontend, con experiencia complementaria en backend y desarrollo full stack.",
+    "body": "He participado en el desarrollo, mantenimiento y evolución de aplicaciones web, trabajando en proyectos empresariales y soluciones orientadas a las necesidades específicas de los clientes. Mi experiencia se centra en la construcción de interfaces de usuario modernas, responsivas y escalables, utilizando arquitecturas basadas en componentes, integración de APIs REST y buenas prácticas de desarrollo de software.",
+    "focusAreas": ["Desarrollo Frontend", "Arquitectura de Componentes", "APIs REST", "Full-Stack"]
   },
   "experience": {
     "heading": "Experiencia",
     "present": "Presente",
+    "workMode": {
+      "remote": "Remoto",
+      "hybrid": "Híbrido",
+      "onsite": "Presencial"
+    },
     "items": {
       "epam": {
         "role": "Software Engineer",
