@@ -1,11 +1,13 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router'
 
-// Synchronizes browser scroll position (and focus) with the URL hash. Needed
-// because client-side navigation (e.g. from a project page back to
-// `/#about`) does not trigger the browser's native scroll-to-anchor
-// behavior — or the focus move a full page load would give a screen-reader
-// user — the way a full page load does.
+/**
+ * Synchronizes browser scroll position and focus with the URL hash.
+ *
+ * @remarks
+ * Client-side navigation does not trigger the browser's native anchor behavior,
+ * so this component restores scrolling and focus for hash links.
+ */
 export function ScrollToHash() {
   const { hash } = useLocation()
 

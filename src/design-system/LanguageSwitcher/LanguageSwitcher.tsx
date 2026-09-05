@@ -4,6 +4,7 @@ import styles from './LanguageSwitcher.module.scss'
 
 const LOCALES: readonly Locale[] = ['es', 'en']
 
+/** Renders the compact control for switching the interface locale. */
 export function LanguageSwitcher() {
   const { i18n } = useTranslation()
 

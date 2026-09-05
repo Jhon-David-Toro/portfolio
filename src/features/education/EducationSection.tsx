@@ -6,6 +6,7 @@ import { Badge } from '../../design-system/Badge/Badge'
 import { Section } from '../../design-system/Section/Section'
 import styles from './EducationSection.module.scss'
 
+/** Renders formal education and additional courses. */
 export function EducationSection() {
   const { t } = useTranslation()
 

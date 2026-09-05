@@ -8,6 +8,7 @@ import { Badge } from '../../design-system/Badge/Badge'
 import { Section } from '../../design-system/Section/Section'
 import styles from './ExperienceSection.module.scss'
 
+/** Renders the professional experience timeline. */
 export function ExperienceSection() {
   const { t, i18n } = useTranslation()
   const [activeId, setActiveId] = useState<string | null>(null)

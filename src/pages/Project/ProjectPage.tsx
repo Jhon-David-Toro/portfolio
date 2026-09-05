@@ -6,6 +6,7 @@ import { getProjectMeta } from '../../content/projects/projects'
 import { Badge } from '../../design-system/Badge/Badge'
 import { NotFoundPage } from '../NotFound/NotFoundPage'
 
+/** Renders a project case study resolved from the route slug. */
 export function ProjectPage() {
   const { slug } = useParams<{ slug: string }>()
   const { t } = useTranslation()

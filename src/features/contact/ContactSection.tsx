@@ -4,6 +4,7 @@ import { Section } from '../../design-system/Section/Section'
 import { ContactForm } from './ContactForm'
 import styles from './ContactSection.module.scss'
 
+/** Renders the contact section, including the contact form. */
 export function ContactSection() {
   const { t } = useTranslation()
 

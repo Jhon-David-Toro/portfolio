@@ -2,15 +2,10 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 
 /**
- * Tracks which of the given section ids is currently "active" while
- * scrolling, via a single IntersectionObserver — shared by the desktop pill
- * nav and the mobile bottom nav so there's one source of truth instead of
- * two divergent implementations.
+ * Tracks the section currently visible in the viewport.
  *
- * Re-runs on route change (not just once at mount) because `SiteHeader` is
- * mounted once for the whole app: landing directly on a route without these
- * sections (e.g. `/projects/:slug`) would otherwise never re-query the DOM
- * after navigating back to a route that has them.
+ * @param sectionIds - IDs of sections eligible to become active.
+ * @returns The active section ID, or `null` when none is visible.
  */
 export function useActiveSection(sectionIds: readonly string[]): string | null {
   const [activeId, setActiveId] = useState<string | null>(null)

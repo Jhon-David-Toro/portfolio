@@ -2,6 +2,7 @@ type IconProps = {
   readonly className?: string
 }
 
+/** Renders the user icon used by profile navigation. */
 export function UserIcon({ className }: IconProps) {
   return (
     <svg

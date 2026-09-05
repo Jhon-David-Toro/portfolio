@@ -2,6 +2,7 @@ type IconProps = {
   readonly className?: string
 }
 
+/** Renders the grid icon used by project navigation. */
 export function GridIcon({ className }: IconProps) {
   return (
     <svg

@@ -2,6 +2,7 @@ type IconProps = {
   readonly className?: string
 }
 
+/** Renders the briefcase icon used by experience navigation. */
 export function BriefcaseIcon({ className }: IconProps) {
   return (
     <svg

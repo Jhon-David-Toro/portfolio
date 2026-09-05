@@ -3,6 +3,7 @@ import { initReactI18next } from 'react-i18next'
 import en from '../../content/locales/en.json'
 import es from '../../content/locales/es.json'
 
+/** Supported interface locales. */
 export type Locale = 'en' | 'es'
 
 const STORAGE_KEY = 'portfolio-locale'

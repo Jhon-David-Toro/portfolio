@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { motion } from 'motion/react'
 import styles from './Modal.module.scss'
 
+/** Props for an accessible modal dialog rendered through a document portal. */
 type ModalProps = {
   readonly onClose: () => void
   readonly titleId: string
@@ -13,14 +14,12 @@ type ModalProps = {
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
 
-// Mounted only while open — the caller renders this conditionally. Only the
-// entrance is animated (`initial`/`animate`); closing unmounts immediately
-// rather than going through an AnimatePresence exit, so there is no way for
-// a stuck exit animation to leave an invisible, click-blocking backdrop
-// behind (observed in testing with an AnimatePresence-driven exit here).
-//
-// `onClose` must be a stable reference (e.g. wrapped in `useCallback`, or a
-// `useState` setter) — it's only read once, when this effect is set up.
+/**
+ * Renders a focus-managed modal dialog.
+ *
+ * @remarks
+ * The caller controls whether the modal is mounted; unmounting closes it.
+ */
 export function Modal({ onClose, titleId, closeLabel, children }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null)
 

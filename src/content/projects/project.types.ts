@@ -1,10 +1,7 @@
-// Title, summary (card blurb) and description (modal body) are translated
-// content — read via `projects.items.<slug>` in content/locales/{en,es}.json,
-// so the same project renders in both locales. Tags are technology names —
-// language-neutral, same as content/skills/skills.ts.
+/** Metadata required to render a localized project case study. */
 export type ProjectMeta = {
   readonly slug: string
   readonly tags: readonly string[]
-  /** Gets the large editorial treatment in ProjectsSection. At most one. */
+  /** Enables the large editorial treatment in the projects section. */
   readonly featured?: boolean
 }

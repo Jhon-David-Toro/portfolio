@@ -1,3 +1,4 @@
+/** Structured employment entry displayed in the experience timeline. */
 export type ExperienceItem = {
   readonly id: string
   readonly company: string
@@ -9,8 +10,7 @@ export type ExperienceItem = {
   readonly endDate: string | null
 }
 
-// Role titles and highlight bullets are translated content — see
-// content/locales/{en,es}.json under `experience.items.<id>`.
+/** Professional experience ordered from the most recent role. */
 export const experience: readonly ExperienceItem[] = [
   {
     id: 'epam',

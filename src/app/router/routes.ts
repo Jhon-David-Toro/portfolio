@@ -1,10 +1,15 @@
-// Route path constants, kept in one place so the router config and any link
-// builders (e.g. project cards linking to their case study) can't drift apart.
+/** Route patterns shared by the router and link builders. */
 export const ROUTE_PATHS = {
   home: '/',
   projectDetail: '/projects/:slug',
 } as const
 
+/**
+ * Builds the canonical URL for a project case study.
+ *
+ * @param slug - URL-safe project identifier.
+ * @returns The project detail path.
+ */
 export function buildProjectPath(slug: string): string {
   return `/projects/${slug}`
 }

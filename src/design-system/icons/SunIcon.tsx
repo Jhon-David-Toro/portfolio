@@ -2,6 +2,7 @@ type IconProps = {
   readonly className?: string
 }
 
+/** Renders the sun icon for the light theme control. */
 export function SunIcon({ className }: IconProps) {
   return (
     <svg

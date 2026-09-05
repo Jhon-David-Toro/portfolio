@@ -1,11 +1,11 @@
 import styles from './SkipLink.module.scss'
 
+/** Props accepted by the keyboard navigation skip link. */
 type SkipLinkProps = {
   readonly label: string
 }
 
-// Hidden until focused — the first Tab stop for keyboard users, letting them
-// jump past the header/nav straight to the page content.
+/** Renders the first keyboard stop for skipping site navigation. */
 export function SkipLink({ label }: SkipLinkProps) {
   return (
     <a href="#main-content" className={styles.skipLink}>

@@ -2,6 +2,7 @@ type IconProps = {
   readonly className?: string
 }
 
+/** Renders the moon icon for the dark theme control. */
 export function MoonIcon({ className }: IconProps) {
   return (
     <svg

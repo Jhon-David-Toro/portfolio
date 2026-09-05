@@ -5,10 +5,7 @@ import { skillGroups } from '../../content/skills/skills'
 import { Section } from '../../design-system/Section/Section'
 import styles from './SkillsSection.module.scss'
 
-// Deliberately not an orbit/relational map — 18 flat technology names don't
-// carry enough real relational information to justify that, it would be
-// decoration without meaning. A strong typographic grid communicates the
-// same information with more editorial character than a badge list.
+/** Renders the grouped technology skills section. */
 export function SkillsSection() {
   const { t } = useTranslation()
 

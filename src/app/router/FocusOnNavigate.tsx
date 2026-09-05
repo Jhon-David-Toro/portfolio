@@ -1,11 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useLocation } from 'react-router'
 
-// Moves focus to the main content landmark on a real page navigation (a
-// pathname change), so screen-reader users get told the page changed — the
-// browser only does this for free on a full page load, not client-side
-// routing. Skipped on the first render (nothing "navigated" yet) and on
-// hash-only changes (ScrollToHash already handles those).
+/** Moves focus to the main content region after route navigation. */
 export function FocusOnNavigate() {
   const { pathname, hash } = useLocation()
   const isFirstRender = useRef(true)

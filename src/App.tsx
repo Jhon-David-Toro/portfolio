@@ -7,12 +7,11 @@ import { ScrollToHash } from './app/router/ScrollToHash'
 import { SkipLink } from './shared/layout/SkipLink/SkipLink'
 import { SiteHeader } from './shared/layout/SiteHeader/SiteHeader'
 
+/** Renders the application shell, providers, navigation, and active route. */
 function App() {
   const { t } = useTranslation()
 
   return (
-    // "user" makes every animation in the tree respect the OS-level
-    // prefers-reduced-motion setting automatically — no per-component checks.
     <MotionConfig reducedMotion="user">
       <BrowserRouter>
         <SkipLink label={t('common.skipToContent')} />

@@ -1,5 +1,4 @@
-// Language-neutral facts about the profile owner. Everything that reads as
-// prose (tagline, About body, etc.) lives in the locale resources instead.
+/** Language-neutral profile facts used by page metadata and contact links. */
 export const profile = {
   name: 'Jhon David Toro Muriel',
   email: 'toromurieljhon@gmail.com',

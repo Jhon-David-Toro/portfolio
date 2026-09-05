@@ -8,6 +8,7 @@ import styles from './BottomNav.module.scss'
 
 type IconName = 'about' | 'experience' | 'projects' | 'skills' | 'contact'
 
+/** Destination, label, and icon for a mobile navigation entry. */
 export type BottomNavItem = {
   readonly id: string
   readonly to: string
@@ -23,17 +24,14 @@ const ICONS: Record<IconName, typeof UserIcon> = {
   contact: MailIcon,
 }
 
+/** Props accepted by the mobile bottom navigation surface. */
 type BottomNavProps = {
   readonly items: readonly BottomNavItem[]
   readonly activeId: string | null
   readonly ariaLabel: string
 }
 
-// Mobile-only (hidden at >=md, see BottomNav.module.scss) — a genuinely
-// separate navigation surface from the desktop pill, not the same markup
-// hidden behind a media query. Curated to 5 items (About/Experience/
-// Projects/Skills/Contact) rather than all 6 anchors — Education stays
-// reachable by scrolling, quick-nav space is deliberately limited.
+/** Renders the mobile-only bottom navigation with an active destination. */
 export function BottomNav({ items, activeId, ariaLabel }: BottomNavProps) {
   return (
     <nav className={styles.nav} aria-label={ariaLabel}>

@@ -4,6 +4,7 @@ import { MoonIcon } from '../icons/MoonIcon'
 import { SunIcon } from '../icons/SunIcon'
 import styles from './ThemeToggle.module.scss'
 
+/** Renders the accessible light and dark theme switch. */
 export function ThemeToggle() {
   const { t } = useTranslation()
   const { theme, setTheme } = useTheme()

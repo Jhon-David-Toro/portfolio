@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 
+/** Available visual themes. */
 export type Theme = 'light' | 'dark'
 
 const STORAGE_KEY = 'theme'
@@ -29,6 +30,11 @@ function applyThemeColorMeta(theme: Theme) {
  * localStorage once the user makes an explicit choice. Until then, this
  * mirrors the OS `prefers-color-scheme` live — matching the app's behavior
  * before this toggle existed.
+ */
+/**
+ * Provides the active theme and persists explicit user selections.
+ *
+ * @returns The current theme and a setter that applies it to the document.
  */
 export function useTheme() {
   const [theme, setThemeState] = useState<Theme>(

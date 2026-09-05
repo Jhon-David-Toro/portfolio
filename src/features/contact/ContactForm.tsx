@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Button } from '../../design-system/Button/Button'
 import styles from './ContactForm.module.scss'
 
+/** Finite states of the contact form submission flow. */
 type SubmitStatus =
   | { readonly kind: 'idle' }
   | { readonly kind: 'submitting' }
@@ -14,6 +15,7 @@ const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
+/** Renders the contact form and its submission feedback. */
 export function ContactForm() {
   const { t } = useTranslation()
   const [status, setStatus] = useState<SubmitStatus>({ kind: 'idle' })

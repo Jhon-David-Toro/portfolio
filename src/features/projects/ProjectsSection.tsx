@@ -11,6 +11,7 @@ import { Modal } from '../../design-system/Modal/Modal'
 import { Section } from '../../design-system/Section/Section'
 import styles from './ProjectsSection.module.scss'
 
+/** Renders project summaries and case-study navigation. */
 export function ProjectsSection() {
   const { t } = useTranslation()
   const projects = getProjects()

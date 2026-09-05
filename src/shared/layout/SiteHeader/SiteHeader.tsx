@@ -8,10 +8,9 @@ import { Navigation, type NavItem } from '../../../design-system/Navigation/Navi
 import { ThemeToggle } from '../../../design-system/ThemeToggle/ThemeToggle'
 import styles from './SiteHeader.module.scss'
 
-// Module-scope so the array reference is stable across renders — required
-// for useActiveSection's effect to only set up its observer once per route.
 const SECTION_IDS = ['about', 'experience', 'education', 'projects', 'skills', 'contact'] as const
 
+/** Renders the responsive site header and primary navigation surfaces. */
 export function SiteHeader() {
   const { t } = useTranslation()
   const activeId = useActiveSection(SECTION_IDS)

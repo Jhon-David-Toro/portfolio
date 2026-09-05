@@ -1,6 +1,7 @@
 import type { Variants } from 'motion/react'
 import { durations, easings, staggerBase } from './tokens'
 
+/** Reveals content by fading it in while moving it upward. */
 export const fadeUpVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: {
@@ -10,6 +11,7 @@ export const fadeUpVariants: Variants = {
   },
 }
 
+/** Reveals content through opacity only. */
 export const fadeInVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -18,6 +20,7 @@ export const fadeInVariants: Variants = {
   },
 }
 
+/** Reveals content with a subtle scale transition. */
 export const scaleInVariants: Variants = {
   hidden: { opacity: 0, scale: 0.92 },
   visible: {
@@ -27,6 +30,7 @@ export const scaleInVariants: Variants = {
   },
 }
 
+/** Staggers direct children using the shared base delay. */
 export const staggerContainerVariants: Variants = {
   hidden: {},
   visible: {
@@ -34,7 +38,12 @@ export const staggerContainerVariants: Variants = {
   },
 }
 
-/** Stagger container with a custom per-child delay — Hero/Experience/Projects want different paces. */
+/**
+ * Creates a stagger container with a custom child delay.
+ *
+ * @param staggerChildren - Delay in seconds between child animations.
+ * @returns Motion variants for a stagger container.
+ */
 export function makeStagger(staggerChildren: number = staggerBase): Variants {
   return {
     hidden: {},

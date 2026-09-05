@@ -4,6 +4,7 @@ import { fadeUpVariants } from '../../core/motion/variants'
 import { Container } from '../Container/Container'
 import styles from './Section.module.scss'
 
+/** Props for a motion-enabled, constrained page section. */
 type SectionProps = {
   readonly id?: string
   readonly children: ReactNode
@@ -11,6 +12,7 @@ type SectionProps = {
   readonly 'aria-labelledby'?: string
 }
 
+/** Renders a semantic section with shared layout and reveal behavior. */
 export function Section({ id, children, ...aria }: SectionProps) {
   return (
     <motion.section

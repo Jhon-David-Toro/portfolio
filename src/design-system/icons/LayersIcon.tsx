@@ -2,6 +2,7 @@ type IconProps = {
   readonly className?: string
 }
 
+/** Renders the layers icon used by skills navigation. */
 export function LayersIcon({ className }: IconProps) {
   return (
     <svg

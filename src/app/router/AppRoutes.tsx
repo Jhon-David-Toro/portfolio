@@ -4,6 +4,7 @@ import { NotFoundPage } from '../../pages/NotFound/NotFoundPage'
 import { ProjectPage } from '../../pages/Project/ProjectPage'
 import { ROUTE_PATHS } from './routes'
 
+/** Renders the application route tree. */
 export function AppRoutes() {
   return (
     <Routes>

@@ -12,6 +12,7 @@ import styles from './HeroSection.module.scss'
 // full Skills section list.
 const FEATURED_STACK = ['TypeScript', 'React', 'Angular', 'Node.js'] as const
 
+/** Renders the introductory hero content for the home page. */
 export function HeroSection() {
   const { t } = useTranslation()
   const containerRef = useRef<HTMLDivElement>(null)

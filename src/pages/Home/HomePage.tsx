@@ -9,6 +9,7 @@ import { HeroSection } from '../../features/hero/HeroSection'
 import { ProjectsSection } from '../../features/projects/ProjectsSection'
 import { SkillsSection } from '../../features/skills/SkillsSection'
 
+/** Renders the complete portfolio home page. */
 export function HomePage() {
   const { t } = useTranslation()
   usePageMeta(`${profile.name} — ${t('hero.eyebrow')}`, t('hero.tagline'))

@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 
 /**
- * Synchronizes the document title and meta description with the active
- * page/locale. Pass `null` for `title` when the page has nothing to set yet
- * (e.g. still resolving a route param) — the effect is skipped entirely
- * rather than briefly writing blank/placeholder values.
+ * Synchronizes document metadata with the active page and locale.
+ *
+ * @param title - Page title, or `null` while the page is unresolved.
+ * @param description - Optional description for the document metadata.
  */
 export function usePageMeta(title: string | null, description?: string) {
   useEffect(() => {

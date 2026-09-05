@@ -5,6 +5,7 @@ import { profile } from '../../content/profile/profile'
 // Rendered both for unmatched routes and for a project slug that doesn't
 // exist yet — the app shell always owns the surrounding <main>, so this
 // stays a plain section rather than another landmark.
+/** Renders the fallback page for unknown routes or projects. */
 export function NotFoundPage() {
   const { t } = useTranslation()
   usePageMeta(`${t('notFound.heading')} — ${profile.name}`)

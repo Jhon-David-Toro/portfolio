@@ -2,6 +2,7 @@ type IconProps = {
   readonly className?: string
 }
 
+/** Renders the mail icon used by contact navigation. */
 export function MailIcon({ className }: IconProps) {
   return (
     <svg

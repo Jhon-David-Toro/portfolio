@@ -1,16 +1,17 @@
-// Technology names are proper nouns — same in every locale. Group labels are
-// translated content — see content/locales/{en,es}.json under `skills.groups`.
+/** Stable identifiers for translated skill categories. */
 export type SkillGroupId =
   | 'languagesFrameworks'
   | 'stylingData'
   | 'testingQuality'
   | 'toolsPractices'
 
+/** Group of related technologies shown in the skills section. */
 export type SkillGroup = {
   readonly id: SkillGroupId
   readonly items: readonly string[]
 }
 
+/** Technology groups displayed in the skills section. */
 export const skillGroups: readonly SkillGroup[] = [
   {
     id: 'languagesFrameworks',

@@ -3,6 +3,7 @@ import { Badge } from '../../design-system/Badge/Badge'
 import { Section } from '../../design-system/Section/Section'
 import styles from './AboutSection.module.scss'
 
+/** Renders the profile and introduction section of the home page. */
 export function AboutSection() {
   const { t } = useTranslation()
   // Safe: `about.focusAreas` is always authored as a string array in
