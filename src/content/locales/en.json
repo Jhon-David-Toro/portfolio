@@ -1,4 +1,7 @@
 {
+  "common": {
+    "close": "Close"
+  },
   "nav": {
     "ariaLabel": "Primary",
     "about": "About",
@@ -75,18 +78,24 @@
     "mock": {
       "note": "Placeholder projects — real case studies coming soon."
     },
+    "modal": {
+      "viewFullPage": "View full page"
+    },
     "items": {
       "project-one": {
-        "title": "Project One",
-        "summary": "Sample project used to preview this layout. Will be replaced with a real case study."
+        "title": "Analytics Dashboard",
+        "summary": "Placeholder project — a data dashboard concept used to preview this card layout.",
+        "description": "Sample case study slot. A real write-up would cover the problem, the approach, and the measurable impact of an analytics dashboard built with React, TypeScript, GraphQL, and MySQL."
       },
       "project-two": {
-        "title": "Project Two",
-        "summary": "Another placeholder project to test the project grid."
+        "title": "Booking Platform",
+        "summary": "Placeholder project — a booking flow concept used to test the grid with more content.",
+        "description": "Sample case study slot. A real write-up would walk through the scheduling logic, real-time updates, and UX decisions behind a booking platform built with Angular, RxJS, and Node.js."
       },
       "project-three": {
-        "title": "Project Three",
-        "summary": "Final placeholder before real content is added."
+        "title": "Component Library",
+        "summary": "Placeholder project — a design-system concept rounding out the mock grid.",
+        "description": "Sample case study slot. A real write-up would explain the component API design, testing strategy, and adoption story for a shared component library built with Lit and TypeScript."
       }
     }
   },

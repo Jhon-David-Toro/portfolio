@@ -1,17 +1,17 @@
 import type { ProjectMeta } from './project.types'
 
 // Placeholder projects, standing in until real case studies are added.
-// Their title/summary come from content/locales/{en,es}.json.
+// Tech tags are drawn from actual skills so the mocks stay plausible.
 const projects: readonly ProjectMeta[] = [
-  { slug: 'project-one' },
-  { slug: 'project-two' },
-  { slug: 'project-three' },
+  { slug: 'project-one', tags: ['React', 'TypeScript', 'GraphQL', 'MySQL'] },
+  { slug: 'project-two', tags: ['Angular', 'RxJS', 'Node.js'] },
+  { slug: 'project-three', tags: ['Lit Element', 'TypeScript', 'Cucumber'] },
 ]
 
 export function getProjects(): readonly ProjectMeta[] {
   return projects
 }
 
-export function projectExists(slug: string): boolean {
-  return projects.some((project) => project.slug === slug)
+export function getProjectMeta(slug: string): ProjectMeta | undefined {
+  return projects.find((project) => project.slug === slug)
 }

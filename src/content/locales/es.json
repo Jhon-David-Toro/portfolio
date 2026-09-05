@@ -1,4 +1,7 @@
 {
+  "common": {
+    "close": "Cerrar"
+  },
   "nav": {
     "ariaLabel": "Principal",
     "about": "Sobre mí",
@@ -75,18 +78,24 @@
     "mock": {
       "note": "Proyectos de ejemplo — muy pronto agregaré casos de estudio reales aquí."
     },
+    "modal": {
+      "viewFullPage": "Ver página completa"
+    },
     "items": {
       "project-one": {
-        "title": "Proyecto Uno",
-        "summary": "Proyecto de ejemplo usado para previsualizar este diseño. Será reemplazado por un caso de estudio real."
+        "title": "Panel de Analítica",
+        "summary": "Proyecto de ejemplo — un concepto de dashboard de datos para previsualizar esta tarjeta.",
+        "description": "Espacio de ejemplo para un caso de estudio real. Ahí normalmente iría el problema, el enfoque y el impacto medible de un panel de analítica construido con React, TypeScript, GraphQL y MySQL."
       },
       "project-two": {
-        "title": "Proyecto Dos",
-        "summary": "Otro proyecto de ejemplo para probar la cuadrícula de proyectos."
+        "title": "Plataforma de Reservas",
+        "summary": "Proyecto de ejemplo — un concepto de flujo de reservas para probar la cuadrícula con más contenido.",
+        "description": "Espacio de ejemplo para un caso de estudio real. Ahí normalmente iría la lógica de agendamiento, actualizaciones en tiempo real y las decisiones de UX detrás de una plataforma de reservas construida con Angular, RxJS y Node.js."
       },
       "project-three": {
-        "title": "Proyecto Tres",
-        "summary": "Marcador de posición final antes de agregar contenido real."
+        "title": "Librería de Componentes",
+        "summary": "Proyecto de ejemplo — un concepto de design system para completar la cuadrícula mock.",
+        "description": "Espacio de ejemplo para un caso de estudio real. Ahí normalmente iría el diseño de la API de componentes, la estrategia de testing y la adopción de una librería de componentes compartida construida con Lit y TypeScript."
       }
     }
   },
