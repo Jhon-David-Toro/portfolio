@@ -102,13 +102,19 @@
     "eyebrow": "Desarrollador de Software",
     "tagline": "Desarrollador de software enfocado en frontend, construyendo interfaces web modernas y escalables — con experiencia complementaria en backend.",
     "viewWork": "Ver proyectos",
-    "getInTouch": "Hablemos"
+    "getInTouch": "Hablemos",
+    "scrollCue": "Desplázate hacia Sobre mí"
   },
   "about": {
     "heading": "Sobre mí",
     "lead": "Soy un desarrollador de software con más de 2 años de experiencia profesional, principalmente enfocado en desarrollo frontend, con experiencia complementaria en backend y desarrollo full stack.",
     "body": "He participado en el desarrollo, mantenimiento y evolución de aplicaciones web, trabajando en proyectos empresariales y soluciones orientadas a las necesidades específicas de los clientes. Mi experiencia se centra en la construcción de interfaces de usuario modernas, responsivas y escalables, utilizando arquitecturas basadas en componentes, integración de APIs REST y buenas prácticas de desarrollo de software.",
-    "focusAreas": ["Desarrollo Frontend", "Arquitectura de Componentes", "APIs REST", "Full-Stack"]
+    "focusAreas": ["Desarrollo Frontend", "Arquitectura de Componentes", "APIs REST", "Full-Stack"],
+    "stats": {
+      "experience": "Años de experiencia",
+      "roles": "Empresas",
+      "technologies": "Tecnologías"
+    }
   },
   "experience": {
     "heading": "Experiencia",

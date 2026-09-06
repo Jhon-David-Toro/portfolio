@@ -102,13 +102,19 @@
     "eyebrow": "Software Developer",
     "tagline": "Frontend-focused software developer building modern, scalable web interfaces — with complementary backend experience.",
     "viewWork": "View my work",
-    "getInTouch": "Get in touch"
+    "getInTouch": "Get in touch",
+    "scrollCue": "Scroll to About"
   },
   "about": {
     "heading": "About",
     "lead": "I'm a software developer with over 2 years of professional experience, primarily focused on frontend development, with complementary backend and full-stack experience.",
     "body": "I've worked on the development, maintenance, and evolution of web applications across enterprise projects and client-specific solutions. My experience centers on building modern, responsive, and scalable user interfaces using component-based architectures, REST API integration, and solid software engineering practices.",
-    "focusAreas": ["Frontend Development", "Component Architecture", "REST APIs", "Full-Stack"]
+    "focusAreas": ["Frontend Development", "Component Architecture", "REST APIs", "Full-Stack"],
+    "stats": {
+      "experience": "Years of experience",
+      "roles": "Companies",
+      "technologies": "Technologies"
+    }
   },
   "experience": {
     "heading": "Experience",
