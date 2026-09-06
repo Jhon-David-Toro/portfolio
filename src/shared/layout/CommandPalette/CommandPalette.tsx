@@ -195,6 +195,7 @@ export function CommandPalette() {
             }}
             onKeyDown={handleInputKeyDown}
             role="combobox"
+            aria-labelledby={titleId}
             aria-expanded="true"
             aria-controls={listId}
             aria-autocomplete="list"

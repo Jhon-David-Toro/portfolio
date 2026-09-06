@@ -33,7 +33,7 @@ export function AboutSection() {
           </ul>
         </div>
 
-        <div className={styles.sidebar}>
+        <aside className={styles.sidebar}>
           <ul className={styles.stats}>
             <li className={styles.stat}>
               <span className={styles.statValue}>{stats.yearsOfExperience}+</span>
@@ -65,7 +65,7 @@ export function AboutSection() {
               </a>
             </li>
           </ul>
-        </div>
+        </aside>
       </div>
     </Section>
   )

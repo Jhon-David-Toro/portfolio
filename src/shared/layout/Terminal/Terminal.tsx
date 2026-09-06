@@ -70,7 +70,7 @@ export function Terminal() {
   const [commandHistory, setCommandHistory] = useState<readonly string[]>([])
   const [historyPointer, setHistoryPointer] = useState<number | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const outputRef = useRef<HTMLDivElement>(null)
+  const outputRef = useRef<HTMLUListElement>(null)
   const windowRef = useRef<HTMLDivElement>(null)
   const nextIdRef = useRef(0)
   const baseId = useId()
@@ -538,9 +538,9 @@ export function Terminal() {
           </p>
         </div>
 
-        <div ref={outputRef} className={styles.output}>
+        <ul ref={outputRef} className={styles.output}>
           {entries.map((entry) => (
-            <motion.div
+            <motion.li
               key={entry.id}
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
@@ -562,9 +562,9 @@ export function Terminal() {
                   {line || ' '}
                 </p>
               ))}
-            </motion.div>
+            </motion.li>
           ))}
-        </div>
+        </ul>
 
         <form className={styles.inputRow} onSubmit={handleSubmit}>
           <span className={styles.prompt} aria-hidden="true">

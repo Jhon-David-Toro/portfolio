@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
+import { useCallback, useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { askAssistant, type AssistantMessage } from '../../../core/api/assistantClient'
 import { useDismissablePanel } from '../../../core/dom/useDismissablePanel'
@@ -20,6 +20,7 @@ export function AiAssistant() {
   const [input, setInput] = useState('')
   const [status, setStatus] = useState<Status>({ kind: 'idle' })
   const inputRef = useRef<HTMLInputElement>(null)
+  const headingId = useId()
 
   // Safe: `assistant.starterQuestions` is always authored as a string array
   // in content/locales/{en,es}.json — we own the shape.
@@ -75,9 +76,9 @@ export function AiAssistant() {
 
   return (
     <div ref={wrapperRef} className={styles.wrapper}>
-      <div ref={panelRef} className={styles.panel} role="dialog" aria-label={t('assistant.heading')} tabIndex={-1}>
-        <div className={styles.panelHeader}>
-          <p className={styles.panelHeading}>{t('assistant.heading')}</p>
+      <div ref={panelRef} className={styles.panel} role="dialog" aria-labelledby={headingId} tabIndex={-1}>
+        <header className={styles.panelHeader}>
+          <h2 id={headingId} className={styles.panelHeading}>{t('assistant.heading')}</h2>
           <button
             type="button"
             className={styles.closeButton}
@@ -86,7 +87,7 @@ export function AiAssistant() {
           >
             ×
           </button>
-        </div>
+        </header>
 
         <div className={styles.messages} aria-live="polite">
             {messages.length === 0 && (
@@ -134,6 +135,7 @@ export function AiAssistant() {
               type="text"
               className={styles.input}
               placeholder={t('assistant.placeholder')}
+              aria-label={t('assistant.placeholder')}
               value={input}
               onChange={(event) => {
                 setInput(event.target.value)

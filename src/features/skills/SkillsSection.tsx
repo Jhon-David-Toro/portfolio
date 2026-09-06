@@ -26,11 +26,11 @@ export function SkillsSection() {
   return (
     <Section id="skills" aria-labelledby="skills-heading">
       <h2 id="skills-heading">{t('skills.heading')}</h2>
-      <motion.div className={styles.grid} variants={staggerContainerVariants}>
+      <motion.ul className={styles.grid} variants={staggerContainerVariants}>
         {skillGroups.map((group) => {
           const GroupIcon = GROUP_ICONS[group.id]
           return (
-            <motion.div key={group.id} className={styles.panel} variants={fadeUpVariants}>
+            <motion.li key={group.id} className={styles.panel} variants={fadeUpVariants}>
               <h3 className={styles.panelLabel}>
                 <span className={styles.icon} aria-hidden="true">
                   <GroupIcon />
@@ -48,10 +48,10 @@ export function SkillsSection() {
               <p className={styles.punctuation} aria-hidden="true">
                 ]
               </p>
-            </motion.div>
+            </motion.li>
           )
         })}
-      </motion.div>
+      </motion.ul>
     </Section>
   )
 }
