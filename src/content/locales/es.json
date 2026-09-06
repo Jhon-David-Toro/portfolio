@@ -19,10 +19,15 @@
     "downloadCv": "Descargar CV"
   },
   "settings": {
-    "openLabel": "Ajustes",
-    "heading": "Ajustes",
     "themeLabel": "Tema",
     "languageLabel": "Idioma"
+  },
+  "launcher": {
+    "openLabel": "Abrir menú de herramientas",
+    "heading": "Herramientas",
+    "chatOption": "Chatear con IA",
+    "terminalOption": "Terminal",
+    "continueTerminal": "Continuar terminal"
   },
   "commandPalette": {
     "openLabel": "Abrir paleta de comandos",
@@ -52,6 +57,46 @@
     "thinking": "Pensando…",
     "errorFallback": "No pude conectar con el asistente en este momento.",
     "errorCta": "Escríbele directamente a Jhon"
+  },
+  "terminal": {
+    "openLabel": "Abrir terminal",
+    "closeWindow": "Cerrar terminal",
+    "minimizeWindow": "Minimizar terminal",
+    "maximizeWindow": "Maximizar terminal",
+    "welcome": [
+      "Terminal del portfolio — escribe 'help' para ver los comandos disponibles.",
+      "Presiona Esc o escribe 'exit' para cerrar."
+    ],
+    "inputLabel": "Entrada de comandos de la terminal",
+    "whoami": "Eres un visitante curioso explorando el portfolio de Jhon. Buen instinto.",
+    "notFound": "comando no encontrado: {{command}} (escribe 'help' para ver la lista)",
+    "askUsage": "uso: ask <pregunta>",
+    "projectsNotFound": "No existe el proyecto #{{number}}. Escribe 'projects' para listarlos.",
+    "themeUsage": "tema actual: {{theme}}. uso: theme <light|dark>",
+    "themeInvalid": "uso: theme <light|dark>",
+    "langUsage": "idioma actual: {{language}}. uso: lang <es|en>",
+    "langInvalid": "uso: lang <es|en>",
+    "cdUsage": "uso: cd <about|experience|education|projects|skills|contact>",
+    "cdNotFound": "no existe esa sección: {{section}}",
+    "contactEmailOpened": "Abriendo tu cliente de correo…",
+    "commandList": [
+      "help            muestra esta lista",
+      "whoami          ¿quién pregunta?",
+      "about           bio corta",
+      "experience      experiencia laboral",
+      "education       educación y cursos",
+      "skills          stack tecnológico",
+      "projects        lista proyectos (projects open <n>)",
+      "contact         correo y GitHub (contact email)",
+      "cv              descarga el currículum",
+      "github          abre GitHub en pestaña nueva",
+      "theme <modo>    ver/cambiar claro u oscuro",
+      "lang <código>   ver/cambiar es o en",
+      "cd <sección>    ir a una sección",
+      "ask <pregunta>  pregúntale al asistente de IA sobre Jhon",
+      "clear           limpia la pantalla",
+      "exit            cierra la terminal"
+    ]
   },
   "hero": {
     "eyebrow": "Desarrollador de Software",

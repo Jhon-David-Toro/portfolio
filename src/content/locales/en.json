@@ -19,10 +19,15 @@
     "downloadCv": "Download CV"
   },
   "settings": {
-    "openLabel": "Settings",
-    "heading": "Settings",
     "themeLabel": "Theme",
     "languageLabel": "Language"
+  },
+  "launcher": {
+    "openLabel": "Open tools menu",
+    "heading": "Tools",
+    "chatOption": "Chat with AI",
+    "terminalOption": "Terminal",
+    "continueTerminal": "Continue terminal"
   },
   "commandPalette": {
     "openLabel": "Open command palette",
@@ -52,6 +57,46 @@
     "thinking": "Thinking…",
     "errorFallback": "Couldn't reach the assistant right now.",
     "errorCta": "Email Jhon directly"
+  },
+  "terminal": {
+    "openLabel": "Open terminal",
+    "closeWindow": "Close terminal",
+    "minimizeWindow": "Minimize terminal",
+    "maximizeWindow": "Maximize terminal",
+    "welcome": [
+      "Portfolio terminal — type 'help' to see available commands.",
+      "Press Esc or type 'exit' to close."
+    ],
+    "inputLabel": "Terminal command input",
+    "whoami": "You're a curious visitor poking around Jhon's portfolio. Good instinct.",
+    "notFound": "command not found: {{command}} (type 'help' for a list)",
+    "askUsage": "usage: ask <question>",
+    "projectsNotFound": "No project #{{number}}. Type 'projects' to list them.",
+    "themeUsage": "current theme: {{theme}}. usage: theme <light|dark>",
+    "themeInvalid": "usage: theme <light|dark>",
+    "langUsage": "current language: {{language}}. usage: lang <es|en>",
+    "langInvalid": "usage: lang <es|en>",
+    "cdUsage": "usage: cd <about|experience|education|projects|skills|contact>",
+    "cdNotFound": "no such section: {{section}}",
+    "contactEmailOpened": "Opening your mail client…",
+    "commandList": [
+      "help            show this list",
+      "whoami          who's asking?",
+      "about           short bio",
+      "experience      work history",
+      "education       education & courses",
+      "skills          tech stack",
+      "projects        list projects (projects open <n>)",
+      "contact         email & GitHub (contact email)",
+      "cv              download the résumé",
+      "github          open GitHub in a new tab",
+      "theme <mode>    get/set light or dark",
+      "lang <code>     get/set es or en",
+      "cd <section>    jump to a section",
+      "ask <question>  ask the AI assistant about Jhon",
+      "clear           clear the screen",
+      "exit            close the terminal"
+    ]
   },
   "hero": {
     "eyebrow": "Software Developer",

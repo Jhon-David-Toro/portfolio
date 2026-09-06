@@ -7,6 +7,7 @@ import { profile } from '../../../content/profile/profile'
 import { getProjects } from '../../../content/projects/projects'
 import { SearchIcon } from '../../../design-system/icons/SearchIcon'
 import { Modal } from '../../../design-system/Modal/Modal'
+import { dispatchOpenTerminal } from '../Terminal/terminalEvents'
 import styles from './CommandPalette.module.scss'
 
 // Mirrors SiteHeader's own nav sections (kept local rather than shared —
@@ -137,6 +138,11 @@ export function CommandPalette() {
         action: () => {
           window.open(profile.github, '_blank', 'noopener,noreferrer')
         },
+      },
+      {
+        id: 'open-terminal',
+        label: t('terminal.openLabel'),
+        action: dispatchOpenTerminal,
       },
     ]
   }, [t, navigate, theme, setTheme, i18n, justCopiedEmail])

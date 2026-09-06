@@ -13,7 +13,7 @@ $spacing-steps: 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32;
   --space-safe-bottom: env(safe-area-inset-bottom, 0px);
 
   // Single source of truth for the sticky header's footprint — SiteHeader
-  // enforces this as a min-height, so SettingsMenu's mobile top offset
-  // always clears it exactly.
+  // enforces this as a min-height, so content sitting below it always
+  // clears it exactly.
   --site-header-height: 4.5rem;
 }

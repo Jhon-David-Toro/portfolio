@@ -1,20 +1,19 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDismissablePanel } from '../../../core/dom/useDismissablePanel'
 import { profile } from '../../../content/profile/profile'
-import { ChatIcon } from '../../../design-system/icons/ChatIcon'
 import styles from './AiAssistant.module.scss'
+import { OPEN_ASSISTANT_EVENT } from './aiAssistantEvents'
 
 type ChatMessage = { readonly role: 'user' | 'assistant'; readonly content: string }
 
 type Status = { readonly kind: 'idle' } | { readonly kind: 'sending' } | { readonly kind: 'error' }
 
-const FOCUSABLE_SELECTOR =
-  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
-
 /**
- * Renders the AI assistant trigger and its chat panel — answers visitor
- * questions grounded strictly in the real portfolio content, via a
- * server-side proxy at /api/chat (see api/chat.ts).
+ * Renders the AI assistant's chat panel — answers visitor questions
+ * grounded strictly in the real portfolio content, via a server-side proxy
+ * at /api/chat (see api/chat.ts). Opened via the Launcher's menu, which
+ * dispatches OPEN_ASSISTANT_EVENT — see aiAssistantEvents.ts.
  */
 export function AiAssistant() {
   const { t, i18n } = useTranslation()
@@ -22,70 +21,29 @@ export function AiAssistant() {
   const [messages, setMessages] = useState<readonly ChatMessage[]>([])
   const [input, setInput] = useState('')
   const [status, setStatus] = useState<Status>({ kind: 'idle' })
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const panelRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
   // Safe: `assistant.starterQuestions` is always authored as a string array
   // in content/locales/{en,es}.json — we own the shape.
   const starterQuestions = t('assistant.starterQuestions', { returnObjects: true }) as string[]
 
-  function close() {
-    setOpen(false)
-  }
+  const close = useCallback(() => setOpen(false), [])
+  const { wrapperRef, panelRef } = useDismissablePanel(open, close)
 
-  function openPanel() {
-    setOpen(true)
-  }
+  useEffect(() => {
+    function handleOpenEvent() {
+      setOpen(true)
+    }
+    window.addEventListener(OPEN_ASSISTANT_EVENT, handleOpenEvent)
+    return () => window.removeEventListener(OPEN_ASSISTANT_EVENT, handleOpenEvent)
+  }, [])
 
   useEffect(() => {
     if (!open) {
       return
     }
-
     const frame = requestAnimationFrame(() => inputRef.current?.focus())
-
-    function handlePointerDown(event: MouseEvent) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
-        close()
-      }
-    }
-
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
-        close()
-        return
-      }
-
-      if (event.key !== 'Tab' || !panelRef.current) {
-        return
-      }
-
-      const focusable = panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
-      if (focusable.length === 0) {
-        return
-      }
-
-      const first = focusable[0]
-      const last = focusable[focusable.length - 1]
-
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault()
-        last.focus()
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault()
-        first.focus()
-      }
-    }
-
-    document.addEventListener('mousedown', handlePointerDown)
-    document.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      cancelAnimationFrame(frame)
-      document.removeEventListener('mousedown', handlePointerDown)
-      document.removeEventListener('keydown', handleKeyDown)
-    }
+    return () => cancelAnimationFrame(frame)
   }, [open])
 
   async function sendMessage(question: string) {
@@ -132,36 +90,26 @@ export function AiAssistant() {
     void sendMessage(input)
   }
 
+  if (!open) {
+    return null
+  }
+
   return (
     <div ref={wrapperRef} className={styles.wrapper}>
-      <button
-        type="button"
-        className={styles.trigger}
-        aria-haspopup="dialog"
-        aria-expanded={open}
-        aria-label={t('assistant.openLabel')}
-        onClick={() => {
-          if (open) {
-            close()
-          } else {
-            openPanel()
-          }
-        }}
-      >
-        <ChatIcon />
-      </button>
-
-      {open && (
-        <div
-          ref={panelRef}
-          className={styles.panel}
-          role="dialog"
-          aria-label={t('assistant.heading')}
-          tabIndex={-1}
-        >
+      <div ref={panelRef} className={styles.panel} role="dialog" aria-label={t('assistant.heading')} tabIndex={-1}>
+        <div className={styles.panelHeader}>
           <p className={styles.panelHeading}>{t('assistant.heading')}</p>
+          <button
+            type="button"
+            className={styles.closeButton}
+            onClick={close}
+            aria-label={t('common.close')}
+          >
+            ×
+          </button>
+        </div>
 
-          <div className={styles.messages} aria-live="polite">
+        <div className={styles.messages} aria-live="polite">
             {messages.length === 0 && (
               <div className={styles.starters}>
                 <p className={styles.greeting}>{t('assistant.greeting')}</p>
@@ -221,8 +169,7 @@ export function AiAssistant() {
               {t('assistant.send')}
             </button>
           </form>
-        </div>
-      )}
+      </div>
     </div>
   )
 }

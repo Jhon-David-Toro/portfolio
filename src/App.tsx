@@ -5,10 +5,11 @@ import { AppRoutes } from './app/router/AppRoutes'
 import { FocusOnNavigate } from './app/router/FocusOnNavigate'
 import { ScrollToHash } from './app/router/ScrollToHash'
 import { AiAssistant } from './shared/layout/AiAssistant/AiAssistant'
-import { SettingsMenu } from './shared/layout/SettingsMenu/SettingsMenu'
+import { Launcher } from './shared/layout/Launcher/Launcher'
 import { SkipLink } from './shared/layout/SkipLink/SkipLink'
 import { SiteFooter } from './shared/layout/SiteFooter/SiteFooter'
 import { SiteHeader } from './shared/layout/SiteHeader/SiteHeader'
+import { Terminal } from './shared/layout/Terminal/Terminal'
 
 /** Renders the application shell, providers, navigation, and active route. */
 function App() {
@@ -21,8 +22,9 @@ function App() {
         <ScrollToHash />
         <FocusOnNavigate />
         <SiteHeader />
-        <SettingsMenu />
+        <Launcher />
         <AiAssistant />
+        <Terminal />
         <main id="main-content" tabIndex={-1}>
           <AppRoutes />
         </main>
