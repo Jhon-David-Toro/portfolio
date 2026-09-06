@@ -1,10 +1,11 @@
+@use '../../styles/abstracts/mixins' as mix;
+
 .backdrop {
+  @include mix.flex-center;
+
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: var(--space-4);
   background-color: rgb(0 0 0 / 50%);
 }
@@ -25,9 +26,8 @@
   position: absolute;
   top: var(--space-3);
   right: var(--space-3);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  @include mix.flex-center(true);
+
   width: 36px;
   height: 36px;
   border-radius: var(--radius-sm);

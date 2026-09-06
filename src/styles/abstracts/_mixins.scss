@@ -1,0 +1,14 @@
+/// Centers content on both axes — the `display: flex; align-items: center;
+/// justify-content: center;` triple repeated verbatim across several
+/// components (icon buttons, modal backdrops, badge dots).
+/// @param {Boolean} $inline - Use `inline-flex` instead of `flex`.
+@mixin flex-center($inline: false) {
+  @if $inline {
+    display: inline-flex;
+  } @else {
+    display: flex;
+  }
+
+  align-items: center;
+  justify-content: center;
+}

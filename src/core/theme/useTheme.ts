@@ -25,14 +25,14 @@ function applyThemeColorMeta(theme: Theme) {
 }
 
 /**
+ * Provides the active theme and persists explicit user selections.
+ *
+ * @remarks
  * Binary light/dark theme, backed by `document.documentElement.dataset.theme`
  * (already wired into styles/themes/_dark.scss) and persisted to
  * localStorage once the user makes an explicit choice. Until then, this
  * mirrors the OS `prefers-color-scheme` live — matching the app's behavior
  * before this toggle existed.
- */
-/**
- * Provides the active theme and persists explicit user selections.
  *
  * @returns The current theme and a setter that applies it to the document.
  */

@@ -1,7 +1,8 @@
+@use '../../styles/abstracts/mixins' as mix;
+
 .button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  @include mix.flex-center(true);
+
   gap: var(--space-2);
   min-height: 44px;
   padding: var(--space-2) var(--space-5);

@@ -1,3 +1,5 @@
+@use '../../../styles/abstracts/mixins' as mix;
+
 // A non-modal floating window — no backdrop, no focus trap, the rest of the
 // page stays interactive behind it. .positioner owns *where* the window
 // sits (centered by default, or dragged), so it never fights the entrance
@@ -95,9 +97,8 @@
 .dotRed,
 .dotYellow,
 .dotGreen {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include mix.flex-center;
+
   width: 12px;
   height: 12px;
   border-radius: var(--radius-full);
