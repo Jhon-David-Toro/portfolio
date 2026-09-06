@@ -1,3 +1,5 @@
+@use '../../styles/abstracts/functions' as functions;
+
 // Fills the screen below the sticky header, like a real hero, instead of
 // sizing to its own content — otherwise About peeks in on the same screen.
 // dvh (dynamic viewport height) accounts for mobile browser chrome; the vh
@@ -29,10 +31,10 @@
   top: 50%;
   left: 50%;
   z-index: -1;
-  width: min(60vw, 640px);
-  height: min(60vw, 640px);
+  width: min(60vw, functions.rem(640px));
+  height: min(60vw, functions.rem(640px));
   background: radial-gradient(circle, var(--color-accent-muted) 0%, transparent 70%);
-  filter: blur(40px);
+  filter: blur(functions.rem(40px));
   transform: translate(-50%, -50%);
 }
 
@@ -45,7 +47,7 @@
 
 .eyebrowLine {
   display: inline-block;
-  width: 40px;
+  width: functions.rem(40px);
   height: 1px;
   background-color: var(--color-accent);
 }
@@ -78,7 +80,7 @@
   display: inline-block;
   width: 2px;
   height: 0.9em;
-  margin-left: 2px;
+  margin-left: functions.rem(2px);
   background-color: var(--color-accent);
   vertical-align: text-bottom;
   animation: hero-cursor-blink 1s step-end infinite;
@@ -137,7 +139,7 @@
 .primaryAction {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
+  min-height: functions.rem(44px);
   padding-inline: var(--space-6);
   border-radius: var(--radius-full);
   background-color: var(--color-accent-solid);
@@ -153,7 +155,7 @@
 .secondaryAction {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
+  min-height: functions.rem(44px);
   padding-inline: var(--space-6);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);

@@ -1,3 +1,5 @@
+@use '../../styles/abstracts/functions' as functions;
+
 .nav {
   display: inline-flex;
   padding: var(--space-1);
@@ -15,7 +17,7 @@
 .link {
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
+  min-height: functions.rem(40px);
   padding-inline: var(--space-4);
   border-radius: var(--radius-full);
   color: var(--color-text-secondary);

@@ -1,3 +1,5 @@
+@use '../../styles/abstracts/functions' as functions;
+
 .row {
   display: flex;
   width: 100%;
@@ -24,8 +26,8 @@
 // of language, unlike a text state ("Light"/"Dark") would be.
 .track {
   position: relative;
-  width: 34px;
-  height: 20px;
+  width: functions.rem(34px);
+  height: functions.rem(20px);
   flex-shrink: 0;
   border-radius: var(--radius-full);
   background-color: var(--color-border);
@@ -34,10 +36,10 @@
 
 .thumb {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 16px;
-  height: 16px;
+  top: functions.rem(2px);
+  left: functions.rem(2px);
+  width: functions.rem(16px);
+  height: functions.rem(16px);
   border-radius: var(--radius-full);
   background-color: var(--color-surface-raised);
   box-shadow: var(--shadow-sm);
@@ -50,6 +52,6 @@
   }
 
   .thumb {
-    transform: translateX(14px);
+    transform: translateX(functions.rem(14px));
   }
 }

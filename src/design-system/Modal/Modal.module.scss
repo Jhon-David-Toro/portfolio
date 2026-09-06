@@ -1,7 +1,8 @@
-@use '../../styles/abstracts/mixins' as mix;
+@use '../../styles/abstracts/mixins' as mixins;
+@use '../../styles/abstracts/functions' as functions;
 
 .backdrop {
-  @include mix.flex-center;
+  @include mixins.flex-center;
 
   position: fixed;
   inset: 0;
@@ -13,7 +14,7 @@
 .dialog {
   position: relative;
   width: 100%;
-  max-width: 560px;
+  max-width: functions.rem(560px);
   max-height: 85vh;
   overflow-y: auto;
   padding: var(--space-8);
@@ -26,10 +27,10 @@
   position: absolute;
   top: var(--space-3);
   right: var(--space-3);
-  @include mix.flex-center(true);
+  @include mixins.flex-center(true);
 
-  width: 36px;
-  height: 36px;
+  width: functions.rem(36px);
+  height: functions.rem(36px);
   border-radius: var(--radius-sm);
   color: var(--color-text-secondary);
   font-size: var(--font-size-xl);

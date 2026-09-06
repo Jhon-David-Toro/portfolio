@@ -1,11 +1,12 @@
-@use '../../styles/abstracts/breakpoints' as bp;
+@use '../../styles/abstracts/breakpoints' as breakpoints;
+@use '../../styles/abstracts/functions' as functions;
 
 .grid {
   display: grid;
   gap: var(--space-4);
   margin-top: var(--space-6);
 
-  @include bp.respond-to('md') {
+  @include breakpoints.respond-to('md') {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -22,7 +23,7 @@
 
   &:hover {
     border-color: var(--color-accent);
-    transform: translateY(-2px);
+    transform: translateY(functions.rem(-2px));
     box-shadow: var(--shadow-md);
   }
 }
@@ -45,8 +46,8 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: functions.rem(32px);
+  height: functions.rem(32px);
   border-radius: var(--radius-md);
   background-color: var(--color-accent-muted);
   color: var(--color-accent);

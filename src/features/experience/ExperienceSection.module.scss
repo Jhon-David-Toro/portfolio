@@ -1,3 +1,5 @@
+@use '../../styles/abstracts/functions' as functions;
+
 .timeline {
   --track-width: 2.5rem;
 
@@ -10,8 +12,8 @@
   &::before {
     content: '';
     position: absolute;
-    top: 10px;
-    bottom: 10px;
+    top: functions.rem(10px);
+    bottom: functions.rem(10px);
     left: calc(var(--track-width) / 2 - 0.5px);
     width: 1px;
     background-color: var(--color-border);
@@ -25,8 +27,8 @@
 // prefers-reduced-motion via the global rule in base/_reset.scss.
 .progressLine {
   position: absolute;
-  top: 10px;
-  bottom: 10px;
+  top: functions.rem(10px);
+  bottom: functions.rem(10px);
   left: calc(var(--track-width) / 2 - 0.5px);
   z-index: 1;
   width: 1px;
@@ -45,12 +47,12 @@
 .track {
   display: flex;
   justify-content: center;
-  padding-top: 6px;
+  padding-top: functions.rem(6px);
 }
 
 .dot {
-  width: 12px;
-  height: 12px;
+  width: functions.rem(12px);
+  height: functions.rem(12px);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-full);
   background-color: var(--color-surface-raised);

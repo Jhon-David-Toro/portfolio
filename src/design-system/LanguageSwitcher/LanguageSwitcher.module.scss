@@ -1,3 +1,5 @@
+@use '../../styles/abstracts/functions' as functions;
+
 .row {
   display: flex;
   align-items: center;
@@ -17,13 +19,13 @@
 .segmented {
   display: flex;
   flex-shrink: 0;
-  padding: 2px;
+  padding: functions.rem(2px);
   border-radius: var(--radius-md);
   background-color: var(--color-surface);
 }
 
 .option {
-  min-width: 32px;
+  min-width: functions.rem(32px);
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-sm);
   color: var(--color-text-secondary);

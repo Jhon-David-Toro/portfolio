@@ -1,10 +1,11 @@
-@use '../../../styles/abstracts/breakpoints' as bp;
+@use '../../../styles/abstracts/breakpoints' as breakpoints;
+@use '../../../styles/abstracts/functions' as functions;
 
 .trigger {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  min-height: 40px;
+  min-height: functions.rem(40px);
   padding-inline: var(--space-3);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
@@ -24,7 +25,7 @@
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
 
-  @include bp.respond-to('md') {
+  @include breakpoints.respond-to('md') {
     display: inline;
   }
 }
@@ -65,7 +66,7 @@
 }
 
 .list {
-  max-height: 320px;
+  max-height: functions.rem(320px);
   margin-top: var(--space-4);
   overflow-y: auto;
 }

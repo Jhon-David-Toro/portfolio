@@ -1,4 +1,5 @@
-@use '../../styles/abstracts/breakpoints' as bp;
+@use '../../styles/abstracts/breakpoints' as breakpoints;
+@use '../../styles/abstracts/functions' as functions;
 
 // Same 2-column grid pattern as About — reused deliberately so the section
 // fills the width evenly instead of leaving one narrow column of content
@@ -8,7 +9,7 @@
   gap: var(--space-10);
   margin-top: var(--space-8);
 
-  @include bp.respond-to('md') {
+  @include breakpoints.respond-to('md') {
     grid-template-columns: 1fr 1.2fr;
     gap: var(--space-16);
   }
@@ -37,7 +38,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  min-height: 44px;
+  min-height: functions.rem(44px);
   padding-inline: var(--space-6);
   border-radius: var(--radius-full);
   background-color: var(--color-accent-solid);
@@ -54,7 +55,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  min-height: 44px;
+  min-height: functions.rem(44px);
   padding-inline: var(--space-6);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
@@ -85,7 +86,7 @@
   padding-top: var(--space-6);
   border-top: 1px solid var(--color-border);
 
-  @include bp.respond-to('md') {
+  @include breakpoints.respond-to('md') {
     padding-top: 0;
     padding-left: var(--space-16);
     border-top: none;

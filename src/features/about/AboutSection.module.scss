@@ -1,11 +1,11 @@
-@use '../../styles/abstracts/breakpoints' as bp;
+@use '../../styles/abstracts/breakpoints' as breakpoints;
 
 .grid {
   display: grid;
   gap: var(--space-8);
   margin-top: var(--space-6);
 
-  @include bp.respond-to('md') {
+  @include breakpoints.respond-to('md') {
     grid-template-columns: 1.4fr 1fr;
     gap: var(--space-12);
     align-items: start;

@@ -1,4 +1,5 @@
-@use '../../../styles/abstracts/mixins' as mix;
+@use '../../../styles/abstracts/mixins' as mixins;
+@use '../../../styles/abstracts/functions' as functions;
 
 // A non-modal floating window — no backdrop, no focus trap, the rest of the
 // page stays interactive behind it. .positioner owns *where* the window
@@ -26,8 +27,8 @@
 // and grabbed by the title bar to drag it anywhere on the page.
 .terminal {
   display: flex;
-  width: min(92vw, 760px);
-  min-height: 280px;
+  width: min(92vw, functions.rem(760px));
+  min-height: functions.rem(280px);
   max-height: 85vh;
   aspect-ratio: 16 / 9;
   flex-direction: column;
@@ -75,7 +76,7 @@
 
 .dots {
   display: inline-flex;
-  gap: 7px;
+  gap: functions.rem(7px);
 
   // Reveals each button's tiny glyph on hover — macOS does the same, and
   // it's what actually tells you these buttons do something.
@@ -97,13 +98,13 @@
 .dotRed,
 .dotYellow,
 .dotGreen {
-  @include mix.flex-center;
+  @include mixins.flex-center;
 
-  width: 12px;
-  height: 12px;
+  width: functions.rem(12px);
+  height: functions.rem(12px);
   border-radius: var(--radius-full);
   color: rgb(0 0 0 / 55%);
-  font-size: 9px;
+  font-size: functions.rem(9px);
   line-height: 1;
 
   &::before {
@@ -130,7 +131,7 @@
 
 .titleText {
   flex: 1;
-  margin-right: 39px; // balances .dots' own width so this visually centers
+  margin-right: functions.rem(39px); // balances .dots' own width so this visually centers
   color: #71717a;
   font-size: var(--font-size-xs);
   text-align: center;

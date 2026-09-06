@@ -1,4 +1,4 @@
-@use '../../../styles/abstracts/breakpoints' as bp;
+@use '../../../styles/abstracts/breakpoints' as breakpoints;
 
 .footer {
   padding-top: var(--space-8);
@@ -9,7 +9,7 @@
   // needed at md+, where the bottom nav is hidden.
   padding-bottom: calc(var(--space-8) + var(--bottom-nav-height) + var(--space-safe-bottom));
 
-  @include bp.respond-to('md') {
+  @include breakpoints.respond-to('md') {
     padding-block: var(--space-6);
   }
 }
@@ -21,7 +21,7 @@
   gap: var(--space-4);
   text-align: center;
 
-  @include bp.respond-to('md') {
+  @include breakpoints.respond-to('md') {
     flex-direction: row;
     justify-content: space-between;
     text-align: left;
@@ -64,7 +64,7 @@
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
 
-  @include bp.respond-to('md') {
+  @include breakpoints.respond-to('md') {
     justify-content: flex-start;
   }
 }

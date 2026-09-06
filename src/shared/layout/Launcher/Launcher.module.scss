@@ -1,5 +1,6 @@
-@use '../../../styles/abstracts/breakpoints' as bp;
-@use '../../../styles/abstracts/mixins' as mix;
+@use '../../../styles/abstracts/breakpoints' as breakpoints;
+@use '../../../styles/abstracts/mixins' as mixins;
+@use '../../../styles/abstracts/functions' as functions;
 
 .wrapper {
   position: fixed;
@@ -10,18 +11,18 @@
   // Desktop has no bottom nav — floats bottom-right instead. This is the
   // single floating trigger on every breakpoint (tools + theme + language),
   // so it never competes with another corner button.
-  @include bp.respond-to('md') {
+  @include breakpoints.respond-to('md') {
     bottom: var(--space-4);
     right: var(--space-4);
   }
 }
 
 .trigger {
-  @include mix.flex-center(true);
+  @include mixins.flex-center(true);
 
   position: relative;
-  width: 52px;
-  height: 52px;
+  width: functions.rem(52px);
+  height: functions.rem(52px);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
   background-color: var(--color-accent-solid);
@@ -37,19 +38,19 @@
 // Badge for a minimized-but-alive terminal session — mirrors a real OS
 // Dock's "app is still running" indicator.
 .badge {
-  @include mix.flex-center(true);
+  @include mixins.flex-center(true);
 
   position: absolute;
-  top: -2px;
-  right: -2px;
-  width: 18px;
-  height: 18px;
+  top: functions.rem(-2px);
+  right: functions.rem(-2px);
+  width: functions.rem(18px);
+  height: functions.rem(18px);
   border: 2px solid var(--color-background);
   border-radius: var(--radius-full);
   background-color: #f87171;
   color: #fff;
   font-family: var(--font-family-mono);
-  font-size: 10px;
+  font-size: functions.rem(10px);
   font-weight: var(--font-weight-semibold);
   line-height: 1;
 }
@@ -60,7 +61,7 @@
   bottom: calc(100% + var(--space-3));
   display: flex;
   width: max-content;
-  min-width: 220px;
+  min-width: functions.rem(220px);
   max-width: calc(100vw - var(--space-6));
   flex-direction: column;
   gap: var(--space-1);

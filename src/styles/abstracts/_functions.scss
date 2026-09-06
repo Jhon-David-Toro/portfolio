@@ -1,0 +1,17 @@
+@use 'sass:math';
+
+// The root font-size this project assumes for px -> rem conversions — the
+// browser default, left unset in base/_reset.scss.
+$base-font-size: 16px;
+
+/// Converts a px length to the equivalent rem length, so component sizing
+/// scales with the user's root font-size instead of staying fixed.
+/// @param {Number} $pixels - a length in px (e.g. 24px)
+/// @return {Number} the equivalent length in rem
+@function rem($pixels) {
+  @if math.unit($pixels) != 'px' {
+    @error "rem() expects a px value, got `#{$pixels}`.";
+  }
+
+  @return math.div($pixels, $base-font-size) * 1rem;
+}
