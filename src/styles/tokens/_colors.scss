@@ -22,5 +22,13 @@
   --color-accent-foreground: #ffffff;
   --color-accent-muted: rgb(109 40 217 / 12%);
 
+  // A fixed, always-saturated purple for solid-filled buttons/bubbles —
+  // deliberately *not* theme-swapped like --color-accent (which goes light
+  // in dark mode for legible text/borders on a dark page). White text needs
+  // a consistently dark-enough fill to stay readable in both themes, so
+  // these two tokens stay constant instead of following the theme.
+  --color-accent-solid: #6d28d9;
+  --color-accent-solid-foreground: #ffffff;
+
   --color-focus-ring: #6d28d9;
 }

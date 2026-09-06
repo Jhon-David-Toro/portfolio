@@ -20,8 +20,8 @@
 }
 
 .primary {
-  background-color: var(--color-accent);
-  color: var(--color-accent-foreground);
+  background-color: var(--color-accent-solid);
+  color: var(--color-accent-solid-foreground);
 
   &:hover:not(:disabled) {
     opacity: 0.9;

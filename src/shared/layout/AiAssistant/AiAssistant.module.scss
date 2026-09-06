@@ -109,8 +109,8 @@
 
 .userBubble {
   align-self: flex-end;
-  background-color: var(--color-accent);
-  color: var(--color-accent-foreground);
+  background-color: var(--color-accent-solid);
+  color: var(--color-accent-solid-foreground);
 }
 
 .assistantBubble {
@@ -171,8 +171,8 @@
 .sendButton {
   padding-inline: var(--space-4);
   border-radius: var(--radius-md);
-  background-color: var(--color-accent);
-  color: var(--color-accent-foreground);
+  background-color: var(--color-accent-solid);
+  color: var(--color-accent-solid-foreground);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);

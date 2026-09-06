@@ -36,11 +36,12 @@
 .primaryLink {
   display: inline-flex;
   align-items: center;
+  gap: var(--space-2);
   min-height: 44px;
   padding-inline: var(--space-6);
   border-radius: var(--radius-full);
-  background-color: var(--color-accent);
-  color: var(--color-accent-foreground);
+  background-color: var(--color-accent-solid);
+  color: var(--color-accent-solid-foreground);
   font-weight: var(--font-weight-medium);
   transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
 
@@ -52,6 +53,7 @@
 .secondaryLink {
   display: inline-flex;
   align-items: center;
+  gap: var(--space-2);
   min-height: 44px;
   padding-inline: var(--space-6);
   border: 1px solid var(--color-border);
@@ -62,6 +64,20 @@
 
   &:hover {
     border-color: var(--color-accent);
+  }
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+
+  svg {
+    flex-shrink: 0;
+    color: var(--color-accent);
   }
 }
 

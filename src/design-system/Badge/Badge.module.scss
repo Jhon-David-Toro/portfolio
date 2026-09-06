@@ -8,4 +8,12 @@
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
+  transition:
+    border-color var(--motion-duration-fast) var(--motion-easing-standard),
+    color var(--motion-duration-fast) var(--motion-easing-standard);
+
+  &:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text-primary);
+  }
 }
