@@ -4,7 +4,7 @@ import { MoonIcon } from '../icons/MoonIcon'
 import { SunIcon } from '../icons/SunIcon'
 import styles from './ThemeToggle.module.scss'
 
-/** Renders the accessible light and dark theme switch. */
+/** Renders the accessible light/dark theme switch as a settings row. */
 export function ThemeToggle() {
   const { t } = useTranslation()
   const { theme, setTheme } = useTheme()
@@ -13,7 +13,7 @@ export function ThemeToggle() {
   return (
     <button
       type="button"
-      className={styles.toggle}
+      className={styles.row}
       role="switch"
       aria-checked={isDark}
       aria-label={t(isDark ? 'theme.switchToLight' : 'theme.switchToDark')}
@@ -22,6 +22,10 @@ export function ThemeToggle() {
       }}
     >
       {isDark ? <MoonIcon /> : <SunIcon />}
+      <span className={styles.label}>{t('settings.themeLabel')}</span>
+      <span className={styles.track} aria-hidden="true">
+        <span className={styles.thumb} />
+      </span>
     </button>
   )
 }

@@ -1,27 +1,45 @@
-.switcher {
+.row {
   display: flex;
-  gap: var(--space-1);
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.label {
+  flex: 1;
+}
+
+// Equal-width segments in a shared track, instead of two independently
+// bordered buttons whose widths drifted apart based on selected state.
+.segmented {
+  display: flex;
+  flex-shrink: 0;
+  padding: 2px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
 }
 
 .option {
-  min-width: 44px;
-  min-height: 36px;
-  padding-inline: var(--space-2);
-  border: 1px solid var(--color-border);
+  min-width: 32px;
+  padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-sm);
   color: var(--color-text-secondary);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   transition:
-    color var(--motion-duration-fast) var(--motion-easing-standard),
-    border-color var(--motion-duration-fast) var(--motion-easing-standard);
+    background-color var(--motion-duration-fast) var(--motion-easing-standard),
+    color var(--motion-duration-fast) var(--motion-easing-standard);
 
   &:hover {
     color: var(--color-text-primary);
   }
 
   &[aria-pressed='true'] {
-    border-color: var(--color-accent);
+    background-color: var(--color-surface-raised);
+    box-shadow: var(--shadow-sm);
     color: var(--color-accent);
   }
 }

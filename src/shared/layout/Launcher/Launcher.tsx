@@ -97,9 +97,7 @@ export function Launcher() {
 
             <hr className={styles.divider} />
 
-            <p className={styles.settingsLabel}>{t('settings.themeLabel')}</p>
             <ThemeToggle />
-            <p className={styles.settingsLabel}>{t('settings.languageLabel')}</p>
             <LanguageSwitcher />
           </motion.div>
         )}

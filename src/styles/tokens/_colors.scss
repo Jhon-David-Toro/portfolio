@@ -4,22 +4,23 @@
 :root {
   color-scheme: light dark;
 
-  // Muted off-white rather than pure white — pure #fff read as too stark/
-  // bright, and left --color-surface-raised visually identical to the page
-  // background. Now light mode gets the same 3-tier elevation dark mode
-  // already has: background (muted) < surface < surface-raised (popped).
-  --color-background: #f6f6f8;
-  --color-surface: #ececf1;
-  --color-surface-raised: #ffffff;
+  // Dimmed off-white rather than pure white — pure #fff (and the paler grays
+  // this replaced) read as too stark/bright against dark UI chrome like the
+  // terminal and code blocks. Keeps the same 3-tier elevation dark mode
+  // already has: surface (recessed) < background (base) < surface-raised
+  // (popped), just shifted a few steps darker across the board.
+  --color-background: #e6e6ec;
+  --color-surface: #d9d9e1;
+  --color-surface-raised: #f2f2f6;
 
   --color-text-primary: #16171d;
-  --color-text-secondary: #52525b;
+  --color-text-secondary: #48484f;
 
-  --color-border: #dcdce3;
+  --color-border: #c7c7d1;
 
   --color-accent: #6d28d9;
   --color-accent-foreground: #ffffff;
-  --color-accent-muted: rgb(109 40 217 / 10%);
+  --color-accent-muted: rgb(109 40 217 / 12%);
 
   --color-focus-ring: #6d28d9;
 }
