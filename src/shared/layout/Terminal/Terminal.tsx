@@ -5,13 +5,16 @@ import {
   useMemo,
   useRef,
   useState,
+  type CSSProperties,
   type FormEvent,
   type KeyboardEvent,
 } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'motion/react'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { buildProjectPath } from '../../../app/router/routes'
+import { useDraggable } from '../../../core/dom/useDraggable'
 import { formatMonthYear } from '../../../core/date/formatMonthYear'
 import { useTheme } from '../../../core/theme/useTheme'
 import { profile } from '../../../content/profile/profile'
@@ -19,7 +22,6 @@ import { education, courses } from '../../../content/education/education'
 import { experience } from '../../../content/experience/experience'
 import { skillGroups } from '../../../content/skills/skills'
 import { getProjects } from '../../../content/projects/projects'
-import { Modal } from '../../../design-system/Modal/Modal'
 import { dispatchTerminalBackground, OPEN_TERMINAL_EVENT } from './terminalEvents'
 import styles from './Terminal.module.scss'
 
@@ -74,9 +76,11 @@ export function Terminal() {
   const [historyPointer, setHistoryPointer] = useState<number | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const outputRef = useRef<HTMLDivElement>(null)
+  const windowRef = useRef<HTMLDivElement>(null)
   const nextIdRef = useRef(0)
   const baseId = useId()
   const projects = useMemo(() => getProjects(), [])
+  const { position, dragHandleProps } = useDraggable(windowRef)
 
   const nextId = useCallback(() => {
     nextIdRef.current += 1
@@ -142,6 +146,43 @@ export function Terminal() {
     const frame = requestAnimationFrame(() => inputRef.current?.focus())
     return () => cancelAnimationFrame(frame)
   }, [open])
+
+  // The terminal is a non-modal floating window now (see the render below —
+  // no backdrop, no focus trap, the page stays interactive behind it), so it
+  // needs its own Escape handling rather than Modal's.
+  useEffect(() => {
+    if (!open || minimized) {
+      return
+    }
+
+    function handleKeyDown(event: globalThis.KeyboardEvent) {
+      if (event.key === 'Escape') {
+        close()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [open, minimized, close])
+
+  // Clicking the page behind the window minimizes it rather than closing it
+  // — the session stays alive (Launcher shows the resume badge), so this
+  // just gets it out of the way instead of discarding it. Skipped while
+  // maximized, since there's no "outside" to click then.
+  useEffect(() => {
+    if (!open || minimized || maximized) {
+      return
+    }
+
+    function handlePointerDown(event: MouseEvent) {
+      if (windowRef.current && !windowRef.current.contains(event.target as Node)) {
+        setMinimized(true)
+      }
+    }
+
+    document.addEventListener('mousedown', handlePointerDown)
+    return () => document.removeEventListener('mousedown', handlePointerDown)
+  }, [open, minimized, maximized])
 
   useEffect(() => {
     if (outputRef.current) {
@@ -414,28 +455,25 @@ export function Terminal() {
     return null
   }
 
-  return (
-    <Modal
-      onClose={close}
-      titleId={titleId}
-      closeLabel={t('common.close')}
-      showCloseButton={false}
-      dialogStyle={
-        maximized
-          ? {
-              position: 'fixed',
-              inset: 0,
-              width: '100vw',
-              height: '100vh',
-              maxWidth: 'none',
-              maxHeight: 'none',
-              borderRadius: 0,
-            }
-          : undefined
-      }
+  const positionerStyle: CSSProperties | undefined =
+    !maximized && position ? { top: position.y, left: position.x, transform: 'none' } : undefined
+
+  return createPortal(
+    <div
+      ref={windowRef}
+      className={maximized ? `${styles.positioner} ${styles.positionerMaximized}` : styles.positioner}
+      style={positionerStyle}
     >
-      <div className={maximized ? `${styles.terminal} ${styles.terminalMaximized}` : styles.terminal}>
-        <div className={styles.titleBar}>
+      <motion.div
+        className={maximized ? `${styles.terminal} ${styles.terminalMaximized}` : styles.terminal}
+        role="dialog"
+        aria-labelledby={titleId}
+        tabIndex={-1}
+        initial={{ opacity: 0, scale: 0.96, y: 8 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.15 }}
+      >
+        <div className={styles.titleBar} {...(maximized ? undefined : dragHandleProps)}>
           <span className={styles.dots}>
             <button
               type="button"
@@ -521,7 +559,8 @@ export function Terminal() {
             spellCheck={false}
           />
         </form>
-      </div>
-    </Modal>
+      </motion.div>
+    </div>,
+    document.body,
   )
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'motion/react'
 import styles from './Modal.module.scss'
@@ -9,11 +9,6 @@ type ModalProps = {
   readonly titleId: string
   readonly closeLabel: string
   readonly children: ReactNode
-  /** Hides the built-in "×" button — for callers with their own close affordance. */
-  readonly showCloseButton?: boolean
-  /** Inline overrides for the dialog box (e.g. a wider "maximized" size) — inline so it
-   * reliably wins over the default max-width/max-height regardless of stylesheet order. */
-  readonly dialogStyle?: CSSProperties
 }
 
 const FOCUSABLE_SELECTOR =
@@ -25,14 +20,7 @@ const FOCUSABLE_SELECTOR =
  * @remarks
  * The caller controls whether the modal is mounted; unmounting closes it.
  */
-export function Modal({
-  onClose,
-  titleId,
-  closeLabel,
-  children,
-  showCloseButton = true,
-  dialogStyle,
-}: ModalProps) {
+export function Modal({ onClose, titleId, closeLabel, children }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -87,7 +75,6 @@ export function Modal({
       <motion.div
         ref={dialogRef}
         className={styles.dialog}
-        style={dialogStyle}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
@@ -96,16 +83,9 @@ export function Modal({
         animate={{ opacity: 1, y: 0 }}
         onClick={(event) => event.stopPropagation()}
       >
-        {showCloseButton && (
-          <button
-            type="button"
-            className={styles.closeButton}
-            onClick={onClose}
-            aria-label={closeLabel}
-          >
-            ×
-          </button>
-        )}
+        <button type="button" className={styles.closeButton} onClick={onClose} aria-label={closeLabel}>
+          ×
+        </button>
         {children}
       </motion.div>
     </motion.div>,
