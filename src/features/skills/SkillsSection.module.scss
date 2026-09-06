@@ -22,16 +22,36 @@
   }
 }
 
+// Formatted like a real JSON entry — "group name": [ ...chips... ] — rather
+// than an arbitrary "// comment", so it reads as actual data, not a label
+// dressed up in a slash.
 .panelLabel {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
   margin-bottom: var(--space-4);
-  color: var(--color-text-secondary);
   font-family: var(--font-family-mono);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-regular);
+}
+
+.key {
+  color: var(--color-accent);
+}
+
+.punctuation {
+  color: var(--color-text-secondary);
 }
 
 .chipList {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+  padding-left: var(--space-4);
+}
+
+p.punctuation {
+  margin-top: var(--space-4);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
 }

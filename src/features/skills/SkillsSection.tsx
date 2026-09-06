@@ -16,7 +16,10 @@ export function SkillsSection() {
       <motion.div className={styles.grid} variants={staggerContainerVariants}>
         {skillGroups.map((group) => (
           <motion.div key={group.id} className={styles.panel} variants={fadeUpVariants}>
-            <h3 className={styles.panelLabel}>// {t(`skills.groups.${group.id}`)}</h3>
+            <h3 className={styles.panelLabel}>
+              <span className={styles.key}>&quot;{t(`skills.groups.${group.id}`)}&quot;</span>
+              <span className={styles.punctuation}>: [</span>
+            </h3>
             <ul className={styles.chipList}>
               {group.items.map((item) => (
                 <li key={item}>
@@ -24,6 +27,9 @@ export function SkillsSection() {
                 </li>
               ))}
             </ul>
+            <p className={styles.punctuation} aria-hidden="true">
+              ]
+            </p>
           </motion.div>
         ))}
       </motion.div>
