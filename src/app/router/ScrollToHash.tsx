@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router'
-import { getLenisInstance } from '../../core/scroll/lenisSingleton'
+import { getLenisInstance } from '@/core/scroll/lenisSingleton'
 
 /**
  * Synchronizes browser scroll position and focus with the URL hash.

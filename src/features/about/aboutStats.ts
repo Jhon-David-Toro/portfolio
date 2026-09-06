@@ -1,5 +1,5 @@
-import { experience } from '../../content/experience/experience'
-import { skillGroups } from '../../content/skills/skills'
+import { experience } from '@/content/experience/experience'
+import { skillGroups } from '@/content/skills/skills'
 
 /** Headline numbers for the About section, derived from real content. */
 export type AboutStats = {

@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import { cx } from '../../core/style/cx'
+import { cx } from '@/core/style/cx'
 import type { NavigationProps } from './Navigation.types'
 import styles from './Navigation.module.scss'
 

@@ -1,10 +1,10 @@
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
-import { fadeUpVariants, staggerContainerVariants } from '../../core/motion/variants'
-import { courses, education } from '../../content/education/education'
-import { Section } from '../../design-system/Section/Section'
-import { BadgeCheckIcon } from '../../design-system/icons/BadgeCheckIcon'
-import { GraduationCapIcon } from '../../design-system/icons/GraduationCapIcon'
+import { fadeUpVariants, staggerContainerVariants } from '@/core/motion/variants'
+import { courses, education } from '@/content/education/education'
+import { Section } from '@/design-system/Section/Section'
+import { BadgeCheckIcon } from '@/design-system/icons/BadgeCheckIcon'
+import { GraduationCapIcon } from '@/design-system/icons/GraduationCapIcon'
 import styles from './EducationSection.module.scss'
 
 /** Renders formal education and additional courses. */

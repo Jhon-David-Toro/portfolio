@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
-import { useTheme } from '../../core/theme/useTheme'
-import { MoonIcon } from '../icons/MoonIcon'
-import { SunIcon } from '../icons/SunIcon'
+import { useTheme } from '@/core/theme/useTheme'
+import { MoonIcon } from '@/design-system/icons/MoonIcon'
+import { SunIcon } from '@/design-system/icons/SunIcon'
 import styles from './ThemeToggle.module.scss'
 
 /** Renders the accessible light/dark theme switch as a settings row. */

@@ -1,10 +1,10 @@
 import { useParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { usePageMeta } from '../../core/seo/usePageMeta'
-import { profile } from '../../content/profile/profile'
-import { getProjectMeta } from '../../content/projects/projects'
-import { Badge } from '../../design-system/Badge/Badge'
-import { NotFoundPage } from '../NotFound/NotFoundPage'
+import { usePageMeta } from '@/core/seo/usePageMeta'
+import { profile } from '@/content/profile/profile'
+import { getProjectMeta } from '@/content/projects/projects'
+import { Badge } from '@/design-system/Badge/Badge'
+import { NotFoundPage } from '@/pages/NotFound/NotFoundPage'
 
 /** Renders a project case study resolved from the route slug. */
 export function ProjectPage() {

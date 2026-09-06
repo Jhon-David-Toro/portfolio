@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
-import { fadeUpVariants } from '../../core/motion/variants'
-import { cx } from '../../core/style/cx'
-import { Container } from '../Container/Container'
+import { fadeUpVariants } from '@/core/motion/variants'
+import { cx } from '@/core/style/cx'
+import { Container } from '@/design-system/Container/Container'
 import type { SectionProps } from './Section.types'
 import styles from './Section.module.scss'
 

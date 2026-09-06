@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
-import { profile } from '../../../content/profile/profile'
-import { useWebVitals } from '../../../core/performance/useWebVitals'
-import { Container } from '../../../design-system/Container/Container'
+import { profile } from '@/content/profile/profile'
+import { useWebVitals } from '@/core/performance/useWebVitals'
+import { Container } from '@/design-system/Container/Container'
 import styles from './SiteFooter.module.scss'
 
 const MEASURING = '—'

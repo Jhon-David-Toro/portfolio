@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
-import { formatMonthYear } from '../../core/date/formatMonthYear'
-import { cx } from '../../core/style/cx'
-import { fadeUpVariants, staggerContainerVariants } from '../../core/motion/variants'
-import { experience } from '../../content/experience/experience'
-import { Badge } from '../../design-system/Badge/Badge'
-import { Section } from '../../design-system/Section/Section'
+import { formatMonthYear } from '@/core/date/formatMonthYear'
+import { cx } from '@/core/style/cx'
+import { fadeUpVariants, staggerContainerVariants } from '@/core/motion/variants'
+import { experience } from '@/content/experience/experience'
+import { Badge } from '@/design-system/Badge/Badge'
+import { Section } from '@/design-system/Section/Section'
 import styles from './ExperienceSection.module.scss'
 
 /** Renders the professional experience timeline. */

@@ -1,4 +1,4 @@
-import { cx } from '../../core/style/cx'
+import { cx } from '@/core/style/cx'
 import type { ButtonProps } from './Button.types'
 import styles from './Button.module.scss'
 
