@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the moon icon for the dark theme control. */
 export function MoonIcon({ className }: IconProps) {

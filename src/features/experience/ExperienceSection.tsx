@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { formatMonthYear } from '../../core/date/formatMonthYear'
+import { cx } from '../../core/style/cx'
 import { fadeUpVariants, staggerContainerVariants } from '../../core/motion/variants'
 import { experience } from '../../content/experience/experience'
 import { Badge } from '../../design-system/Badge/Badge'
@@ -83,7 +84,7 @@ export function ExperienceSection() {
                   nodeRefs.current.delete(item.id)
                 }
               }}
-              className={isActive ? `${styles.node} ${styles.active}` : styles.node}
+              className={cx(styles.node, isActive && styles.active)}
               variants={fadeUpVariants}
             >
               <div className={styles.track}>

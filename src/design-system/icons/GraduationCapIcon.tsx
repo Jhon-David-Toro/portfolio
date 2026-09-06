@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the graduation cap icon used for formal education entries. */
 export function GraduationCapIcon({ className }: IconProps) {

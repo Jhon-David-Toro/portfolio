@@ -4,13 +4,8 @@ import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { fadeUpVariants, staggerContainerVariants } from '../../core/motion/variants'
 import { Button } from '../../design-system/Button/Button'
+import type { SubmitStatus } from './ContactForm.types'
 import styles from './ContactForm.module.scss'
-
-type SubmitStatus =
-  | { readonly kind: 'idle' }
-  | { readonly kind: 'submitting' }
-  | { readonly kind: 'success' }
-  | { readonly kind: 'error' }
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID

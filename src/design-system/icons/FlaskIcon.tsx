@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the flask icon for the testing & quality skill group. */
 export function FlaskIcon({ className }: IconProps) {

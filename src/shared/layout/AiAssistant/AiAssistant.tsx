@@ -1,13 +1,11 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
+import { askAssistant, type AssistantMessage } from '../../../core/api/assistantClient'
 import { useDismissablePanel } from '../../../core/dom/useDismissablePanel'
 import { profile } from '../../../content/profile/profile'
+import type { Status } from './AiAssistant.types'
 import styles from './AiAssistant.module.scss'
 import { OPEN_ASSISTANT_EVENT } from './aiAssistantEvents'
-
-type ChatMessage = { readonly role: 'user' | 'assistant'; readonly content: string }
-
-type Status = { readonly kind: 'idle' } | { readonly kind: 'sending' } | { readonly kind: 'error' }
 
 /**
  * Renders the AI assistant's chat panel — answers visitor questions
@@ -18,7 +16,7 @@ type Status = { readonly kind: 'idle' } | { readonly kind: 'sending' } | { reado
 export function AiAssistant() {
   const { t, i18n } = useTranslation()
   const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState<readonly ChatMessage[]>([])
+  const [messages, setMessages] = useState<readonly AssistantMessage[]>([])
   const [input, setInput] = useState('')
   const [status, setStatus] = useState<Status>({ kind: 'idle' })
   const inputRef = useRef<HTMLInputElement>(null)
@@ -58,26 +56,7 @@ export function AiAssistant() {
     setStatus({ kind: 'sending' })
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          question: trimmed,
-          language: i18n.language,
-          history: priorHistory.slice(-6),
-        }),
-      })
-
-      if (!response.ok) {
-        throw new Error('request failed')
-      }
-
-      const data = (await response.json()) as { answer?: string }
-      const answer = data.answer
-      if (!answer) {
-        throw new Error('empty answer')
-      }
-
+      const answer = await askAssistant(trimmed, i18n.language, priorHistory.slice(-6))
       setMessages((current) => [...current, { role: 'assistant', content: answer }])
       setStatus({ kind: 'idle' })
     } catch {

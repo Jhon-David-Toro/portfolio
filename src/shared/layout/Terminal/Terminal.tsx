@@ -14,18 +14,21 @@ import { motion } from 'motion/react'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { buildProjectPath } from '../../../app/router/routes'
+import { askAssistant } from '../../../core/api/assistantClient'
 import { useDraggable } from '../../../core/dom/useDraggable'
 import { formatMonthYear } from '../../../core/date/formatMonthYear'
+import { cx } from '../../../core/style/cx'
 import { useTheme } from '../../../core/theme/useTheme'
-import { profile } from '../../../content/profile/profile'
+import { downloadCv, openGithubProfile, profile } from '../../../content/profile/profile'
 import { education, courses } from '../../../content/education/education'
 import { experience } from '../../../content/experience/experience'
+import { PORTFOLIO_SECTION_IDS } from '../../../content/navigation/sections'
 import { skillGroups } from '../../../content/skills/skills'
 import { getProjects } from '../../../content/projects/projects'
 import { dispatchTerminalBackground, OPEN_TERMINAL_EVENT } from './terminalEvents'
+import type { Entry, EntryKind } from './Terminal.types'
 import styles from './Terminal.module.scss'
 
-const SECTIONS = ['about', 'experience', 'education', 'projects', 'skills', 'contact'] as const
 const COMMAND_NAMES = [
   'help',
   'whoami',
@@ -47,14 +50,6 @@ const COMMAND_NAMES = [
   'exit',
   'close',
 ] as const
-
-type EntryKind = 'default' | 'error' | 'success'
-type Entry = {
-  readonly id: number
-  readonly command: string | null
-  readonly output: readonly string[]
-  readonly kind: EntryKind
-}
 
 /**
  * Renders a playable terminal emulator — a command-line way to explore the
@@ -200,6 +195,69 @@ export function Terminal() {
     setEntries((current) => [...current, { id: nextId(), command, output, kind }])
   }
 
+  // The three commands below each take an optional sub-argument that
+  // triggers navigation (and closes the terminal) instead of just printing
+  // text — pulled out of execute()'s switch since that nested "check an
+  // arg, maybe navigate and return early, otherwise fall through to a
+  // default listing" shape was its main source of nesting. Returning `null`
+  // means the command already fully handled itself (appended its own entry,
+  // navigated, closed) and execute() should stop rather than append again.
+
+  function runProjectsCommand(
+    args: readonly string[],
+    trimmed: string,
+  ): { readonly output: string[]; readonly kind: EntryKind } | null {
+    if (args[0] === 'open') {
+      const index = Number.parseInt(args[1] ?? '', 10)
+      const project = projects[index - 1]
+      if (!project) {
+        return { output: [t('terminal.projectsNotFound', { number: args[1] ?? '?' })], kind: 'error' }
+      }
+      appendEntry(trimmed, [t(`projects.items.${project.slug}.title`)], 'success')
+      navigate(buildProjectPath(project.slug))
+      close()
+      return null
+    }
+
+    return {
+      output: projects.map(
+        (project, index) =>
+          `${index + 1}. ${t(`projects.items.${project.slug}.title`)} — ${t(`projects.items.${project.slug}.summary`)}`,
+      ),
+      kind: 'default',
+    }
+  }
+
+  function runContactCommand(
+    args: readonly string[],
+    trimmed: string,
+  ): { readonly output: string[]; readonly kind: EntryKind } | null {
+    if (args[0] === 'email') {
+      appendEntry(trimmed, [t('terminal.contactEmailOpened')], 'success')
+      window.location.href = `mailto:${profile.email}`
+      return null
+    }
+
+    return { output: [`Email: ${profile.email}`, `GitHub: ${profile.github}`], kind: 'default' }
+  }
+
+  function runCdCommand(
+    argString: string,
+    trimmed: string,
+  ): { readonly output: string[]; readonly kind: EntryKind } | null {
+    if (argString && PORTFOLIO_SECTION_IDS.includes(argString as (typeof PORTFOLIO_SECTION_IDS)[number])) {
+      appendEntry(trimmed, [], 'success')
+      navigate(`/#${argString}`)
+      close()
+      return null
+    }
+
+    return {
+      output: argString ? [t('terminal.cdNotFound', { section: argString })] : [t('terminal.cdUsage')],
+      kind: 'error',
+    }
+  }
+
   async function runAsk(question: string, command: string) {
     const entryId = nextId()
     setEntries((current) => [
@@ -208,19 +266,7 @@ export function Terminal() {
     ])
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ question, language: i18n.language, history: [] }),
-      })
-      if (!response.ok) {
-        throw new Error('request failed')
-      }
-      const data = (await response.json()) as { answer?: string }
-      const answer = data.answer
-      if (!answer) {
-        throw new Error('empty answer')
-      }
+      const answer = await askAssistant(question, i18n.language, [])
       setEntries((current) =>
         current.map((entry) => (entry.id === entryId ? { ...entry, output: [answer] } : entry)),
       )
@@ -311,50 +357,35 @@ export function Terminal() {
         output = skillGroups.map((group) => `${t(`skills.groups.${group.id}`)}: ${group.items.join(', ')}`)
         break
 
-      case 'projects':
-        if (args[0] === 'open') {
-          const index = Number.parseInt(args[1] ?? '', 10)
-          const project = projects[index - 1]
-          if (!project) {
-            output = [t('terminal.projectsNotFound', { number: args[1] ?? '?' })]
-            kind = 'error'
-            break
-          }
-          appendEntry(trimmed, [t(`projects.items.${project.slug}.title`)], 'success')
-          navigate(buildProjectPath(project.slug))
-          close()
+      case 'projects': {
+        const result = runProjectsCommand(args, trimmed)
+        if (!result) {
           return
         }
-        output = projects.map(
-          (project, index) =>
-            `${index + 1}. ${t(`projects.items.${project.slug}.title`)} — ${t(`projects.items.${project.slug}.summary`)}`,
-        )
-        break
-
-      case 'contact':
-        if (args[0] === 'email') {
-          appendEntry(trimmed, [t('terminal.contactEmailOpened')], 'success')
-          window.location.href = `mailto:${profile.email}`
-          return
-        }
-        output = [`Email: ${profile.email}`, `GitHub: ${profile.github}`]
-        break
-
-      case 'cv':
-      case 'resume': {
-        const link = document.createElement('a')
-        link.href = '/jhon-toro-cv.pdf'
-        link.download = ''
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-        output = [`${t('nav.downloadCv')}…`]
-        kind = 'success'
+        output = result.output
+        kind = result.kind
         break
       }
 
+      case 'contact': {
+        const result = runContactCommand(args, trimmed)
+        if (!result) {
+          return
+        }
+        output = result.output
+        kind = result.kind
+        break
+      }
+
+      case 'cv':
+      case 'resume':
+        downloadCv()
+        output = [`${t('nav.downloadCv')}…`]
+        kind = 'success'
+        break
+
       case 'github':
-        window.open(profile.github, '_blank', 'noopener,noreferrer')
+        openGithubProfile()
         output = [profile.github]
         break
 
@@ -384,16 +415,15 @@ export function Terminal() {
         }
         break
 
-      case 'cd':
-        if (argString && SECTIONS.includes(argString as (typeof SECTIONS)[number])) {
-          appendEntry(trimmed, [], 'success')
-          navigate(`/#${argString}`)
-          close()
+      case 'cd': {
+        const result = runCdCommand(argString, trimmed)
+        if (!result) {
           return
         }
-        output = argString ? [t('terminal.cdNotFound', { section: argString })] : [t('terminal.cdUsage')]
-        kind = 'error'
+        output = result.output
+        kind = result.kind
         break
+      }
 
       default:
         output = [t('terminal.notFound', { command: rawCommand })]
@@ -461,11 +491,11 @@ export function Terminal() {
   return createPortal(
     <div
       ref={windowRef}
-      className={maximized ? `${styles.positioner} ${styles.positionerMaximized}` : styles.positioner}
+      className={cx(styles.positioner, maximized && styles.positionerMaximized)}
       style={positionerStyle}
     >
       <motion.div
-        className={maximized ? `${styles.terminal} ${styles.terminalMaximized}` : styles.terminal}
+        className={cx(styles.terminal, maximized && styles.terminalMaximized)}
         role="dialog"
         aria-labelledby={titleId}
         tabIndex={-1}
@@ -527,11 +557,7 @@ export function Terminal() {
               {entry.output.map((line, index) => (
                 <p
                   key={index}
-                  className={
-                    entry.kind === 'default'
-                      ? styles.outputLine
-                      : `${styles.outputLine} ${styles[entry.kind]}`
-                  }
+                  className={cx(styles.outputLine, entry.kind !== 'default' && styles[entry.kind])}
                 >
                   {line || ' '}
                 </p>

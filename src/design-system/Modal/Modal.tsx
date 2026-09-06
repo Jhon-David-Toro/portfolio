@@ -1,15 +1,8 @@
-import { useEffect, useRef, type ReactNode } from 'react'
+import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'motion/react'
+import type { ModalProps } from './Modal.types'
 import styles from './Modal.module.scss'
-
-/** Props for an accessible modal dialog rendered through a document portal. */
-type ModalProps = {
-  readonly onClose: () => void
-  readonly titleId: string
-  readonly closeLabel: string
-  readonly children: ReactNode
-}
 
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'

@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the sun icon for the light theme control. */
 export function SunIcon({ className }: IconProps) {

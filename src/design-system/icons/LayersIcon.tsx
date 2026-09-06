@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the layers icon used by skills navigation. */
 export function LayersIcon({ className }: IconProps) {

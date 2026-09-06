@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the user icon used by profile navigation. */
 export function UserIcon({ className }: IconProps) {

@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the sparkle icon used by the launcher trigger. */
 export function SparkleIcon({ className }: IconProps) {

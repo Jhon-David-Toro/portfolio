@@ -1,24 +1,21 @@
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router'
+import { PORTFOLIO_SECTION_IDS } from '../../../content/navigation/sections'
+import { CV_FILE_PATH } from '../../../content/profile/profile'
 import { useActiveSection } from '../../../core/scroll/useActiveSection'
-import { BottomNav, type BottomNavItem } from '../../../design-system/BottomNav/BottomNav'
+import { cx } from '../../../core/style/cx'
+import { BottomNav } from '../../../design-system/BottomNav/BottomNav'
+import type { BottomNavItem } from '../../../design-system/BottomNav/BottomNav.types'
 import { Container } from '../../../design-system/Container/Container'
-import { Navigation, type NavItem } from '../../../design-system/Navigation/Navigation'
+import { Navigation } from '../../../design-system/Navigation/Navigation'
+import type { NavItem } from '../../../design-system/Navigation/Navigation.types'
 import { CommandPalette } from '../CommandPalette/CommandPalette'
 import styles from './SiteHeader.module.scss'
 
 // 'hero' has no nav link of its own — it's tracked only so the brand mark can
 // show as "active" while at the top of the page, instead of nothing being
 // highlighted until the reader scrolls past it.
-const SECTION_IDS = [
-  'hero',
-  'about',
-  'experience',
-  'education',
-  'projects',
-  'skills',
-  'contact',
-] as const
+const SECTION_IDS = ['hero', ...PORTFOLIO_SECTION_IDS] as const
 
 /** Renders the responsive site header and primary navigation surfaces. */
 export function SiteHeader() {
@@ -51,7 +48,7 @@ export function SiteHeader() {
           <div className={styles.row}>
             <Link
               to="/#hero"
-              className={isHeroActive ? `${styles.brand} ${styles.active}` : styles.brand}
+              className={cx(styles.brand, isHeroActive && styles.active)}
               aria-current={isHeroActive ? 'location' : undefined}
             >
               JT
@@ -63,7 +60,7 @@ export function SiteHeader() {
 
             <div className={styles.controls}>
               <CommandPalette />
-              <a className={styles.cvLink} href="/jhon-toro-cv.pdf" download>
+              <a className={styles.cvLink} href={CV_FILE_PATH} download>
                 {t('nav.downloadCv')}
               </a>
             </div>

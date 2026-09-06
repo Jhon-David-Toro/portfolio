@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the chevron-down icon used by the Hero's scroll cue. */
 export function ChevronDownIcon({ className }: IconProps) {

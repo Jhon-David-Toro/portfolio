@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the location pin icon used for the About section's quick facts. */
 export function PinIcon({ className }: IconProps) {

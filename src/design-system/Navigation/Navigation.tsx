@@ -1,19 +1,7 @@
 import { Link } from 'react-router'
+import { cx } from '../../core/style/cx'
+import type { NavigationProps } from './Navigation.types'
 import styles from './Navigation.module.scss'
-
-/** Destination and accessible label for a primary navigation entry. */
-export type NavItem = {
-  readonly id: string
-  readonly label: string
-  readonly to: string
-}
-
-/** Props accepted by the primary navigation component. */
-type NavigationProps = {
-  readonly items: readonly NavItem[]
-  readonly ariaLabel: string
-  readonly activeId?: string | null
-}
 
 /** Renders the primary navigation and marks the active destination. */
 export function Navigation({ items, ariaLabel, activeId }: NavigationProps) {
@@ -27,7 +15,7 @@ export function Navigation({ items, ariaLabel, activeId }: NavigationProps) {
             <li key={item.id}>
               <Link
                 to={item.to}
-                className={isActive ? `${styles.link} ${styles.active}` : styles.link}
+                className={cx(styles.link, isActive && styles.active)}
                 aria-current={isActive ? 'location' : undefined}
               >
                 {item.label}

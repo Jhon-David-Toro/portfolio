@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the palette icon for the styling & data skill group. */
 export function PaletteIcon({ className }: IconProps) {

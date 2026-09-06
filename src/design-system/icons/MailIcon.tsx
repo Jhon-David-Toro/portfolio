@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the mail icon used by contact navigation. */
 export function MailIcon({ className }: IconProps) {

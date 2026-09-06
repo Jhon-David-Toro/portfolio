@@ -2,26 +2,16 @@ import { useCallback, useEffect, useId, useMemo, useRef, useState, type Keyboard
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { buildProjectPath } from '../../../app/router/routes'
+import { cx } from '../../../core/style/cx'
 import { useTheme } from '../../../core/theme/useTheme'
-import { profile } from '../../../content/profile/profile'
+import { PORTFOLIO_SECTION_IDS } from '../../../content/navigation/sections'
+import { downloadCv, openGithubProfile, profile } from '../../../content/profile/profile'
 import { getProjects } from '../../../content/projects/projects'
 import { SearchIcon } from '../../../design-system/icons/SearchIcon'
 import { Modal } from '../../../design-system/Modal/Modal'
 import { dispatchOpenTerminal } from '../Terminal/terminalEvents'
+import type { Command } from './CommandPalette.types'
 import styles from './CommandPalette.module.scss'
-
-// Mirrors SiteHeader's own nav sections (kept local rather than shared —
-// it's a short, stable list authored in exactly one other place).
-const SECTION_IDS = ['about', 'experience', 'education', 'projects', 'skills', 'contact'] as const
-
-/** A single runnable entry in the command palette. */
-type Command = {
-  readonly id: string
-  readonly label: string
-  readonly action: () => void
-  /** Keeps the palette open after running — for actions with no visible page effect. */
-  readonly keepOpen?: boolean
-}
 
 /**
  * Renders the command palette trigger and its keyboard-driven quick-actions
@@ -82,7 +72,7 @@ export function CommandPalette() {
   }, [open])
 
   const commands = useMemo<readonly Command[]>(() => {
-    const sectionCommands = SECTION_IDS.map((id) => ({
+    const sectionCommands = PORTFOLIO_SECTION_IDS.map((id) => ({
       id: `go-${id}`,
       label: `${t('commandPalette.goTo')} ${t(`nav.${id}`)}`,
       action: () => navigate(`/#${id}`),
@@ -113,14 +103,7 @@ export function CommandPalette() {
       {
         id: 'download-cv',
         label: t('nav.downloadCv'),
-        action: () => {
-          const link = document.createElement('a')
-          link.href = '/jhon-toro-cv.pdf'
-          link.download = ''
-          document.body.appendChild(link)
-          link.click()
-          document.body.removeChild(link)
-        },
+        action: downloadCv,
       },
       {
         id: 'copy-email',
@@ -135,9 +118,7 @@ export function CommandPalette() {
       {
         id: 'open-github',
         label: t('commandPalette.openGithub'),
-        action: () => {
-          window.open(profile.github, '_blank', 'noopener,noreferrer')
-        },
+        action: openGithubProfile,
       },
       {
         id: 'open-terminal',
@@ -229,9 +210,7 @@ export function CommandPalette() {
                 id={`${baseId}-${command.id}`}
                 role="option"
                 aria-selected={index === highlightedIndex}
-                className={
-                  index === highlightedIndex ? `${styles.option} ${styles.highlighted}` : styles.option
-                }
+                className={cx(styles.option, index === highlightedIndex && styles.highlighted)}
                 onClick={() => runCommand(command)}
                 onMouseEnter={() => setHighlightedIndex(index)}
               >

@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the wrench icon for the tools & practices skill group. */
 export function WrenchIcon({ className }: IconProps) {

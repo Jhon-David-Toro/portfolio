@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the terminal icon used by the launcher menu. */
 export function TerminalIcon({ className }: IconProps) {

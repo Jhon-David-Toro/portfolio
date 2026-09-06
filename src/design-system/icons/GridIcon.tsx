@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the grid icon used by project navigation. */
 export function GridIcon({ className }: IconProps) {

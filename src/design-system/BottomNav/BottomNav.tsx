@@ -1,20 +1,12 @@
 import { Link } from 'react-router'
+import { cx } from '../../core/style/cx'
 import { BriefcaseIcon } from '../icons/BriefcaseIcon'
 import { GridIcon } from '../icons/GridIcon'
 import { LayersIcon } from '../icons/LayersIcon'
 import { MailIcon } from '../icons/MailIcon'
 import { UserIcon } from '../icons/UserIcon'
+import type { BottomNavProps, IconName } from './BottomNav.types'
 import styles from './BottomNav.module.scss'
-
-type IconName = 'about' | 'experience' | 'projects' | 'skills' | 'contact'
-
-/** Destination, label, and icon for a mobile navigation entry. */
-export type BottomNavItem = {
-  readonly id: string
-  readonly to: string
-  readonly label: string
-  readonly icon: IconName
-}
 
 const ICONS: Record<IconName, typeof UserIcon> = {
   about: UserIcon,
@@ -22,13 +14,6 @@ const ICONS: Record<IconName, typeof UserIcon> = {
   projects: GridIcon,
   skills: LayersIcon,
   contact: MailIcon,
-}
-
-/** Props accepted by the mobile bottom navigation surface. */
-type BottomNavProps = {
-  readonly items: readonly BottomNavItem[]
-  readonly activeId: string | null
-  readonly ariaLabel: string
 }
 
 /** Renders the mobile-only bottom navigation with an active destination. */
@@ -44,7 +29,7 @@ export function BottomNav({ items, activeId, ariaLabel }: BottomNavProps) {
             <li key={item.id} className={styles.item}>
               <Link
                 to={item.to}
-                className={isActive ? `${styles.link} ${styles.active}` : styles.link}
+                className={cx(styles.link, isActive && styles.active)}
                 aria-label={item.label}
                 aria-current={isActive ? 'location' : undefined}
               >

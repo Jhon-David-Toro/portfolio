@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the chat bubble icon used by the AI assistant trigger. */
 export function ChatIcon({ className }: IconProps) {

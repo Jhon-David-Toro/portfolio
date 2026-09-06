@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the globe icon used by the language switcher row. */
 export function LanguageIcon({ className }: IconProps) {

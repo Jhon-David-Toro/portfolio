@@ -1,17 +1,16 @@
-import type { ComponentType } from 'react'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { fadeUpVariants, staggerContainerVariants } from '../../core/motion/variants'
-import { skillGroups, type SkillGroupId } from '../../content/skills/skills'
+import { skillGroups } from '../../content/skills/skills'
+import type { SkillGroupId } from '../../content/skills/skills.types'
 import { Badge } from '../../design-system/Badge/Badge'
 import { Section } from '../../design-system/Section/Section'
 import { CodeBracketsIcon } from '../../design-system/icons/CodeBracketsIcon'
 import { FlaskIcon } from '../../design-system/icons/FlaskIcon'
 import { PaletteIcon } from '../../design-system/icons/PaletteIcon'
 import { WrenchIcon } from '../../design-system/icons/WrenchIcon'
+import type { IconComponent } from './SkillsSection.types'
 import styles from './SkillsSection.module.scss'
-
-type IconComponent = ComponentType<{ readonly className?: string }>
 
 const GROUP_ICONS: Record<SkillGroupId, IconComponent> = {
   languagesFrameworks: CodeBracketsIcon,

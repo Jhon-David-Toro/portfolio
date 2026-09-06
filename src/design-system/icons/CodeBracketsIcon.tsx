@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the code-brackets icon for the languages & frameworks skill group. */
 export function CodeBracketsIcon({ className }: IconProps) {

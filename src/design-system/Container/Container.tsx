@@ -1,10 +1,5 @@
-import type { ReactNode } from 'react'
+import type { ContainerProps } from './Container.types'
 import styles from './Container.module.scss'
-
-/** Props accepted by the shared responsive content container. */
-type ContainerProps = {
-  readonly children: ReactNode
-}
 
 /** Constrains page content to the shared readable width. */
 export function Container({ children }: ContainerProps) {

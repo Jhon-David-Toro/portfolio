@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the GitHub mark used for profile links. */
 export function GithubIcon({ className }: IconProps) {

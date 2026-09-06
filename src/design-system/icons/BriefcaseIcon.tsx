@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the briefcase icon used by experience navigation. */
 export function BriefcaseIcon({ className }: IconProps) {

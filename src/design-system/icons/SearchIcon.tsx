@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the search icon used by the command palette trigger. */
 export function SearchIcon({ className }: IconProps) {

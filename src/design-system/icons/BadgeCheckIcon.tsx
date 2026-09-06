@@ -1,6 +1,4 @@
-type IconProps = {
-  readonly className?: string
-}
+import type { IconProps } from './icon.types'
 
 /** Renders the certificate/course-completion icon. */
 export function BadgeCheckIcon({ className }: IconProps) {
