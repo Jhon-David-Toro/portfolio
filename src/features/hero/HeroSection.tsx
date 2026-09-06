@@ -32,7 +32,7 @@ export function HeroSection() {
   const scrollY = useTransform(scrollYProgress, [0, 1], [0, 40])
 
   return (
-    <Section aria-label={t('hero.eyebrow')}>
+    <Section id="hero" aria-label={t('hero.eyebrow')}>
       <span className={styles.backdrop} aria-hidden="true" />
       <motion.div
         ref={containerRef}

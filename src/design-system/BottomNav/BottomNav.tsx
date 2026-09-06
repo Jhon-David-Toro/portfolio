@@ -45,12 +45,12 @@ export function BottomNav({ items, activeId, ariaLabel }: BottomNavProps) {
               <Link
                 to={item.to}
                 className={isActive ? `${styles.link} ${styles.active}` : styles.link}
+                aria-label={item.label}
                 aria-current={isActive ? 'location' : undefined}
               >
                 <span className={styles.iconWrap}>
                   <Icon />
                 </span>
-                <span className={styles.label}>{item.label}</span>
               </Link>
             </li>
           )

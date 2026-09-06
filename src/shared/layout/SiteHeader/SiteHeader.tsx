@@ -4,14 +4,27 @@ import { useActiveSection } from '../../../core/scroll/useActiveSection'
 import { BottomNav, type BottomNavItem } from '../../../design-system/BottomNav/BottomNav'
 import { Container } from '../../../design-system/Container/Container'
 import { Navigation, type NavItem } from '../../../design-system/Navigation/Navigation'
+import { CommandPalette } from '../CommandPalette/CommandPalette'
 import styles from './SiteHeader.module.scss'
 
-const SECTION_IDS = ['about', 'experience', 'education', 'projects', 'skills', 'contact'] as const
+// 'hero' has no nav link of its own — it's tracked only so the brand mark can
+// show as "active" while at the top of the page, instead of nothing being
+// highlighted until the reader scrolls past it.
+const SECTION_IDS = [
+  'hero',
+  'about',
+  'experience',
+  'education',
+  'projects',
+  'skills',
+  'contact',
+] as const
 
 /** Renders the responsive site header and primary navigation surfaces. */
 export function SiteHeader() {
   const { t } = useTranslation()
   const activeId = useActiveSection(SECTION_IDS)
+  const isHeroActive = activeId === 'hero'
 
   const navItems: readonly NavItem[] = [
     { id: 'about', label: t('nav.about'), to: '/#about' },
@@ -36,7 +49,11 @@ export function SiteHeader() {
       <header className={styles.header}>
         <Container>
           <div className={styles.row}>
-            <Link to="/" className={styles.brand}>
+            <Link
+              to="/#hero"
+              className={isHeroActive ? `${styles.brand} ${styles.active}` : styles.brand}
+              aria-current={isHeroActive ? 'location' : undefined}
+            >
               JT
             </Link>
 
@@ -45,6 +62,7 @@ export function SiteHeader() {
             </div>
 
             <div className={styles.controls}>
+              <CommandPalette />
               <a className={styles.cvLink} href="/jhon-toro-cv.pdf" download>
                 {t('nav.downloadCv')}
               </a>

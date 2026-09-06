@@ -49,3 +49,27 @@
     color: var(--color-accent);
   }
 }
+
+// Real, live Core Web Vitals for this page load — see useWebVitals. A
+// terminal-style status line rather than a claim in prose.
+.vitals {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+
+  @include bp.respond-to('md') {
+    justify-content: flex-start;
+  }
+}
+
+.vitalsLabel {
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}

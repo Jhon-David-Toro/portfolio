@@ -24,6 +24,35 @@
     "themeLabel": "Tema",
     "languageLabel": "Idioma"
   },
+  "commandPalette": {
+    "openLabel": "Abrir paleta de comandos",
+    "heading": "Paleta de comandos",
+    "placeholder": "Escribe un comando o busca…",
+    "noResults": "Sin resultados.",
+    "goTo": "Ir a",
+    "openProject": "Abrir proyecto:",
+    "switchToEnglish": "Cambiar a inglés",
+    "switchToSpanish": "Cambiar a español",
+    "copyEmail": "Copiar correo electrónico",
+    "copiedEmail": "¡Copiado!",
+    "openGithub": "Abrir perfil de GitHub",
+    "keyHint": "↑↓ navegar · Enter seleccionar · Esc cerrar"
+  },
+  "assistant": {
+    "openLabel": "Pregúntale a la IA sobre Jhon",
+    "heading": "Pregunta sobre Jhon",
+    "greeting": "Pregúntame lo que quieras sobre la experiencia, habilidades o proyectos de Jhon — respondo según su perfil real.",
+    "starterQuestions": [
+      "¿Cuál es su experiencia con React?",
+      "¿Está disponible para trabajo remoto?",
+      "¿Qué proyectos ha construido?"
+    ],
+    "placeholder": "Escribe una pregunta…",
+    "send": "Enviar",
+    "thinking": "Pensando…",
+    "errorFallback": "No pude conectar con el asistente en este momento.",
+    "errorCta": "Escríbele directamente a Jhon"
+  },
   "hero": {
     "eyebrow": "Desarrollador de Software",
     "tagline": "Desarrollador de software enfocado en frontend, construyendo interfaces web modernas y escalables — con experiencia complementaria en backend.",
@@ -152,6 +181,7 @@
   "footer": {
     "email": "Correo",
     "github": "GitHub",
-    "rights": "Todos los derechos reservados."
+    "rights": "Todos los derechos reservados.",
+    "vitalsLabel": "Esta página, en vivo:"
   }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { formatMonthYear } from '../../core/date/formatMonthYear'
 import { fadeUpVariants, staggerContainerVariants } from '../../core/motion/variants'
@@ -13,18 +13,6 @@ export function ExperienceSection() {
   const { t, i18n } = useTranslation()
   const [activeId, setActiveId] = useState<string | null>(null)
   const nodeRefs = useRef(new Map<string, HTMLLIElement>())
-  const timelineRef = useRef<HTMLOListElement>(null)
-  const prefersReducedMotion = useReducedMotion()
-
-  // Drives the timeline's accent fill line — same useScroll/useTransform
-  // pattern as HeroSection's parallax. Progress reaches 1 once the bottom of
-  // the timeline reaches viewport center, so the fill roughly tracks how far
-  // through the section the reader has scrolled.
-  const { scrollYProgress } = useScroll({
-    target: timelineRef,
-    offset: ['start center', 'end center'],
-  })
-  const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1])
 
   // Local, tighter-banded observer than useActiveSection's page-level one —
   // this drives the timeline's scroll-linked node highlight, a purely
@@ -56,14 +44,20 @@ export function ExperienceSection() {
     }
   }, [])
 
+  // Filled up to the currently active node (same activeId that highlights
+  // its dot below) rather than an independent scroll-position calculation —
+  // keeps the line and the dot it corresponds to always in sync.
+  const activeIndex = experience.findIndex((item) => item.id === activeId)
+  const filledFraction = activeIndex === -1 ? 0 : (activeIndex + 1) / experience.length
+
   return (
     <Section id="experience" aria-labelledby="experience-heading">
       <h2 id="experience-heading">{t('experience.heading')}</h2>
-      <motion.ol ref={timelineRef} className={styles.timeline} variants={staggerContainerVariants}>
-        <motion.span
+      <motion.ol className={styles.timeline} variants={staggerContainerVariants}>
+        <span
           className={styles.progressLine}
           aria-hidden="true"
-          style={prefersReducedMotion ? undefined : { scaleY: progressScale }}
+          style={{ transform: `scaleY(${filledFraction})` }}
         />
         {experience.map((item) => {
           // Safe: `experience.items.<id>.highlights` is always authored as a

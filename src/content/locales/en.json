@@ -24,6 +24,35 @@
     "themeLabel": "Theme",
     "languageLabel": "Language"
   },
+  "commandPalette": {
+    "openLabel": "Open command palette",
+    "heading": "Command palette",
+    "placeholder": "Type a command or search…",
+    "noResults": "No results found.",
+    "goTo": "Go to",
+    "openProject": "Open project:",
+    "switchToEnglish": "Switch to English",
+    "switchToSpanish": "Switch to Spanish",
+    "copyEmail": "Copy email address",
+    "copiedEmail": "Copied!",
+    "openGithub": "Open GitHub profile",
+    "keyHint": "↑↓ navigate · Enter select · Esc close"
+  },
+  "assistant": {
+    "openLabel": "Ask the AI assistant about Jhon",
+    "heading": "Ask about Jhon",
+    "greeting": "Ask me anything about Jhon's experience, skills, or projects — I'll answer based on his real profile.",
+    "starterQuestions": [
+      "What's his experience with React?",
+      "Is he open to remote work?",
+      "What projects has he built?"
+    ],
+    "placeholder": "Type a question…",
+    "send": "Send",
+    "thinking": "Thinking…",
+    "errorFallback": "Couldn't reach the assistant right now.",
+    "errorCta": "Email Jhon directly"
+  },
   "hero": {
     "eyebrow": "Software Developer",
     "tagline": "Frontend-focused software developer building modern, scalable web interfaces — with complementary backend experience.",
@@ -152,6 +181,7 @@
   "footer": {
     "email": "Email",
     "github": "GitHub",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "vitalsLabel": "This page, live:"
   }
 }

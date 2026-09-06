@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { AppRoutes } from './app/router/AppRoutes'
 import { FocusOnNavigate } from './app/router/FocusOnNavigate'
 import { ScrollToHash } from './app/router/ScrollToHash'
+import { AiAssistant } from './shared/layout/AiAssistant/AiAssistant'
 import { SettingsMenu } from './shared/layout/SettingsMenu/SettingsMenu'
 import { SkipLink } from './shared/layout/SkipLink/SkipLink'
 import { SiteFooter } from './shared/layout/SiteFooter/SiteFooter'
@@ -21,6 +22,7 @@ function App() {
         <FocusOnNavigate />
         <SiteHeader />
         <SettingsMenu />
+        <AiAssistant />
         <main id="main-content" tabIndex={-1}>
           <AppRoutes />
         </main>

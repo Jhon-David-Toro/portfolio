@@ -25,6 +25,11 @@
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   letter-spacing: var(--tracking-tight);
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+
+  &.active {
+    color: var(--color-accent);
+  }
 }
 
 .desktopNav {

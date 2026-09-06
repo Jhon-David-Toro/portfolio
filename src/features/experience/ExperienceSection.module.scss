@@ -18,10 +18,11 @@
   }
 }
 
-// Painted over the static track above, scaling in from the top as the
-// reader scrolls through the section — see ExperienceSection.tsx's
-// useScroll/useTransform binding. transform: scaleY(1) is the fallback when
-// reduced motion drops the inline scaleY binding, so the fill still shows.
+// Painted over the static track above. Its scaleY is set inline from the
+// active node's index (ExperienceSection.tsx), so it always fills exactly
+// up to the currently highlighted dot — this transition animates between
+// values as that index changes, and is skipped automatically under
+// prefers-reduced-motion via the global rule in base/_reset.scss.
 .progressLine {
   position: absolute;
   top: 10px;
@@ -29,9 +30,9 @@
   left: calc(var(--track-width) / 2 - 0.5px);
   z-index: 1;
   width: 1px;
-  transform: scaleY(1);
   transform-origin: top;
   background-color: var(--color-accent);
+  transition: transform var(--motion-duration-slower) var(--motion-easing-standard);
 }
 
 .node {

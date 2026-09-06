@@ -1,4 +1,12 @@
 .section {
   position: relative;
   padding-block: var(--space-16);
+
+  // Without this, scrollIntoView (via ScrollToHash) lands the section flush
+  // with the viewport top, which is exactly where the sticky header sits —
+  // covering the heading. This offsets the scroll target itself rather than
+  // hard-coding the header height into any particular scroll call, so every
+  // path that scrolls to a section id (nav links, bottom nav, Hero CTAs, the
+  // command palette) is fixed for free.
+  scroll-margin-top: calc(var(--site-header-height) + var(--space-4));
 }

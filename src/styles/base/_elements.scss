@@ -7,13 +7,6 @@ body {
   background-color: var(--color-background);
 }
 
-// Auto-numbers page sections as "// 01", "// 02", ... purely in CSS, scoped
-// to h2s inside the routed page content — h1 (Hero, ProjectPage, NotFound)
-// and the project modal's h3 are untouched.
-#main-content {
-  counter-reset: section;
-}
-
 // Section titles (h2) and sub-headings (h3) get one deliberate, consistent
 // size everywhere instead of falling back to the browser's UA default — h1
 // is sized per-component (Hero, ProjectPage) since it varies more.
@@ -32,15 +25,12 @@ h2 {
   font-size: var(--font-size-3xl);
 }
 
+// A single Markdown-heading-style character, inline with the heading text
+// itself rather than a separate line — a light developer signal without
+// competing with the heading for visual weight.
 #main-content h2::before {
-  counter-increment: section;
-  content: '// ' counter(section, decimal-leading-zero);
-  display: block;
-  margin-bottom: var(--space-2);
-  color: var(--color-text-secondary);
-  font-family: var(--font-family-mono);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-regular);
+  content: '# ';
+  color: var(--color-accent);
 }
 
 h3 {
