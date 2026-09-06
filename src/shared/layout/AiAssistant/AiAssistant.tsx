@@ -7,6 +7,55 @@ import type { Status } from './AiAssistant.types'
 import styles from './AiAssistant.module.scss'
 import { OPEN_ASSISTANT_EVENT } from './aiAssistantEvents'
 
+type AssistantMessagesProps = {
+  readonly messages: readonly AssistantMessage[]
+  readonly status: Status
+  readonly starterQuestions: readonly string[]
+  readonly onStarterClick: (question: string) => void
+}
+
+/** Renders the conversation log: empty-state starters, bubbles, thinking/error states. */
+function AssistantMessages({ messages, status, starterQuestions, onStarterClick }: AssistantMessagesProps) {
+  const { t } = useTranslation()
+
+  return (
+    <div className={styles.messages} aria-live="polite">
+      {messages.length === 0 && (
+        <div className={styles.starters}>
+          <p className={styles.greeting}>{t('assistant.greeting')}</p>
+          {starterQuestions.map((question) => (
+            <button
+              key={question}
+              type="button"
+              className={styles.starterChip}
+              onClick={() => {
+                onStarterClick(question)
+              }}
+            >
+              {question}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {messages.map((message, index) => (
+        <p key={index} className={message.role === 'user' ? styles.userBubble : styles.assistantBubble}>
+          {message.content}
+        </p>
+      ))}
+
+      {status.kind === 'sending' && <p className={styles.assistantBubble}>{t('assistant.thinking')}</p>}
+
+      {status.kind === 'error' && (
+        <div className={styles.errorBubble}>
+          <p>{t('assistant.errorFallback')}</p>
+          <a href={`mailto:${profile.email}`}>{t('assistant.errorCta')}</a>
+        </div>
+      )}
+    </div>
+  )
+}
+
 /**
  * Renders the AI assistant's chat panel — answers visitor questions
  * grounded strictly in the real portfolio content, via a server-side proxy
@@ -89,45 +138,14 @@ export function AiAssistant() {
           </button>
         </header>
 
-        <div className={styles.messages} aria-live="polite">
-            {messages.length === 0 && (
-              <div className={styles.starters}>
-                <p className={styles.greeting}>{t('assistant.greeting')}</p>
-                {starterQuestions.map((question) => (
-                  <button
-                    key={question}
-                    type="button"
-                    className={styles.starterChip}
-                    onClick={() => {
-                      void sendMessage(question)
-                    }}
-                  >
-                    {question}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {messages.map((message, index) => (
-              <p
-                key={index}
-                className={message.role === 'user' ? styles.userBubble : styles.assistantBubble}
-              >
-                {message.content}
-              </p>
-            ))}
-
-            {status.kind === 'sending' && (
-              <p className={styles.assistantBubble}>{t('assistant.thinking')}</p>
-            )}
-
-            {status.kind === 'error' && (
-              <div className={styles.errorBubble}>
-                <p>{t('assistant.errorFallback')}</p>
-                <a href={`mailto:${profile.email}`}>{t('assistant.errorCta')}</a>
-              </div>
-            )}
-          </div>
+        <AssistantMessages
+            messages={messages}
+            status={status}
+            starterQuestions={starterQuestions}
+            onStarterClick={(question) => {
+              void sendMessage(question)
+            }}
+          />
 
           <form className={styles.form} onSubmit={handleSubmit}>
             <input

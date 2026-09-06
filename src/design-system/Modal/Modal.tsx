@@ -1,11 +1,9 @@
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'motion/react'
+import { trapTabFocus } from '@/core/dom/trapTabFocus'
 import type { ModalProps } from './Modal.types'
 import styles from './Modal.module.scss'
-
-const FOCUSABLE_SELECTOR =
-  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
 
 /**
  * Renders a focus-managed modal dialog.
@@ -28,24 +26,8 @@ export function Modal({ onClose, titleId, closeLabel, children }: ModalProps) {
         return
       }
 
-      if (event.key !== 'Tab' || !dialogRef.current) {
-        return
-      }
-
-      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
-      if (focusable.length === 0) {
-        return
-      }
-
-      const first = focusable[0]
-      const last = focusable[focusable.length - 1]
-
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault()
-        last.focus()
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault()
-        first.focus()
+      if (event.key === 'Tab' && dialogRef.current) {
+        trapTabFocus(event, dialogRef.current)
       }
     }
 

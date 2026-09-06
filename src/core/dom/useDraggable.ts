@@ -15,6 +15,14 @@ type DragState = {
 // window dragged fully off-screen could never be grabbed again.
 const MIN_VISIBLE_EDGE = 120
 
+/** Reads an element's current box size, or `0x0` if it isn't mounted yet. */
+function getElementSize(element: HTMLElement | null): { readonly width: number; readonly height: number } {
+  if (!element) {
+    return { width: 0, height: 0 }
+  }
+  return { width: element.offsetWidth, height: element.offsetHeight }
+}
+
 /**
  * Makes an element draggable by a designated handle, using pointer capture
  * rather than document-level listeners — the browser keeps delivering move/up
@@ -61,8 +69,7 @@ export function useDraggable(elementRef: RefObject<HTMLElement | null>) {
         return
       }
 
-      const width = elementRef.current?.offsetWidth ?? 0
-      const height = elementRef.current?.offsetHeight ?? 0
+      const { width, height } = getElementSize(elementRef.current)
       const minX = MIN_VISIBLE_EDGE - width
       const maxX = window.innerWidth - MIN_VISIBLE_EDGE
       const maxY = window.innerHeight - Math.min(MIN_VISIBLE_EDGE, height)

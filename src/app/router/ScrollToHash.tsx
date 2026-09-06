@@ -1,6 +1,16 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router'
 import { getLenisInstance } from '@/core/scroll/lenisSingleton'
+import type Lenis from 'lenis'
+
+/** Scrolls `target` into view using Lenis when active, or native scroll otherwise. */
+function scrollToTarget(target: HTMLElement, lenis: Lenis | null, prefersReducedMotion: boolean) {
+  if (lenis) {
+    lenis.scrollTo(target, { immediate: prefersReducedMotion })
+    return
+  }
+  target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' })
+}
 
 /**
  * Synchronizes browser scroll position and focus with the URL hash.
@@ -37,15 +47,7 @@ export function ScrollToHash() {
       '(prefers-reduced-motion: reduce)',
     ).matches
 
-    const lenis = getLenisInstance()
-    if (lenis) {
-      lenis.scrollTo(target, { immediate: prefersReducedMotion })
-    } else {
-      target.scrollIntoView({
-        behavior: prefersReducedMotion ? 'auto' : 'smooth',
-        block: 'start',
-      })
-    }
+    scrollToTarget(target, getLenisInstance(), prefersReducedMotion)
     target.focus({ preventScroll: true })
   }, [hash, key])
 

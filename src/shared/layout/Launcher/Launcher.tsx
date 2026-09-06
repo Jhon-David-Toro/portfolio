@@ -12,6 +12,36 @@ import { dispatchOpenAssistant } from '@/shared/layout/AiAssistant/aiAssistantEv
 import { dispatchOpenTerminal, TERMINAL_BACKGROUND_EVENT } from '@/shared/layout/Terminal/terminalEvents'
 import styles from './Launcher.module.scss'
 
+type LauncherTriggerProps = {
+  readonly open: boolean
+  readonly terminalMinimized: boolean
+  readonly label: string
+  readonly onClick: () => void
+}
+
+/** The floating ball button itself — its own rotate animation and resume badge. */
+function LauncherTrigger({ open, terminalMinimized, label, onClick }: LauncherTriggerProps) {
+  return (
+    <motion.button
+      type="button"
+      className={styles.trigger}
+      aria-haspopup="dialog"
+      aria-expanded={open}
+      aria-label={label}
+      animate={{ rotate: open ? 45 : 0 }}
+      transition={{ duration: durations.fast }}
+      onClick={onClick}
+    >
+      <SparkleIcon />
+      {terminalMinimized && (
+        <span className={styles.badge} aria-hidden="true">
+          1
+        </span>
+      )}
+    </motion.button>
+  )
+}
+
 /**
  * Renders the single floating launcher ball (bottom-right) that replaces
  * separate triggers for the AI assistant, terminal, theme, and language —
@@ -40,25 +70,14 @@ export function Launcher() {
 
   return (
     <div ref={wrapperRef} className={styles.wrapper}>
-      <motion.button
-        type="button"
-        className={styles.trigger}
-        aria-haspopup="dialog"
-        aria-expanded={open}
-        aria-label={t('launcher.openLabel')}
-        animate={{ rotate: open ? 45 : 0 }}
-        transition={{ duration: durations.fast }}
+      <LauncherTrigger
+        open={open}
+        terminalMinimized={terminalMinimized}
+        label={t('launcher.openLabel')}
         onClick={() => {
           setOpen((value) => !value)
         }}
-      >
-        <SparkleIcon />
-        {terminalMinimized && (
-          <span className={styles.badge} aria-hidden="true">
-            1
-          </span>
-        )}
-      </motion.button>
+      />
 
       <AnimatePresence>
         {open && (

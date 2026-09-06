@@ -13,6 +13,11 @@ import { dispatchOpenTerminal } from '@/shared/layout/Terminal/terminalEvents'
 import type { Command } from './CommandPalette.types'
 import styles from './CommandPalette.module.scss'
 
+/** Whether `event` is the Ctrl/Cmd+K shortcut that opens or closes the palette. */
+function isPaletteShortcut(event: globalThis.KeyboardEvent): boolean {
+  return (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k'
+}
+
 /**
  * Renders the command palette trigger and its keyboard-driven quick-actions
  * overlay (navigation, theme, language, CV, contact) — opened via Ctrl/Cmd+K
@@ -45,13 +50,14 @@ export function CommandPalette() {
   // Global shortcut — works regardless of what currently has focus.
   useEffect(() => {
     function handleGlobalKeyDown(event: globalThis.KeyboardEvent) {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
-        event.preventDefault()
-        if (open) {
-          close()
-        } else {
-          openPalette()
-        }
+      if (!isPaletteShortcut(event)) {
+        return
+      }
+      event.preventDefault()
+      if (open) {
+        close()
+      } else {
+        openPalette()
       }
     }
 
@@ -143,20 +149,26 @@ export function CommandPalette() {
     }
   }
 
-  function handleInputKeyDown(event: KeyboardEvent<HTMLInputElement>) {
-    if (event.key === 'ArrowDown') {
-      event.preventDefault()
-      setHighlightedIndex((index) => Math.min(index + 1, filtered.length - 1))
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault()
-      setHighlightedIndex((index) => Math.max(index - 1, 0))
-    } else if (event.key === 'Enter') {
-      event.preventDefault()
-      const command = filtered[highlightedIndex]
-      if (command) {
-        runCommand(command)
-      }
+  function runHighlightedCommand() {
+    const command = filtered[highlightedIndex]
+    if (command) {
+      runCommand(command)
     }
+  }
+
+  function handleInputKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+    const keyActions: Partial<Record<string, () => void>> = {
+      ArrowDown: () => setHighlightedIndex((index) => Math.min(index + 1, filtered.length - 1)),
+      ArrowUp: () => setHighlightedIndex((index) => Math.max(index - 1, 0)),
+      Enter: runHighlightedCommand,
+    }
+
+    const action = keyActions[event.key]
+    if (!action) {
+      return
+    }
+    event.preventDefault()
+    action()
   }
 
   const titleId = `${baseId}-title`

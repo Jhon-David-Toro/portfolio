@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { buildProjectPath } from '@/app/router/routes'
 import { askAssistant } from '@/core/api/assistantClient'
-import { useDraggable } from '@/core/dom/useDraggable'
+import { useDraggable, type Position } from '@/core/dom/useDraggable'
 import { formatMonthYear } from '@/core/date/formatMonthYear'
 import { cx } from '@/core/style/cx'
 import { useTheme } from '@/core/theme/useTheme'
@@ -50,6 +50,31 @@ const COMMAND_NAMES = [
   'exit',
   'close',
 ] as const
+
+/** Result of running one terminal command — `null` means it already fully handled itself. */
+type CommandResult = { readonly output: string[]; readonly kind: EntryKind } | null
+
+/** Whether the visitor is typing into a field elsewhere on the page. */
+function isTypingInField(target: EventTarget | null): boolean {
+  const element = target as HTMLElement
+  return element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.isContentEditable
+}
+
+function getPositionerClassName(maximized: boolean): string {
+  return cx(styles.positioner, maximized && styles.positionerMaximized)
+}
+
+function getTerminalClassName(maximized: boolean): string {
+  return cx(styles.terminal, maximized && styles.terminalMaximized)
+}
+
+/** The dragged window position, or `undefined` to fall back to centered CSS. */
+function getPositionerStyle(maximized: boolean, position: Position | null): CSSProperties | undefined {
+  if (maximized || !position) {
+    return undefined
+  }
+  return { top: position.y, left: position.x, transform: 'none' }
+}
 
 /**
  * Renders a playable terminal emulator — a command-line way to explore the
@@ -105,13 +130,7 @@ export function Terminal() {
   // on the page (contact form, AI assistant, command palette, etc.).
   useEffect(() => {
     function handleGlobalKeyDown(event: globalThis.KeyboardEvent) {
-      if (event.key !== '`') {
-        return
-      }
-      const target = event.target as HTMLElement
-      const isTyping =
-        target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable
-      if (isTyping) {
+      if (event.key !== '`' || isTypingInField(event.target)) {
         return
       }
       event.preventDefault()
@@ -203,35 +222,31 @@ export function Terminal() {
   // means the command already fully handled itself (appended its own entry,
   // navigated, closed) and execute() should stop rather than append again.
 
-  function runProjectsCommand(
-    args: readonly string[],
-    trimmed: string,
-  ): { readonly output: string[]; readonly kind: EntryKind } | null {
-    if (args[0] === 'open') {
-      const index = Number.parseInt(args[1] ?? '', 10)
-      const project = projects[index - 1]
-      if (!project) {
-        return { output: [t('terminal.projectsNotFound', { number: args[1] ?? '?' })], kind: 'error' }
-      }
-      appendEntry(trimmed, [t(`projects.items.${project.slug}.title`)], 'success')
-      navigate(buildProjectPath(project.slug))
-      close()
-      return null
+  function openProjectAtIndex(rawIndex: string | undefined, trimmed: string): CommandResult {
+    const project = projects[Number.parseInt(rawIndex ?? '', 10) - 1]
+    if (!project) {
+      return { output: [t('terminal.projectsNotFound', { number: rawIndex ?? '?' })], kind: 'error' }
     }
-
-    return {
-      output: projects.map(
-        (project, index) =>
-          `${index + 1}. ${t(`projects.items.${project.slug}.title`)} — ${t(`projects.items.${project.slug}.summary`)}`,
-      ),
-      kind: 'default',
-    }
+    appendEntry(trimmed, [t(`projects.items.${project.slug}.title`)], 'success')
+    navigate(buildProjectPath(project.slug))
+    close()
+    return null
   }
 
-  function runContactCommand(
-    args: readonly string[],
-    trimmed: string,
-  ): { readonly output: string[]; readonly kind: EntryKind } | null {
+  function runProjectsCommand(args: readonly string[], trimmed: string): CommandResult {
+    if (args[0] !== 'open') {
+      return {
+        output: projects.map(
+          (project, index) =>
+            `${index + 1}. ${t(`projects.items.${project.slug}.title`)} — ${t(`projects.items.${project.slug}.summary`)}`,
+        ),
+        kind: 'default',
+      }
+    }
+    return openProjectAtIndex(args[1], trimmed)
+  }
+
+  function runContactCommand(args: readonly string[], trimmed: string): CommandResult {
     if (args[0] === 'email') {
       appendEntry(trimmed, [t('terminal.contactEmailOpened')], 'success')
       window.location.href = `mailto:${profile.email}`
@@ -241,10 +256,7 @@ export function Terminal() {
     return { output: [`Email: ${profile.email}`, `GitHub: ${profile.github}`], kind: 'default' }
   }
 
-  function runCdCommand(
-    argString: string,
-    trimmed: string,
-  ): { readonly output: string[]; readonly kind: EntryKind } | null {
+  function runCdCommand(argString: string, trimmed: string): CommandResult {
     if (argString && PORTFOLIO_SECTION_IDS.includes(argString as (typeof PORTFOLIO_SECTION_IDS)[number])) {
       appendEntry(trimmed, [], 'success')
       navigate(`/#${argString}`)
@@ -281,6 +293,111 @@ export function Terminal() {
     }
   }
 
+  function formatExperienceLine(item: (typeof experience)[number]): string {
+    const role = t(`experience.items.${item.id}.role`)
+    const start = formatMonthYear(item.startDate, i18n.language)
+    const end = item.endDate ? formatMonthYear(item.endDate, i18n.language) : t('experience.present')
+    const mode = t(`experience.workMode.${item.workMode}`)
+    return `${role} — ${item.company} (${start} – ${end}) · ${mode}`
+  }
+
+  function formatEducationLine(item: (typeof education)[number]): string {
+    const program = t(`education.items.${item.id}.program`)
+    return `${program} — ${item.institution} (${item.startYear}–${item.endYear})`
+  }
+
+  function buildEducationOutput(): string[] {
+    return [
+      ...education.map(formatEducationLine),
+      '',
+      `${t('education.coursesHeading')}:`,
+      ...courses.map((course) => `- ${course.title} (${course.provider})`),
+    ]
+  }
+
+  function runCvCommand(): CommandResult {
+    downloadCv()
+    return { output: [`${t('nav.downloadCv')}…`], kind: 'success' }
+  }
+
+  function runGithubCommand(): CommandResult {
+    openGithubProfile()
+    return { output: [profile.github], kind: 'default' }
+  }
+
+  function runThemeCommand(argString: string): CommandResult {
+    if (!argString) {
+      return { output: [t('terminal.themeUsage', { theme })], kind: 'default' }
+    }
+    if (argString === 'light' || argString === 'dark') {
+      setTheme(argString)
+      return { output: [`theme: ${argString}`], kind: 'success' }
+    }
+    return { output: [t('terminal.themeInvalid')], kind: 'error' }
+  }
+
+  function runLangCommand(argString: string): CommandResult {
+    if (!argString) {
+      return { output: [t('terminal.langUsage', { language: i18n.language })], kind: 'default' }
+    }
+    if (argString === 'es' || argString === 'en') {
+      void i18n.changeLanguage(argString)
+      return { output: [`lang: ${argString}`], kind: 'success' }
+    }
+    return { output: [t('terminal.langInvalid')], kind: 'error' }
+  }
+
+  function runClearCommand(): CommandResult {
+    setEntries([])
+    return null
+  }
+
+  function runExitCommand(trimmed: string): CommandResult {
+    appendEntry(trimmed, [])
+    close()
+    return null
+  }
+
+  async function runAskCommand(argString: string, trimmed: string): Promise<CommandResult> {
+    if (!argString) {
+      return { output: [t('terminal.askUsage')], kind: 'error' }
+    }
+    await runAsk(argString, trimmed)
+    return null
+  }
+
+  /** Maps each command name to the handler that runs it — extend here, not in `execute`. */
+  function buildCommandHandlers(
+    args: readonly string[],
+    argString: string,
+    trimmed: string,
+  ): Record<string, () => CommandResult | Promise<CommandResult>> {
+    return {
+      clear: () => runClearCommand(),
+      cls: () => runClearCommand(),
+      exit: () => runExitCommand(trimmed),
+      close: () => runExitCommand(trimmed),
+      ask: () => runAskCommand(argString, trimmed),
+      help: () => ({ output: t('terminal.commandList', { returnObjects: true }) as string[], kind: 'default' }),
+      whoami: () => ({ output: [t('terminal.whoami')], kind: 'default' }),
+      about: () => ({ output: [t('about.lead'), '', t('about.body')], kind: 'default' }),
+      experience: () => ({ output: experience.map(formatExperienceLine), kind: 'default' }),
+      education: () => ({ output: buildEducationOutput(), kind: 'default' }),
+      skills: () => ({
+        output: skillGroups.map((group) => `${t(`skills.groups.${group.id}`)}: ${group.items.join(', ')}`),
+        kind: 'default',
+      }),
+      projects: () => runProjectsCommand(args, trimmed),
+      contact: () => runContactCommand(args, trimmed),
+      cv: () => runCvCommand(),
+      resume: () => runCvCommand(),
+      github: () => runGithubCommand(),
+      theme: () => runThemeCommand(argString),
+      lang: () => runLangCommand(argString),
+      cd: () => runCdCommand(argString, trimmed),
+    }
+  }
+
   async function execute(raw: string) {
     const trimmed = raw.trim()
     if (trimmed.length === 0) {
@@ -294,143 +411,15 @@ export function Terminal() {
     const [rawCommand, ...args] = trimmed.split(/\s+/)
     const command = rawCommand.toLowerCase()
     const argString = args.join(' ')
+    const handler = buildCommandHandlers(args, argString, trimmed)[command]
 
-    if (command === 'clear' || command === 'cls') {
-      setEntries([])
-      return
+    const result = handler
+      ? await handler()
+      : { output: [t('terminal.notFound', { command: rawCommand })], kind: 'error' as const }
+
+    if (result) {
+      appendEntry(trimmed, result.output, result.kind)
     }
-
-    if (command === 'exit' || command === 'close') {
-      appendEntry(trimmed, [])
-      close()
-      return
-    }
-
-    if (command === 'ask') {
-      if (!argString) {
-        appendEntry(trimmed, [t('terminal.askUsage')], 'error')
-        return
-      }
-      await runAsk(argString, trimmed)
-      return
-    }
-
-    let output: string[]
-    let kind: EntryKind = 'default'
-
-    switch (command) {
-      case 'help':
-        output = t('terminal.commandList', { returnObjects: true }) as string[]
-        break
-
-      case 'whoami':
-        output = [t('terminal.whoami')]
-        break
-
-      case 'about':
-        output = [t('about.lead'), '', t('about.body')]
-        break
-
-      case 'experience':
-        output = experience.map((item) => {
-          const role = t(`experience.items.${item.id}.role`)
-          const start = formatMonthYear(item.startDate, i18n.language)
-          const end = item.endDate ? formatMonthYear(item.endDate, i18n.language) : t('experience.present')
-          const mode = t(`experience.workMode.${item.workMode}`)
-          return `${role} — ${item.company} (${start} – ${end}) · ${mode}`
-        })
-        break
-
-      case 'education':
-        output = [
-          ...education.map((item) => {
-            const program = t(`education.items.${item.id}.program`)
-            return `${program} — ${item.institution} (${item.startYear}–${item.endYear})`
-          }),
-          '',
-          `${t('education.coursesHeading')}:`,
-          ...courses.map((course) => `- ${course.title} (${course.provider})`),
-        ]
-        break
-
-      case 'skills':
-        output = skillGroups.map((group) => `${t(`skills.groups.${group.id}`)}: ${group.items.join(', ')}`)
-        break
-
-      case 'projects': {
-        const result = runProjectsCommand(args, trimmed)
-        if (!result) {
-          return
-        }
-        output = result.output
-        kind = result.kind
-        break
-      }
-
-      case 'contact': {
-        const result = runContactCommand(args, trimmed)
-        if (!result) {
-          return
-        }
-        output = result.output
-        kind = result.kind
-        break
-      }
-
-      case 'cv':
-      case 'resume':
-        downloadCv()
-        output = [`${t('nav.downloadCv')}…`]
-        kind = 'success'
-        break
-
-      case 'github':
-        openGithubProfile()
-        output = [profile.github]
-        break
-
-      case 'theme':
-        if (!argString) {
-          output = [t('terminal.themeUsage', { theme })]
-        } else if (argString === 'light' || argString === 'dark') {
-          setTheme(argString)
-          output = [`theme: ${argString}`]
-          kind = 'success'
-        } else {
-          output = [t('terminal.themeInvalid')]
-          kind = 'error'
-        }
-        break
-
-      case 'lang':
-        if (!argString) {
-          output = [t('terminal.langUsage', { language: i18n.language })]
-        } else if (argString === 'es' || argString === 'en') {
-          void i18n.changeLanguage(argString)
-          output = [`lang: ${argString}`]
-          kind = 'success'
-        } else {
-          output = [t('terminal.langInvalid')]
-          kind = 'error'
-        }
-        break
-
-      case 'cd': {
-        const result = runCdCommand(argString, trimmed)
-        if (!result) {
-          return
-        }
-        output = result.output
-        kind = result.kind
-        break
-      }
-
-      default:
-        output = [t('terminal.notFound', { command: rawCommand })]
-        kind = 'error'
-    }
-
-    appendEntry(trimmed, output, kind)
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -440,39 +429,53 @@ export function Terminal() {
     void execute(value)
   }
 
-  function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
-    if (event.key === 'ArrowUp') {
-      event.preventDefault()
-      if (commandHistory.length === 0) {
-        return
-      }
-      const nextPointer = historyPointer === null ? commandHistory.length - 1 : Math.max(historyPointer - 1, 0)
-      setHistoryPointer(nextPointer)
-      setInput(commandHistory[nextPointer] ?? '')
-    } else if (event.key === 'ArrowDown') {
-      event.preventDefault()
-      if (historyPointer === null) {
-        return
-      }
-      const nextPointer = historyPointer + 1
-      if (nextPointer >= commandHistory.length) {
-        setHistoryPointer(null)
-        setInput('')
-      } else {
-        setHistoryPointer(nextPointer)
-        setInput(commandHistory[nextPointer] ?? '')
-      }
-    } else if (event.key === 'Tab') {
-      event.preventDefault()
-      const [current] = input.split(/\s+/)
-      if (!current) {
-        return
-      }
-      const matches = COMMAND_NAMES.filter((name) => name.startsWith(current.toLowerCase()))
-      if (matches.length === 1) {
-        setInput(`${matches[0]} `)
-      }
+  function navigateHistoryUp() {
+    if (commandHistory.length === 0) {
+      return
     }
+    const nextPointer = historyPointer === null ? commandHistory.length - 1 : Math.max(historyPointer - 1, 0)
+    setHistoryPointer(nextPointer)
+    setInput(commandHistory[nextPointer] ?? '')
+  }
+
+  function navigateHistoryDown() {
+    if (historyPointer === null) {
+      return
+    }
+    const nextPointer = historyPointer + 1
+    if (nextPointer >= commandHistory.length) {
+      setHistoryPointer(null)
+      setInput('')
+      return
+    }
+    setHistoryPointer(nextPointer)
+    setInput(commandHistory[nextPointer] ?? '')
+  }
+
+  function completeCommand() {
+    const [current] = input.split(/\s+/)
+    if (!current) {
+      return
+    }
+    const matches = COMMAND_NAMES.filter((name) => name.startsWith(current.toLowerCase()))
+    if (matches.length === 1) {
+      setInput(`${matches[0]} `)
+    }
+  }
+
+  function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+    const keyActions: Partial<Record<string, () => void>> = {
+      ArrowUp: navigateHistoryUp,
+      ArrowDown: navigateHistoryDown,
+      Tab: completeCommand,
+    }
+
+    const action = keyActions[event.key]
+    if (!action) {
+      return
+    }
+    event.preventDefault()
+    action()
   }
 
   const titleId = `${baseId}-title`
@@ -485,17 +488,14 @@ export function Terminal() {
     return null
   }
 
-  const positionerStyle: CSSProperties | undefined =
-    !maximized && position ? { top: position.y, left: position.x, transform: 'none' } : undefined
-
   return createPortal(
     <div
       ref={windowRef}
-      className={cx(styles.positioner, maximized && styles.positionerMaximized)}
-      style={positionerStyle}
+      className={getPositionerClassName(maximized)}
+      style={getPositionerStyle(maximized, position)}
     >
       <motion.div
-        className={cx(styles.terminal, maximized && styles.terminalMaximized)}
+        className={getTerminalClassName(maximized)}
         role="dialog"
         aria-labelledby={titleId}
         tabIndex={-1}

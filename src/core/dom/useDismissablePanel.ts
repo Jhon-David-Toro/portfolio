@@ -1,7 +1,5 @@
 import { useEffect, useRef, type RefObject } from 'react'
-
-const FOCUSABLE_SELECTOR =
-  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+import { trapTabFocus } from './trapTabFocus'
 
 /** Refs to wire up a dismissable floating panel. */
 export type DismissablePanel = {
@@ -40,24 +38,8 @@ export function useDismissablePanel(open: boolean, onClose: () => void): Dismiss
         return
       }
 
-      if (event.key !== 'Tab' || !panelRef.current) {
-        return
-      }
-
-      const focusable = panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
-      if (focusable.length === 0) {
-        return
-      }
-
-      const first = focusable[0]
-      const last = focusable[focusable.length - 1]
-
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault()
-        last.focus()
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault()
-        first.focus()
+      if (event.key === 'Tab' && panelRef.current) {
+        trapTabFocus(event, panelRef.current)
       }
     }
 

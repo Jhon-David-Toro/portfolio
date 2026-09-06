@@ -43,45 +43,61 @@ function isLocale(value: unknown): value is Locale {
   return value === 'es' || value === 'en'
 }
 
+function isValidChatRole(role: unknown): role is ChatMessage['role'] {
+  return role === 'user' || role === 'assistant'
+}
+
 function isChatMessage(value: unknown): value is ChatMessage {
   if (typeof value !== 'object' || value === null) {
     return false
   }
   const candidate = value as Record<string, unknown>
-  return (
-    (candidate.role === 'user' || candidate.role === 'assistant') &&
-    typeof candidate.content === 'string'
-  )
+  return isValidChatRole(candidate.role) && typeof candidate.content === 'string'
+}
+
+/** Reads `entry[key]`, or `fallback` when the localized entry is missing. */
+function resolveField<T, K extends keyof T>(entry: T | undefined, key: K, fallback: T[K]): T[K] {
+  if (!entry) {
+    return fallback
+  }
+  return entry[key]
+}
+
+function resolveHighlights(entry: { readonly highlights?: readonly string[] } | undefined): string {
+  if (!entry?.highlights) {
+    return ''
+  }
+  return entry.highlights.join(' ')
+}
+
+function formatExperienceEntry(item: (typeof experience)[number], locale: LocaleContent): string {
+  const entry = locale.experience.items[item.id as keyof typeof locale.experience.items]
+  const role = resolveField(entry, 'role', item.id)
+  const highlights = resolveHighlights(entry)
+  const end = item.endDate ?? locale.experience.present
+  return `- ${role} at ${item.company} (${item.startDate} to ${end}, ${item.workMode}). ${highlights}`
+}
+
+function formatEducationEntry(item: (typeof education)[number], locale: LocaleContent): string {
+  const entry = locale.education.items[item.id as keyof typeof locale.education.items]
+  return `- ${entry?.program ?? item.id} — ${item.institution} (${item.startYear}-${item.endYear})`
+}
+
+function formatProjectEntry(project: ReturnType<typeof getProjects>[number], locale: LocaleContent): string {
+  const entry = locale.projects.items[project.slug as keyof typeof locale.projects.items]
+  const title = resolveField(entry, 'title', project.slug)
+  const summary = resolveField(entry, 'summary', '')
+  return `- ${title}: ${summary} (${project.tags.join(', ')})`
 }
 
 /** Assembles the grounding context from the same content the site itself renders. */
 function buildContext(locale: LocaleContent): string {
   const skillList = skillGroups.flatMap((group) => group.items).join(', ')
-
-  const experienceLines = experience
-    .map((item) => {
-      const entry = locale.experience.items[item.id as keyof typeof locale.experience.items]
-      const role = entry?.role ?? item.id
-      const highlights = entry?.highlights?.join(' ') ?? ''
-      const end = item.endDate ?? locale.experience.present
-      return `- ${role} at ${item.company} (${item.startDate} to ${end}, ${item.workMode}). ${highlights}`
-    })
-    .join('\n')
-
-  const educationLines = education
-    .map((item) => {
-      const entry = locale.education.items[item.id as keyof typeof locale.education.items]
-      return `- ${entry?.program ?? item.id} — ${item.institution} (${item.startYear}-${item.endYear})`
-    })
-    .join('\n')
-
+  const experienceLines = experience.map((item) => formatExperienceEntry(item, locale)).join('\n')
+  const educationLines = education.map((item) => formatEducationEntry(item, locale)).join('\n')
   const courseList = courses.map((course) => course.title).join(', ')
-
   const projectLines = getProjects()
-    .map((project) => {
-      const entry = locale.projects.items[project.slug as keyof typeof locale.projects.items]
-      return `- ${entry?.title ?? project.slug}: ${entry?.summary ?? ''} (${project.tags.join(', ')})`
-    })
+    .map((project) => formatProjectEntry(project, locale))
     .join('\n')
 
   return `Name: ${profile.name}
@@ -125,36 +141,49 @@ function jsonResponse(body: unknown, status: number): Response {
   })
 }
 
-export default async function handler(request: Request): Promise<Response> {
+function checkMethod(request: Request): Response | null {
   if (request.method !== 'POST') {
     return jsonResponse({ error: 'Method not allowed' }, 405)
   }
+  return null
+}
 
-  const apiKey = process.env.GEMINI_API_KEY
-  if (!apiKey) {
-    return jsonResponse({ error: 'Assistant is not configured yet.' }, 503)
-  }
+type ParsedRequest =
+  | { readonly ok: true; readonly body: ChatRequestBody; readonly question: string }
+  | { readonly ok: false; readonly errorMessage: string }
 
+function normalizeQuestion(body: ChatRequestBody): string {
+  return typeof body.question === 'string' ? body.question.trim() : ''
+}
+
+/** Parses the JSON body and validates the question, keeping their distinct error messages. */
+async function parseAndValidateRequest(request: Request): Promise<ParsedRequest> {
   let body: ChatRequestBody
   try {
     body = (await request.json()) as ChatRequestBody
   } catch {
-    return jsonResponse({ error: 'Invalid request body.' }, 400)
+    return { ok: false, errorMessage: 'Invalid request body.' }
   }
 
-  const question = typeof body.question === 'string' ? body.question.trim() : ''
+  const question = normalizeQuestion(body)
   if (question.length === 0 || question.length > MAX_QUESTION_LENGTH) {
-    return jsonResponse({ error: 'Question must be 1-500 characters.' }, 400)
+    return { ok: false, errorMessage: 'Question must be 1-500 characters.' }
   }
 
-  const language: Locale = isLocale(body.language) ? body.language : 'es'
-  const locale = language === 'en' ? en : es
+  return { ok: true, body, question }
+}
 
+function resolveLocale(body: ChatRequestBody): { readonly language: Locale; readonly locale: LocaleContent } {
+  const language: Locale = isLocale(body.language) ? body.language : 'es'
+  return { language, locale: language === 'en' ? en : es }
+}
+
+function buildGeminiContents(body: ChatRequestBody, question: string) {
   const history = Array.isArray(body.history)
     ? body.history.filter(isChatMessage).slice(-MAX_HISTORY_MESSAGES)
     : []
 
-  const contents = [
+  return [
     ...history.map((message) => ({
       role: message.role === 'assistant' ? 'model' : 'user',
       // Bounds worst-case payload size regardless of what a client sends —
@@ -163,33 +192,80 @@ export default async function handler(request: Request): Promise<Response> {
     })),
     { role: 'user', parts: [{ text: question }] },
   ]
+}
 
+function extractTrimmedText(parts: { text?: string }[] | undefined): string | null {
+  if (!parts || parts.length === 0) {
+    return null
+  }
+  const text = parts[0].text
+  return text ? text.trim() : null
+}
+
+function extractAnswer(data: { candidates?: { content?: { parts?: { text?: string }[] } }[] }): string | null {
+  const candidate = data.candidates?.[0]
+  return extractTrimmedText(candidate?.content?.parts)
+}
+
+function unavailableResponse(): Response {
+  return jsonResponse({ error: 'The assistant is temporarily unavailable.' }, 502)
+}
+
+/** Calls Gemini and returns the fully-formed response — success or a graceful failure. */
+async function callGemini(
+  apiKey: string,
+  systemPrompt: string,
+  contents: ReturnType<typeof buildGeminiContents>,
+): Promise<Response> {
   try {
     const geminiResponse = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
-        systemInstruction: { parts: [{ text: buildSystemPrompt(locale, language) }] },
+        systemInstruction: { parts: [{ text: systemPrompt }] },
         contents,
         generationConfig: { maxOutputTokens: MAX_OUTPUT_TOKENS, temperature: 0.4 },
       }),
     })
 
     if (!geminiResponse.ok) {
-      return jsonResponse({ error: 'The assistant is temporarily unavailable.' }, 502)
+      return unavailableResponse()
     }
 
     const data = (await geminiResponse.json()) as {
       candidates?: { content?: { parts?: { text?: string }[] } }[]
     }
-    const answer = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim()
+    const answer = extractAnswer(data)
 
     if (!answer) {
-      return jsonResponse({ error: 'The assistant is temporarily unavailable.' }, 502)
+      return unavailableResponse()
     }
 
     return jsonResponse({ answer }, 200)
   } catch {
-    return jsonResponse({ error: 'The assistant is temporarily unavailable.' }, 502)
+    return unavailableResponse()
   }
+}
+
+export default async function handler(request: Request): Promise<Response> {
+  const methodError = checkMethod(request)
+  if (methodError) {
+    return methodError
+  }
+
+  const apiKey = process.env.GEMINI_API_KEY
+  if (!apiKey) {
+    return jsonResponse({ error: 'Assistant is not configured yet.' }, 503)
+  }
+
+  const parsed = await parseAndValidateRequest(request)
+  if (!parsed.ok) {
+    return jsonResponse({ error: parsed.errorMessage }, 400)
+  }
+
+  const { language, locale } = resolveLocale(parsed.body)
+  const contents = buildGeminiContents(parsed.body, parsed.question)
+  const systemPrompt = buildSystemPrompt(locale, language)
+
+  return callGemini(apiKey, systemPrompt, contents)
 }
