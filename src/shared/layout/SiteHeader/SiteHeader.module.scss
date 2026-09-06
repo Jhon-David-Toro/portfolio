@@ -1,5 +1,5 @@
-@use '../../../styles/abstracts/breakpoints' as breakpoints;
-@use '../../../styles/abstracts/functions' as functions;
+@use '@/styles/abstracts/breakpoints' as breakpoints;
+@use '@/styles/abstracts/functions' as functions;
 
 .header {
   position: sticky;

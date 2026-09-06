@@ -1,8 +1,11 @@
 import type { IncomingMessage, ServerResponse } from 'node:http'
+import { fileURLToPath } from 'node:url'
 import type { Connect, Plugin } from 'vite'
 import react, { reactCompilerPreset } from '@vitejs/plugin-react'
 import babel from '@rolldown/plugin-babel'
 import { defineConfig, loadEnv } from 'vite'
+
+const srcDir = fileURLToPath(new URL('./src', import.meta.url))
 
 function readRequestBody(req: IncomingMessage): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -65,5 +68,10 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react(), babel({ presets: [reactCompilerPreset()] }), localApiPlugin()],
+    resolve: {
+      alias: {
+        '@': srcDir,
+      },
+    },
   }
 })

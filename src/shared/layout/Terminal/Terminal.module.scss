@@ -1,5 +1,5 @@
-@use '../../../styles/abstracts/mixins' as mixins;
-@use '../../../styles/abstracts/functions' as functions;
+@use '@/styles/abstracts/mixins' as mixins;
+@use '@/styles/abstracts/functions' as functions;
 
 // A non-modal floating window — no backdrop, no focus trap, the rest of the
 // page stays interactive behind it. .positioner owns *where* the window

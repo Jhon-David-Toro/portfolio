@@ -1,6 +1,6 @@
-@use '../../styles/abstracts/breakpoints' as breakpoints;
-@use '../../styles/abstracts/mixins' as mixins;
-@use '../../styles/abstracts/functions' as functions;
+@use '@/styles/abstracts/breakpoints' as breakpoints;
+@use '@/styles/abstracts/mixins' as mixins;
+@use '@/styles/abstracts/functions' as functions;
 
 .nav {
   position: fixed;
