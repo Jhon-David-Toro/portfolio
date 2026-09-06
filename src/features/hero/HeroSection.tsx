@@ -6,6 +6,8 @@ import { fadeUpVariants, staggerContainerVariants } from '../../core/motion/vari
 import { profile } from '../../content/profile/profile'
 import { Badge } from '../../design-system/Badge/Badge'
 import { Section } from '../../design-system/Section/Section'
+import { ChevronDownIcon } from '../../design-system/icons/ChevronDownIcon'
+import { PinIcon } from '../../design-system/icons/PinIcon'
 import styles from './HeroSection.module.scss'
 
 // Curated for a quick-glance stack in the Hero — same real technologies from
@@ -32,7 +34,8 @@ export function HeroSection() {
   const scrollY = useTransform(scrollYProgress, [0, 1], [0, 40])
 
   return (
-    <Section id="hero" aria-label={t('hero.eyebrow')}>
+    <Section id="hero" aria-label={t('hero.eyebrow')} className={styles.heroSection}>
+      <span className={styles.glow} aria-hidden="true" />
       <span className={styles.backdrop} aria-hidden="true" />
       <motion.div
         ref={containerRef}
@@ -44,6 +47,7 @@ export function HeroSection() {
           <p className={styles.eyebrow}>
             <span aria-hidden="true">$ </span>
             {t('hero.eyebrow')}
+            <span className={styles.cursor} aria-hidden="true" />
           </p>
         </motion.div>
 
@@ -56,7 +60,10 @@ export function HeroSection() {
         </motion.p>
 
         <motion.div variants={fadeUpVariants} className={styles.meta}>
-          <span className={styles.location}>{profile.location}</span>
+          <span className={styles.location}>
+            <PinIcon />
+            {profile.location}
+          </span>
           <ul className={styles.stack}>
             {FEATURED_STACK.map((tech) => (
               <li key={tech}>
@@ -74,6 +81,23 @@ export function HeroSection() {
             {t('hero.getInTouch')}
           </Link>
         </motion.div>
+      </motion.div>
+
+      <motion.div
+        className={styles.scrollCue}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 0.4 }}
+      >
+        <Link to="/#about" className={styles.scrollCueLink} aria-label={t('hero.scrollCue')}>
+          <motion.span
+            className={styles.scrollCueIcon}
+            animate={prefersReducedMotion ? undefined : { y: [0, 6, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <ChevronDownIcon />
+          </motion.span>
+        </Link>
       </motion.div>
     </Section>
   )

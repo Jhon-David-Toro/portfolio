@@ -1,3 +1,15 @@
+// Fills the screen below the sticky header, like a real hero, instead of
+// sizing to its own content — otherwise About peeks in on the same screen.
+// dvh (dynamic viewport height) accounts for mobile browser chrome; the vh
+// line above it is a fallback for browsers that don't support dvh yet.
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100vh - var(--site-header-height));
+  min-height: calc(100dvh - var(--site-header-height));
+}
+
 // Faint dot-grid, fading out toward the bottom of the section — a subtle
 // technical/blueprint accent scoped to the Hero only (not a global texture).
 .backdrop {
@@ -8,6 +20,20 @@
   background-size: 24px 24px;
   mask-image: linear-gradient(to bottom, black, transparent 85%);
   opacity: 0.6;
+}
+
+// A soft accent bloom behind the content — adds depth without competing
+// with the dot-grid or the name's own typography.
+.glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: min(60vw, 640px);
+  height: min(60vw, 640px);
+  background: radial-gradient(circle, var(--color-accent-muted) 0%, transparent 70%);
+  filter: blur(40px);
+  transform: translate(-50%, -50%);
 }
 
 .eyebrowRow {
@@ -31,6 +57,31 @@
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
+}
+
+// A blinking terminal-style cursor — completes the "$ " prompt already
+// prefixing the eyebrow text. The global reduced-motion reset (see
+// styles/base/_reset.scss) freezes this automatically for those users.
+@keyframes hero-cursor-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  margin-left: 2px;
+  background-color: var(--color-accent);
+  vertical-align: text-bottom;
+  animation: hero-cursor-blink 1s step-end infinite;
 }
 
 .name {
@@ -59,8 +110,15 @@
 }
 
 .location {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
+
+  svg {
+    color: var(--color-accent);
+  }
 }
 
 .stack {
@@ -82,8 +140,8 @@
   min-height: 44px;
   padding-inline: var(--space-6);
   border-radius: var(--radius-full);
-  background-color: var(--color-accent);
-  color: var(--color-accent-foreground);
+  background-color: var(--color-accent-solid);
+  color: var(--color-accent-solid-foreground);
   font-weight: var(--font-weight-medium);
   transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
 
@@ -101,9 +159,38 @@
   border-radius: var(--radius-full);
   color: var(--color-text-primary);
   font-weight: var(--font-weight-medium);
-  transition: border-color var(--motion-duration-fast) var(--motion-easing-standard);
+  transition:
+    border-color var(--motion-duration-fast) var(--motion-easing-standard),
+    background-color var(--motion-duration-fast) var(--motion-easing-standard);
 
   &:hover {
     border-color: var(--color-accent);
+    background-color: var(--color-surface);
   }
+}
+
+// Hints that this is a full-viewport hero with more below it, not the
+// whole page — sits at the section's own bottom edge regardless of how the
+// content above is vertically centered.
+.scrollCue {
+  position: absolute;
+  bottom: var(--space-6);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scrollCueLink {
+  display: flex;
+  padding: var(--space-2);
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+.scrollCueIcon {
+  display: flex;
 }

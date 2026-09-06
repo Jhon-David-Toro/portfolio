@@ -13,9 +13,15 @@ import { getLenisInstance } from '../../core/scroll/lenisSingleton'
  * the page — Lenis reads the same `scroll-margin-top` CSS already keeping
  * sections clear of the sticky header, so the landing position matches
  * exactly either way.
+ *
+ * Depends on `key`, not just `hash`: React Router only changes `hash` when
+ * its *value* changes, so re-clicking a link back to the section you're
+ * already on (scrolled away without the hash changing, e.g. the Hero's
+ * scroll cue) wouldn't otherwise re-run this effect. `key` is a fresh string
+ * on every navigation, same hash or not, so every click scrolls.
  */
 export function ScrollToHash() {
-  const { hash } = useLocation()
+  const { hash, key } = useLocation()
 
   useEffect(() => {
     if (!hash) {
@@ -41,7 +47,7 @@ export function ScrollToHash() {
       })
     }
     target.focus({ preventScroll: true })
-  }, [hash])
+  }, [hash, key])
 
   return null
 }

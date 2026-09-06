@@ -20,8 +20,9 @@
 
 // Minimal "underline" style — no filled box, no border-radius. Lets the
 // typography carry the field rather than a generic bordered input box.
-.input,
-.textarea {
+// Single-line only now — a multi-line textarea reads better as an actual
+// contained box (see .textarea below) than a baseline rule stretched tall.
+.input {
   padding-block: var(--space-2);
   border-style: none none solid none;
   border-width: 0 0 1px 0;
@@ -52,9 +53,30 @@
   }
 }
 
+// A contained box rather than an underline — a multi-line field needs a
+// visible boundary to read as one block, and disabling resize keeps it from
+// fighting the form's own layout.
 .textarea {
-  min-height: 6rem;
-  resize: vertical;
+  min-height: 8rem;
+  padding: var(--space-3) var(--space-4);
+  resize: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  transition: border-color var(--motion-duration-fast) var(--motion-easing-standard);
+
+  &::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  &:focus-visible {
+    border-color: var(--color-accent);
+    outline: none;
+  }
 }
 
 .formFooter {
