@@ -2,24 +2,8 @@ import { useTranslation } from 'react-i18next'
 import { profile } from '@/content/profile/profile'
 import { useWebVitals } from '@/core/performance/useWebVitals'
 import { Container } from '@/design-system/Container/Container'
+import { formatMs, formatScore, formatSeconds } from './SiteFooter.helpers'
 import styles from './SiteFooter.module.scss'
-
-const MEASURING = '—'
-
-/** Formats a millisecond duration as whole seconds, e.g. "0.9s". */
-function formatSeconds(ms: number | null): string {
-  return ms === null ? MEASURING : `${(ms / 1000).toFixed(1)}s`
-}
-
-/** Formats a millisecond duration as whole milliseconds, e.g. "42ms". */
-function formatMs(ms: number | null): string {
-  return ms === null ? MEASURING : `${Math.round(ms)}ms`
-}
-
-/** Formats a unitless layout-shift score to two decimals, e.g. "0.00". */
-function formatScore(value: number | null): string {
-  return value === null ? MEASURING : value.toFixed(2)
-}
 
 /** Renders the site-wide footer with copyright, contact links, and live Core Web Vitals. */
 export function SiteFooter() {

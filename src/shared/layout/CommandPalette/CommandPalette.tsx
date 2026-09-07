@@ -11,12 +11,8 @@ import { SearchIcon } from '@/design-system/icons/SearchIcon'
 import { Modal } from '@/design-system/Modal/Modal'
 import { dispatchOpenTerminal } from '@/shared/layout/Terminal/terminalEvents'
 import type { Command } from './CommandPalette.types'
+import { isPaletteShortcut } from './CommandPalette.helpers'
 import styles from './CommandPalette.module.scss'
-
-/** Whether `event` is the Ctrl/Cmd+K shortcut that opens or closes the palette. */
-function isPaletteShortcut(event: globalThis.KeyboardEvent): boolean {
-  return (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k'
-}
 
 /**
  * Renders the command palette trigger and its keyboard-driven quick-actions

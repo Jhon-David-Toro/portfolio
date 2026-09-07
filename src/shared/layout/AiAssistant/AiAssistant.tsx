@@ -3,16 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { askAssistant, type AssistantMessage } from '@/core/api/assistantClient'
 import { useDismissablePanel } from '@/core/dom/useDismissablePanel'
 import { profile } from '@/content/profile/profile'
-import type { Status } from './AiAssistant.types'
+import type { AssistantMessagesProps, Status } from './AiAssistant.types'
 import styles from './AiAssistant.module.scss'
 import { OPEN_ASSISTANT_EVENT } from './aiAssistantEvents'
-
-type AssistantMessagesProps = {
-  readonly messages: readonly AssistantMessage[]
-  readonly status: Status
-  readonly starterQuestions: readonly string[]
-  readonly onStarterClick: (question: string) => void
-}
 
 /** Renders the conversation log: empty-state starters, bubbles, thinking/error states. */
 function AssistantMessages({ messages, status, starterQuestions, onStarterClick }: AssistantMessagesProps) {

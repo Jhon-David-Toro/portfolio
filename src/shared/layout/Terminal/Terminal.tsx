@@ -5,7 +5,6 @@ import {
   useMemo,
   useRef,
   useState,
-  type CSSProperties,
   type FormEvent,
   type KeyboardEvent,
 } from 'react'
@@ -15,7 +14,7 @@ import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { buildProjectPath } from '@/app/router/routes'
 import { askAssistant } from '@/core/api/assistantClient'
-import { useDraggable, type Position } from '@/core/dom/useDraggable'
+import { useDraggable } from '@/core/dom/useDraggable'
 import { formatMonthYear } from '@/core/date/formatMonthYear'
 import { cx } from '@/core/style/cx'
 import { useTheme } from '@/core/theme/useTheme'
@@ -26,7 +25,8 @@ import { PORTFOLIO_SECTION_IDS } from '@/content/navigation/sections'
 import { skillGroups } from '@/content/skills/skills'
 import { getProjects } from '@/content/projects/projects'
 import { dispatchTerminalBackground, OPEN_TERMINAL_EVENT } from './terminalEvents'
-import type { Entry, EntryKind } from './Terminal.types'
+import type { CommandResult, Entry, EntryKind } from './Terminal.types'
+import { getPositionerClassName, getPositionerStyle, getTerminalClassName, isTypingInField } from './Terminal.helpers'
 import styles from './Terminal.module.scss'
 
 const COMMAND_NAMES = [
@@ -50,31 +50,6 @@ const COMMAND_NAMES = [
   'exit',
   'close',
 ] as const
-
-/** Result of running one terminal command — `null` means it already fully handled itself. */
-type CommandResult = { readonly output: string[]; readonly kind: EntryKind } | null
-
-/** Whether the visitor is typing into a field elsewhere on the page. */
-function isTypingInField(target: EventTarget | null): boolean {
-  const element = target as HTMLElement
-  return element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.isContentEditable
-}
-
-function getPositionerClassName(maximized: boolean): string {
-  return cx(styles.positioner, maximized && styles.positionerMaximized)
-}
-
-function getTerminalClassName(maximized: boolean): string {
-  return cx(styles.terminal, maximized && styles.terminalMaximized)
-}
-
-/** The dragged window position, or `undefined` to fall back to centered CSS. */
-function getPositionerStyle(maximized: boolean, position: Position | null): CSSProperties | undefined {
-  if (maximized || !position) {
-    return undefined
-  }
-  return { top: position.y, left: position.x, transform: 'none' }
-}
 
 /**
  * Renders a playable terminal emulator — a command-line way to explore the

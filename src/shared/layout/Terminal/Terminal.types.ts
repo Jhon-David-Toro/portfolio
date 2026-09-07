@@ -8,3 +8,6 @@ export type Entry = {
   readonly output: readonly string[]
   readonly kind: EntryKind
 }
+
+/** Result of running one terminal command — `null` means it already fully handled itself. */
+export type CommandResult = { readonly output: string[]; readonly kind: EntryKind } | null

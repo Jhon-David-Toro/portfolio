@@ -10,14 +10,8 @@ import { SparkleIcon } from '@/design-system/icons/SparkleIcon'
 import { TerminalIcon } from '@/design-system/icons/TerminalIcon'
 import { dispatchOpenAssistant } from '@/shared/layout/AiAssistant/aiAssistantEvents'
 import { dispatchOpenTerminal, TERMINAL_BACKGROUND_EVENT } from '@/shared/layout/Terminal/terminalEvents'
+import type { LauncherTriggerProps } from './Launcher.types'
 import styles from './Launcher.module.scss'
-
-type LauncherTriggerProps = {
-  readonly open: boolean
-  readonly terminalMinimized: boolean
-  readonly label: string
-  readonly onClick: () => void
-}
 
 /** The floating ball button itself — its own rotate animation and resume badge. */
 function LauncherTrigger({ open, terminalMinimized, label, onClick }: LauncherTriggerProps) {
