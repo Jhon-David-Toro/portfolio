@@ -27,7 +27,8 @@
     "heading": "Tools",
     "chatOption": "Chat with AI",
     "terminalOption": "Terminal",
-    "continueTerminal": "Continue terminal"
+    "continueTerminal": "Continue terminal",
+    "reposOption": "Repositories"
   },
   "commandPalette": {
     "openLabel": "Open command palette",
@@ -196,6 +197,19 @@
         "description": "Sample case study slot. A real write-up would explain the component API design, testing strategy, and adoption story for a shared component library built with Lit and TypeScript."
       }
     }
+  },
+  "github": {
+    "heading": "GitHub",
+    "note": "Real activity, fetched live from my GitHub profile.",
+    "loading": "Loading GitHub activity…",
+    "error": "Couldn't load GitHub activity right now.",
+    "viewProfile": "View full profile",
+    "publicRepos": "Public repositories",
+    "followers": "Followers",
+    "commits_one": "{{count}} commit",
+    "commits_other": "{{count}} commits",
+    "noDescription": "No description.",
+    "retry": "Retry"
   },
   "skills": {
     "heading": "Skills",

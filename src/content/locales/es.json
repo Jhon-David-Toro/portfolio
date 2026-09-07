@@ -27,7 +27,8 @@
     "heading": "Herramientas",
     "chatOption": "Chatear con IA",
     "terminalOption": "Terminal",
-    "continueTerminal": "Continuar terminal"
+    "continueTerminal": "Continuar terminal",
+    "reposOption": "Repositorios"
   },
   "commandPalette": {
     "openLabel": "Abrir paleta de comandos",
@@ -196,6 +197,19 @@
         "description": "Espacio de ejemplo para un caso de estudio real. Ahí normalmente iría el diseño de la API de componentes, la estrategia de testing y la adopción de una librería de componentes compartida construida con Lit y TypeScript."
       }
     }
+  },
+  "github": {
+    "heading": "GitHub",
+    "note": "Actividad real, obtenida en vivo desde mi perfil de GitHub.",
+    "loading": "Cargando actividad de GitHub…",
+    "error": "No se pudo cargar la actividad de GitHub en este momento.",
+    "viewProfile": "Ver perfil completo",
+    "publicRepos": "Repositorios públicos",
+    "followers": "Seguidores",
+    "commits_one": "{{count}} commit",
+    "commits_other": "{{count}} commits",
+    "noDescription": "Sin descripción.",
+    "retry": "Reintentar"
   },
   "skills": {
     "heading": "Habilidades",

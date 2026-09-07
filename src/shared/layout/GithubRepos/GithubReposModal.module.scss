@@ -1,0 +1,216 @@
+@use '@/styles/abstracts/functions' as functions;
+
+.note {
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+// Sweeping gradient highlight — a static pulse reads as "broken", a moving
+// shimmer reads as "working on it." Reduced-motion users get this frozen
+// automatically by the global reset (see styles/base/_reset.scss).
+@keyframes github-skeleton-shimmer {
+  0% {
+    background-position: 150% 0;
+  }
+
+  100% {
+    background-position: -50% 0;
+  }
+}
+
+.skeleton {
+  display: inline-block;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    90deg,
+    var(--color-border) 25%,
+    var(--color-surface-raised) 50%,
+    var(--color-border) 75%
+  );
+  background-size: 400% 100%;
+  animation: github-skeleton-shimmer 1.6s ease-in-out infinite;
+}
+
+.skeletonStatValue {
+  width: functions.rem(48px);
+  height: functions.rem(28px);
+}
+
+.skeletonStatLabel {
+  width: functions.rem(96px);
+  height: functions.rem(14px);
+}
+
+.skeletonRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.skeletonRepoName {
+  width: functions.rem(140px);
+  height: functions.rem(16px);
+}
+
+.skeletonRepoMeta {
+  width: functions.rem(90px);
+  height: functions.rem(14px);
+}
+
+.errorState {
+  margin-top: var(--space-6);
+  padding: var(--space-5);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.errorMessage {
+  color: var(--color-text-secondary);
+}
+
+.errorActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.errorLink {
+  color: var(--color-accent);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: functions.rem(320px);
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-inline-start: var(--space-3);
+  border-left: 2px solid var(--color-accent);
+}
+
+.statValue {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  color: var(--color-text-primary);
+}
+
+.statLabel {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-tight);
+}
+
+.repoList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.repoRow {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-align: left;
+  transition: border-color var(--motion-duration-fast) var(--motion-easing-standard);
+
+  &:hover,
+  &[aria-expanded='true'] {
+    border-color: var(--color-accent);
+  }
+}
+
+.repoName {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.repoMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.repoLanguage::before {
+  content: '';
+  display: inline-block;
+  width: functions.rem(8px);
+  height: functions.rem(8px);
+  margin-right: functions.rem(4px);
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+}
+
+.repoStars {
+  display: inline-flex;
+  align-items: center;
+  gap: functions.rem(4px);
+}
+
+.repoDescription {
+  margin-top: var(--space-1);
+  padding: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.viewAllLink {
+  display: inline-block;
+  margin-top: var(--space-6);
+  color: var(--color-accent);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
