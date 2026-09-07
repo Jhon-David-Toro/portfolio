@@ -2,7 +2,6 @@ import {
   useCallback,
   useEffect,
   useId,
-  useMemo,
   useRef,
   useState,
   type FormEvent,
@@ -15,6 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { buildProjectPath } from '@/app/router/routes'
 import { askAssistant } from '@/core/api/assistantClient'
 import { useDraggable } from '@/core/dom/useDraggable'
+import { useFocusOnOpen } from '@/core/dom/useFocusOnOpen'
 import { formatMonthYear } from '@/core/date/formatMonthYear'
 import { cx } from '@/core/style/cx'
 import { useTheme } from '@/core/theme/useTheme'
@@ -74,7 +74,7 @@ export function Terminal() {
   const windowRef = useRef<HTMLDivElement>(null)
   const nextIdRef = useRef(0)
   const baseId = useId()
-  const projects = useMemo(() => getProjects(), [])
+  const projects = getProjects()
   const { position, dragHandleProps } = useDraggable(windowRef)
 
   const nextId = useCallback(() => {
@@ -128,13 +128,7 @@ export function Terminal() {
     return () => window.removeEventListener(OPEN_TERMINAL_EVENT, handleOpenEvent)
   }, [openTerminal])
 
-  useEffect(() => {
-    if (!open) {
-      return
-    }
-    const frame = requestAnimationFrame(() => inputRef.current?.focus())
-    return () => cancelAnimationFrame(frame)
-  }, [open])
+  useFocusOnOpen(open, inputRef)
 
   // The terminal is a non-modal floating window now (see the render below —
   // no backdrop, no focus trap, the page stays interactive behind it), so it

@@ -32,3 +32,4 @@ dist-ssr
 CLAUDE.md
 AGENTS.md
 .agents/
+.claude/

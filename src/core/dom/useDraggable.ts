@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, type PointerEvent as ReactPointerEvent, type RefObject } from 'react'
+import { useRef, useState, type PointerEvent as ReactPointerEvent, type RefObject } from 'react'
 import type { DragState, Position } from './useDraggable.types'
 
 // How much of the window must stay reachable on-screen after a drag — a
@@ -28,55 +28,53 @@ export function useDraggable(elementRef: RefObject<HTMLElement | null>) {
   const [position, setPosition] = useState<Position | null>(null)
   const dragState = useRef<DragState | null>(null)
 
-  const handlePointerDown = useCallback(
-    (event: ReactPointerEvent<HTMLElement>) => {
-      // Let clicks on the traffic-light buttons through without starting a drag.
-      if ((event.target as HTMLElement).closest('button')) {
-        return
-      }
+  // Plain functions, not useCallback: dragHandleProps below is a fresh
+  // object every render regardless, and the only consumer (Terminal's
+  // title bar) is a native DOM element, so there's no memoized child or
+  // effect dependency that would benefit from stable references here.
+  function handlePointerDown(event: ReactPointerEvent<HTMLElement>) {
+    // Let clicks on the traffic-light buttons through without starting a drag.
+    if ((event.target as HTMLElement).closest('button')) {
+      return
+    }
 
-      const element = elementRef.current
-      if (!element) {
-        return
-      }
+    const element = elementRef.current
+    if (!element) {
+      return
+    }
 
-      const rect = element.getBoundingClientRect()
-      dragState.current = {
-        pointerId: event.pointerId,
-        offsetX: event.clientX - rect.left,
-        offsetY: event.clientY - rect.top,
-      }
-      setPosition({ x: rect.left, y: rect.top })
-      event.currentTarget.setPointerCapture(event.pointerId)
-    },
-    [elementRef],
-  )
+    const rect = element.getBoundingClientRect()
+    dragState.current = {
+      pointerId: event.pointerId,
+      offsetX: event.clientX - rect.left,
+      offsetY: event.clientY - rect.top,
+    }
+    setPosition({ x: rect.left, y: rect.top })
+    event.currentTarget.setPointerCapture(event.pointerId)
+  }
 
-  const handlePointerMove = useCallback(
-    (event: ReactPointerEvent<HTMLElement>) => {
-      const drag = dragState.current
-      if (!drag || drag.pointerId !== event.pointerId) {
-        return
-      }
+  function handlePointerMove(event: ReactPointerEvent<HTMLElement>) {
+    const drag = dragState.current
+    if (!drag || drag.pointerId !== event.pointerId) {
+      return
+    }
 
-      const { width, height } = getElementSize(elementRef.current)
-      const minX = MIN_VISIBLE_EDGE - width
-      const maxX = window.innerWidth - MIN_VISIBLE_EDGE
-      const maxY = window.innerHeight - Math.min(MIN_VISIBLE_EDGE, height)
+    const { width, height } = getElementSize(elementRef.current)
+    const minX = MIN_VISIBLE_EDGE - width
+    const maxX = window.innerWidth - MIN_VISIBLE_EDGE
+    const maxY = window.innerHeight - Math.min(MIN_VISIBLE_EDGE, height)
 
-      setPosition({
-        x: Math.min(Math.max(event.clientX - drag.offsetX, minX), maxX),
-        y: Math.min(Math.max(event.clientY - drag.offsetY, 0), maxY),
-      })
-    },
-    [elementRef],
-  )
+    setPosition({
+      x: Math.min(Math.max(event.clientX - drag.offsetX, minX), maxX),
+      y: Math.min(Math.max(event.clientY - drag.offsetY, 0), maxY),
+    })
+  }
 
-  const handlePointerUp = useCallback((event: ReactPointerEvent<HTMLElement>) => {
+  function handlePointerUp(event: ReactPointerEvent<HTMLElement>) {
     if (dragState.current?.pointerId === event.pointerId) {
       dragState.current = null
     }
-  }, [])
+  }
 
   return {
     position,

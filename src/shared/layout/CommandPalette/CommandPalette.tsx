@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { buildProjectPath } from '@/app/router/routes'
 import { cx } from '@/core/style/cx'
+import { useFocusOnOpen } from '@/core/dom/useFocusOnOpen'
 import { useTheme } from '@/core/theme/useTheme'
 import { PORTFOLIO_SECTION_IDS } from '@/content/navigation/sections'
 import { downloadCv, openGithubProfile, profile } from '@/content/profile/profile'
@@ -64,14 +65,7 @@ export function CommandPalette() {
   // Synchronizes focus with the DOM once the dialog is open — Modal moves
   // focus to the dialog itself first, so this moves it one step further,
   // into the input.
-  useEffect(() => {
-    if (!open) {
-      return
-    }
-
-    const frame = requestAnimationFrame(() => inputRef.current?.focus())
-    return () => cancelAnimationFrame(frame)
-  }, [open])
+  useFocusOnOpen(open, inputRef)
 
   const commands = useMemo<readonly Command[]>(() => {
     const sectionCommands = PORTFOLIO_SECTION_IDS.map((id) => ({

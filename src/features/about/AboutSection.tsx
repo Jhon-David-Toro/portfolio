@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { profile } from '@/content/profile/profile'
 import { Badge } from '@/design-system/Badge/Badge'
@@ -15,7 +14,7 @@ export function AboutSection() {
   // Safe: `about.focusAreas` is always authored as a string array in
   // content/locales/{en,es}.json — we own the shape.
   const focusAreas = t('about.focusAreas', { returnObjects: true }) as string[]
-  const stats = useMemo(() => computeAboutStats(), [])
+  const stats = computeAboutStats()
 
   return (
     <Section id="about" aria-labelledby="about-heading">

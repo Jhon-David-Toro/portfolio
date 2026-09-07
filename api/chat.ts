@@ -6,29 +6,13 @@ import { getProjects } from '../src/content/projects/projects'
 import en from '../src/content/locales/en.json'
 import es from '../src/content/locales/es.json'
 import type { ChatMessage, ChatRequestBody, Locale, LocaleContent, ParsedRequest } from './chat.types'
+import { GEMINI_URL, MAX_HISTORY_MESSAGES, MAX_OUTPUT_TOKENS, MAX_QUESTION_LENGTH } from './chat.constants'
 
 // Vercel Edge Function — runs server-side only, so this is the one place in
 // the whole app allowed to hold the API key. Uses Web-standard
 // Request/Response/fetch (already in lib.dom.d.ts) rather than a Vercel or
 // Google SDK, so it adds zero new dependencies to the project.
 export const config = { runtime: 'edge' }
-
-// "-latest" alias rather than a dated model name — Google repoints it as
-// their lineup moves on, so this shouldn't need updating the way a dated
-// name would (gemini-2.5-flash was already retired for new keys by
-// 2026-09-05). Deliberately the "lite" tier, not a "thinking" model:
-// confirmed by direct testing that gemini-3.6-flash reasons internally
-// before answering and draws that from the same output-token budget,
-// which produced truncated (finishReason: MAX_TOKENS) answers for this
-// short, grounded Q&A use case. gemini-flash-lite-latest answers directly,
-// faster, and without that failure mode.
-const GEMINI_MODEL = 'gemini-flash-lite-latest'
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`
-
-const MAX_QUESTION_LENGTH = 500
-const MAX_HISTORY_MESSAGES = 6
-// A ceiling, not a target — the system prompt asks for 2-4 sentences.
-const MAX_OUTPUT_TOKENS = 1024
 
 function isLocale(value: unknown): value is Locale {
   return value === 'es' || value === 'en'

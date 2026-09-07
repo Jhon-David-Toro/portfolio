@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { askAssistant } from '@/core/api/assistantClient'
 import type { AssistantMessage } from '@/core/api/assistantClient.types'
 import { useDismissablePanel } from '@/core/dom/useDismissablePanel'
+import { useFocusOnOpen } from '@/core/dom/useFocusOnOpen'
 import { profile } from '@/content/profile/profile'
 import type { AssistantMessagesProps, Status } from './AiAssistant.types'
 import styles from './AiAssistant.module.scss'
@@ -80,13 +81,7 @@ export function AiAssistant() {
     return () => window.removeEventListener(OPEN_ASSISTANT_EVENT, handleOpenEvent)
   }, [])
 
-  useEffect(() => {
-    if (!open) {
-      return
-    }
-    const frame = requestAnimationFrame(() => inputRef.current?.focus())
-    return () => cancelAnimationFrame(frame)
-  }, [open])
+  useFocusOnOpen(open, inputRef)
 
   async function sendMessage(question: string) {
     const trimmed = question.trim()
