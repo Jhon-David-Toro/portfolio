@@ -1,0 +1,88 @@
+@use '@/styles/abstracts/functions' as functions;
+
+// Mirrors the Hero's terminal-prompt language (mono eyebrow + blinking
+// cursor) so a wrong turn still feels like part of the same product, not a
+// generic framework fallback screen.
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--site-header-height));
+  min-height: calc(100dvh - var(--site-header-height));
+  padding-block: var(--space-16);
+  text-align: center;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+@keyframes not-found-cursor-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.cursor {
+  display: inline-block;
+  width: functions.rem(2px);
+  height: 0.9em;
+  margin-left: functions.rem(2px);
+  background-color: var(--color-accent);
+  vertical-align: text-bottom;
+  animation: not-found-cursor-blink 1s step-end infinite;
+}
+
+.code {
+  margin-top: var(--space-6);
+  color: var(--color-accent);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-display-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+}
+
+.heading {
+  margin-top: var(--space-4);
+}
+
+.message {
+  max-width: 40ch;
+  margin-top: var(--space-3);
+  margin-inline: auto;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  min-height: functions.rem(44px);
+  margin-top: var(--space-8);
+  padding-inline: var(--space-6);
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent-solid);
+  color: var(--color-accent-solid-foreground);
+  font-weight: var(--font-weight-medium);
+  transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

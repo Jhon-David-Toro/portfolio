@@ -89,15 +89,3 @@
   color: var(--color-text-secondary);
   line-height: var(--line-height-relaxed);
 }
-
-.permalink {
-  display: inline-block;
-  margin-top: var(--space-6);
-  color: var(--color-accent);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-
-  &:hover {
-    text-decoration: underline;
-  }
-}

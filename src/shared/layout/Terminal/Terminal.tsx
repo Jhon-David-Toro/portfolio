@@ -11,7 +11,6 @@ import { createPortal } from 'react-dom'
 import { motion } from 'motion/react'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { buildProjectPath } from '@/app/router/routes'
 import { askAssistant } from '@/core/api/assistantClient'
 import { useDraggable } from '@/core/dom/useDraggable'
 import { useFocusOnOpen } from '@/core/dom/useFocusOnOpen'
@@ -209,7 +208,7 @@ export function Terminal({ initialOpen }: TerminalProps) {
       return { output: [t('terminal.projectsNotFound', { number: rawIndex ?? '?' })], kind: 'error' }
     }
     appendEntry(trimmed, [t(`projects.items.${project.slug}.title`)], 'success')
-    navigate(buildProjectPath(project.slug))
+    navigate('/#projects')
     close()
     return null
   }

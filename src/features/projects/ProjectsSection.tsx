@@ -1,8 +1,6 @@
 import { useCallback, useId, useState } from 'react'
 import { motion } from 'motion/react'
-import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { buildProjectPath } from '@/app/router/routes'
 import { durations } from '@/core/motion/tokens'
 import { fadeUpVariants, staggerContainerVariants } from '@/core/motion/variants'
 import { getProjectMeta, getProjects } from '@/content/projects/projects'
@@ -73,9 +71,6 @@ export function ProjectsSection() {
               <Badge key={tag}>{tag}</Badge>
             ))}
           </span>
-          <Link to={buildProjectPath(openProject.slug)} className={styles.permalink}>
-            {t('projects.modal.viewFullPage')}
-          </Link>
         </Modal>
       )}
     </Section>

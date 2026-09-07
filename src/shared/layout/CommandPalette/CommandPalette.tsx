@@ -1,13 +1,11 @@
 import { useCallback, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 'react'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { buildProjectPath } from '@/app/router/routes'
 import { cx } from '@/core/style/cx'
 import { useFocusOnOpen } from '@/core/dom/useFocusOnOpen'
 import { useTheme } from '@/core/theme/useTheme'
 import { PORTFOLIO_SECTION_IDS } from '@/content/navigation/sections'
 import { downloadCv, openGithubProfile, profile } from '@/content/profile/profile'
-import { getProjects } from '@/content/projects/projects'
 import { SearchIcon } from '@/design-system/icons/SearchIcon'
 import { Modal } from '@/design-system/Modal/Modal'
 import { dispatchOpenTerminal } from '@/shared/layout/Terminal/terminalEvents'
@@ -74,15 +72,8 @@ export function CommandPalette() {
       action: () => navigate(`/#${id}`),
     }))
 
-    const projectCommands = getProjects().map((project) => ({
-      id: `project-${project.slug}`,
-      label: `${t('commandPalette.openProject')} ${t(`projects.items.${project.slug}.title`)}`,
-      action: () => navigate(buildProjectPath(project.slug)),
-    }))
-
     return [
       ...sectionCommands,
-      ...projectCommands,
       {
         id: 'toggle-theme',
         label: theme === 'dark' ? t('theme.switchToLight') : t('theme.switchToDark'),

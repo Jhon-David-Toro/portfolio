@@ -35,7 +35,6 @@
     "placeholder": "Escribe un comando o busca…",
     "noResults": "Sin resultados.",
     "goTo": "Ir a",
-    "openProject": "Abrir proyecto:",
     "switchToEnglish": "Cambiar a inglés",
     "switchToSpanish": "Cambiar a español",
     "copyEmail": "Copiar correo electrónico",
@@ -180,9 +179,6 @@
     "mock": {
       "note": "Proyectos de ejemplo — muy pronto agregaré casos de estudio reales aquí."
     },
-    "modal": {
-      "viewFullPage": "Ver página completa"
-    },
     "items": {
       "project-one": {
         "title": "Panel de Analítica",
@@ -211,7 +207,10 @@
     }
   },
   "notFound": {
-    "heading": "Página no encontrada"
+    "eyebrow": "ruta no encontrada",
+    "heading": "Página no encontrada",
+    "message": "La página que buscas no existe o fue movida.",
+    "backHome": "Volver al inicio"
   },
   "contact": {
     "heading": "Contacto",

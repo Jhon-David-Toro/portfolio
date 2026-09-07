@@ -35,7 +35,6 @@
     "placeholder": "Type a command or search…",
     "noResults": "No results found.",
     "goTo": "Go to",
-    "openProject": "Open project:",
     "switchToEnglish": "Switch to English",
     "switchToSpanish": "Switch to Spanish",
     "copyEmail": "Copy email address",
@@ -180,9 +179,6 @@
     "mock": {
       "note": "Placeholder projects — real case studies coming soon."
     },
-    "modal": {
-      "viewFullPage": "View full page"
-    },
     "items": {
       "project-one": {
         "title": "Analytics Dashboard",
@@ -211,7 +207,10 @@
     }
   },
   "notFound": {
-    "heading": "Page not found"
+    "eyebrow": "route not found",
+    "heading": "Page not found",
+    "message": "The page you're looking for doesn't exist or was moved.",
+    "backHome": "Back to home"
   },
   "contact": {
     "heading": "Contact",
