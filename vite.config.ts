@@ -22,5 +22,14 @@ export default defineConfig(({ mode }) => {
         '@': srcDir,
       },
     },
+    build: {
+      // Vite's default build target downlevels syntax for a wider set of
+      // browsers than this portfolio needs to support — Lighthouse flagged
+      // the resulting transforms/helpers as unnecessary "legacy JavaScript"
+      // shipped to browsers that don't need them. Every evergreen browser
+      // (including Safari, which lagged on some ES2022 features) has
+      // supported this baseline for years.
+      target: 'es2022',
+    },
   }
 })

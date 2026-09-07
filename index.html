@@ -15,10 +15,26 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--
+      Loaded non-render-blocking: this stylesheet fetch was the single
+      biggest render-blocking resource on the page (~870ms in Lighthouse's
+      mobile/slow-4G trace). media="print" makes the browser fetch it at low
+      priority without blocking first paint on it; the onload swap applies
+      it for real once it's ready. display=swap (already in the URL) still
+      avoids invisible text while the font files themselves load in.
+    -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@400;500;600;700&display=swap"
+      />
+    </noscript>
 
     <!--
       Sets data-theme before first paint so an explicit preference doesn't
