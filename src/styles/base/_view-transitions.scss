@@ -1,25 +1,65 @@
-// Animates a circular reveal expanding from the click point when switching
-// themes — core/theme/useTheme.ts sets --theme-reveal-x/-y/-radius and
-// calls document.startViewTransition() right before applying the change.
-// Browsers without View Transitions support, or visitors who prefer
-// reduced motion, never hit this: useTheme.ts applies the theme instantly
-// instead, so no fallback styling is needed here.
-::view-transition-old(root) {
-  animation: none;
-}
+@use '@/styles/abstracts/breakpoints' as breakpoints;
 
+// Animates a themed reveal when switching themes — core/theme/useTheme.ts
+// sets --theme-reveal-x/-y/-radius and calls document.startViewTransition()
+// right before applying the change. Browsers without View Transitions
+// support, or visitors who prefer reduced motion, never hit this:
+// useTheme.ts applies the theme instantly instead, so no fallback styling
+// is needed here.
+::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: theme-reveal var(--motion-duration-slower) var(--motion-easing-standard);
+  // The UA stylesheet blends old/new with mix-blend-mode: plus-lighter by
+  // default (meant for smooth cross-fades). Neither variant below is a
+  // cross-fade in that sense, and that per-pixel blend compositing over a
+  // full-viewport layer is unnecessary cost either way — normal blending
+  // is both correct here and cheaper.
+  mix-blend-mode: normal;
 }
 
-@keyframes theme-reveal {
+// Mobile-first default: a plain opacity cross-fade. The circular clip-path
+// reveal (below, from 'md' up) re-rasterizes a full-page mask every frame,
+// which mid-range Android GPUs can't keep up with — visible stutter. An
+// opacity fade is compositor-only work (no masking, no per-frame paint),
+// so it stays smooth on weaker hardware.
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: theme-fade var(--motion-duration-slow) var(--motion-easing-standard);
+}
+
+::view-transition-old(root) {
+  animation-direction: reverse;
+}
+
+@keyframes theme-fade {
   from {
-    clip-path: circle(0 at var(--theme-reveal-x, 50%) var(--theme-reveal-y, 50%));
+    opacity: 0;
   }
 
   to {
-    clip-path: circle(
-      var(--theme-reveal-radius, 150%) at var(--theme-reveal-x, 50%) var(--theme-reveal-y, 50%)
-    );
+    opacity: 1;
+  }
+}
+
+// Tablet and up: circular reveal expanding from the click point — desktop
+// and tablet GPUs handle the per-frame clip-path mask fine.
+@include breakpoints.respond-to('md') {
+  ::view-transition-old(root) {
+    animation: none;
+  }
+
+  ::view-transition-new(root) {
+    animation: theme-reveal var(--motion-duration-slower) var(--motion-easing-standard);
+  }
+
+  @keyframes theme-reveal {
+    from {
+      clip-path: circle(0 at var(--theme-reveal-x, 50%) var(--theme-reveal-y, 50%));
+    }
+
+    to {
+      clip-path: circle(
+        var(--theme-reveal-radius, 150%) at var(--theme-reveal-x, 50%) var(--theme-reveal-y, 50%)
+      );
+    }
   }
 }

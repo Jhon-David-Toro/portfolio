@@ -95,7 +95,7 @@ function SubmitButton({ status }: SubmitButtonProps) {
   return (
     <motion.button
       type="submit"
-      layout
+      layout="size"
       className={cx(styles.submitButton, isCompactStatus(status) && styles.submitButtonCompact)}
       disabled={status.kind === 'submitting'}
       aria-label={resolveSubmitLabel(status, t)}
