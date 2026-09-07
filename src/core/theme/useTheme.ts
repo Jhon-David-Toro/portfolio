@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
-import type { Theme } from './useTheme.types'
+import type { Theme, ThemeChangeOrigin } from './useTheme.types'
 
 const STORAGE_KEY = 'theme'
 const DARK_QUERY = '(prefers-color-scheme: dark)'
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
 const THEME_COLOR: Record<Theme, string> = { light: '#ffffff', dark: '#121214' }
 
 function isTheme(value: string | null): value is Theme {
@@ -20,6 +21,38 @@ function readStoredTheme(): Theme | null {
 
 function applyThemeColorMeta(theme: Theme) {
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLOR[theme])
+}
+
+function persistTheme(theme: Theme): void {
+  localStorage.setItem(STORAGE_KEY, theme)
+}
+
+function canAnimateThemeChange(): boolean {
+  return typeof document.startViewTransition === 'function' && !window.matchMedia(REDUCED_MOTION_QUERY).matches
+}
+
+function resolveRevealOrigin(origin: ThemeChangeOrigin | undefined): ThemeChangeOrigin {
+  if (origin) {
+    return origin
+  }
+  return { x: window.innerWidth / 2, y: window.innerHeight / 2 }
+}
+
+// The circle must reach the viewport's farthest corner from the origin to
+// fully cover the screen — a fixed percentage would clip on wide viewports
+// when the origin sits near an edge instead of the center.
+function distanceToFarthestCorner(origin: ThemeChangeOrigin): number {
+  const x = Math.max(origin.x, window.innerWidth - origin.x)
+  const y = Math.max(origin.y, window.innerHeight - origin.y)
+  return Math.hypot(x, y)
+}
+
+// Read by the circular-reveal keyframes in styles/base/_view-transitions.scss.
+function setRevealOrigin(origin: ThemeChangeOrigin): void {
+  const root = document.documentElement.style
+  root.setProperty('--theme-reveal-x', `${origin.x}px`)
+  root.setProperty('--theme-reveal-y', `${origin.y}px`)
+  root.setProperty('--theme-reveal-radius', `${distanceToFarthestCorner(origin)}px`)
 }
 
 /**
@@ -63,14 +96,20 @@ export function useTheme() {
     applyThemeColorMeta(theme)
   }, [theme])
 
-  const setTheme = useCallback((next: Theme) => {
-    document.documentElement.dataset.theme = next
-    try {
-      localStorage.setItem(STORAGE_KEY, next)
-    } catch {
-      // Preference just won't persist across reloads — it still applies now.
+  const setTheme = useCallback((next: Theme, origin?: ThemeChangeOrigin) => {
+    const applyChange = () => {
+      document.documentElement.dataset.theme = next
+      persistTheme(next)
+      setThemeState(next)
     }
-    setThemeState(next)
+
+    if (!canAnimateThemeChange()) {
+      applyChange()
+      return
+    }
+
+    setRevealOrigin(resolveRevealOrigin(origin))
+    document.startViewTransition(applyChange)
   }, [])
 
   return { theme, setTheme } as const

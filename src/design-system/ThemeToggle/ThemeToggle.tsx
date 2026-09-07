@@ -17,8 +17,8 @@ export function ThemeToggle() {
       role="switch"
       aria-checked={isDark}
       aria-label={t(isDark ? 'theme.switchToLight' : 'theme.switchToDark')}
-      onClick={() => {
-        setTheme(isDark ? 'light' : 'dark')
+      onClick={(event) => {
+        setTheme(isDark ? 'light' : 'dark', { x: event.clientX, y: event.clientY })
       }}
     >
       {isDark ? <MoonIcon /> : <SunIcon />}

@@ -1,0 +1,25 @@
+// Animates a circular reveal expanding from the click point when switching
+// themes — core/theme/useTheme.ts sets --theme-reveal-x/-y/-radius and
+// calls document.startViewTransition() right before applying the change.
+// Browsers without View Transitions support, or visitors who prefer
+// reduced motion, never hit this: useTheme.ts applies the theme instantly
+// instead, so no fallback styling is needed here.
+::view-transition-old(root) {
+  animation: none;
+}
+
+::view-transition-new(root) {
+  animation: theme-reveal var(--motion-duration-slower) var(--motion-easing-standard);
+}
+
+@keyframes theme-reveal {
+  from {
+    clip-path: circle(0 at var(--theme-reveal-x, 50%) var(--theme-reveal-y, 50%));
+  }
+
+  to {
+    clip-path: circle(
+      var(--theme-reveal-radius, 150%) at var(--theme-reveal-x, 50%) var(--theme-reveal-y, 50%)
+    );
+  }
+}
