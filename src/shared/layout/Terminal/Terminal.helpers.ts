@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 import { cx } from '@/core/style/cx'
-import type { Position } from '@/core/dom/useDraggable'
+import type { Position } from '@/core/dom/useDraggable.types'
 import styles from './Terminal.module.scss'
 
 /** Whether the visitor is typing into a field elsewhere on the page. */

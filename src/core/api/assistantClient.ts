@@ -1,8 +1,4 @@
-/** One turn of prior conversation sent as context to the assistant. */
-export type AssistantMessage = {
-  readonly role: 'user' | 'assistant'
-  readonly content: string
-}
+import type { AssistantMessage } from './assistantClient.types'
 
 /**
  * Asks the AI assistant a question via the server-side proxy at /api/chat

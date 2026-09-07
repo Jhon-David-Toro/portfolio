@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import type { Locale } from '@/app/i18n/i18n'
+import type { Locale } from '@/app/i18n/i18n.types'
 import { LanguageIcon } from '@/design-system/icons/LanguageIcon'
 import styles from './LanguageSwitcher.module.scss'
 

@@ -1,13 +1,6 @@
-import { useEffect, useRef, type RefObject } from 'react'
+import { useEffect, useRef } from 'react'
 import { trapTabFocus } from './trapTabFocus'
-
-/** Refs to wire up a dismissable floating panel. */
-export type DismissablePanel = {
-  /** Wraps both the trigger and the panel — an outside click is anything outside this. */
-  readonly wrapperRef: RefObject<HTMLDivElement | null>
-  /** The panel itself — Tab is trapped between its first and last focusable descendants. */
-  readonly panelRef: RefObject<HTMLDivElement | null>
-}
+import type { DismissablePanel } from './useDismissablePanel.types'
 
 /**
  * Shared behavior for a floating, anchored popover panel (settings menu,

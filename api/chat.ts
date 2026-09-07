@@ -5,6 +5,7 @@ import { skillGroups } from '../src/content/skills/skills'
 import { getProjects } from '../src/content/projects/projects'
 import en from '../src/content/locales/en.json'
 import es from '../src/content/locales/es.json'
+import type { ChatMessage, ChatRequestBody, Locale, LocaleContent, ParsedRequest } from './chat.types'
 
 // Vercel Edge Function — runs server-side only, so this is the one place in
 // the whole app allowed to hold the API key. Uses Web-standard
@@ -28,16 +29,6 @@ const MAX_QUESTION_LENGTH = 500
 const MAX_HISTORY_MESSAGES = 6
 // A ceiling, not a target — the system prompt asks for 2-4 sentences.
 const MAX_OUTPUT_TOKENS = 1024
-
-type Locale = 'es' | 'en'
-type ChatMessage = { readonly role: 'user' | 'assistant'; readonly content: string }
-type ChatRequestBody = {
-  readonly question?: unknown
-  readonly language?: unknown
-  readonly history?: unknown
-}
-
-type LocaleContent = typeof en
 
 function isLocale(value: unknown): value is Locale {
   return value === 'es' || value === 'en'
@@ -147,10 +138,6 @@ function checkMethod(request: Request): Response | null {
   }
   return null
 }
-
-type ParsedRequest =
-  | { readonly ok: true; readonly body: ChatRequestBody; readonly question: string }
-  | { readonly ok: false; readonly errorMessage: string }
 
 function normalizeQuestion(body: ChatRequestBody): string {
   return typeof body.question === 'string' ? body.question.trim() : ''

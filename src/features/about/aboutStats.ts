@@ -1,12 +1,6 @@
 import { experience } from '@/content/experience/experience'
 import { skillGroups } from '@/content/skills/skills'
-
-/** Headline numbers for the About section, derived from real content. */
-export type AboutStats = {
-  readonly yearsOfExperience: number
-  readonly roleCount: number
-  readonly technologyCount: number
-}
+import type { AboutStats } from './aboutStats.types'
 
 const MS_PER_YEAR = 1000 * 60 * 60 * 24 * 365.25
 

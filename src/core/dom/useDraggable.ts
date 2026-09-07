@@ -1,15 +1,5 @@
 import { useCallback, useRef, useState, type PointerEvent as ReactPointerEvent, type RefObject } from 'react'
-
-export type Position = {
-  readonly x: number
-  readonly y: number
-}
-
-type DragState = {
-  readonly pointerId: number
-  readonly offsetX: number
-  readonly offsetY: number
-}
+import type { DragState, Position } from './useDraggable.types'
 
 // How much of the window must stay reachable on-screen after a drag — a
 // window dragged fully off-screen could never be grabbed again.

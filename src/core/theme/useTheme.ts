@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-
-/** Available visual themes. */
-export type Theme = 'light' | 'dark'
+import type { Theme } from './useTheme.types'
 
 const STORAGE_KEY = 'theme'
 const DARK_QUERY = '(prefers-color-scheme: dark)'

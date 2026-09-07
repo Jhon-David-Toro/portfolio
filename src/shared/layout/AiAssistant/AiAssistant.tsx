@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { askAssistant, type AssistantMessage } from '@/core/api/assistantClient'
+import { askAssistant } from '@/core/api/assistantClient'
+import type { AssistantMessage } from '@/core/api/assistantClient.types'
 import { useDismissablePanel } from '@/core/dom/useDismissablePanel'
 import { profile } from '@/content/profile/profile'
 import type { AssistantMessagesProps, Status } from './AiAssistant.types'
