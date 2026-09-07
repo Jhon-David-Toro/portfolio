@@ -24,7 +24,12 @@ function applyThemeColorMeta(theme: Theme) {
 }
 
 function persistTheme(theme: Theme): void {
-  localStorage.setItem(STORAGE_KEY, theme)
+  try {
+    localStorage.setItem(STORAGE_KEY, theme)
+  } catch (error) {
+    // Preference just won't persist across reloads — it still applies now.
+    console.warn('Failed to persist theme preference:', error)
+  }
 }
 
 function canAnimateThemeChange(): boolean {
