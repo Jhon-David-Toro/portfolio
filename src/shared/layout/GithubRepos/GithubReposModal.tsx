@@ -4,6 +4,8 @@ import { cx } from '@/core/style/cx'
 import { profile } from '@/content/profile/profile'
 import { Button } from '@/design-system/Button/Button'
 import { Modal } from '@/design-system/Modal/Modal'
+import { SectionNote } from '@/design-system/SectionNote/SectionNote'
+import { Stat } from '@/design-system/Stat/Stat'
 import { StarIcon } from '@/design-system/icons/StarIcon'
 import type { GithubReposModalProps, RepoListItemProps } from './GithubRepos.types'
 import { useGithubActivity } from './useGithubActivity'
@@ -87,7 +89,7 @@ export function GithubReposModal({ onClose }: GithubReposModalProps) {
   return (
     <Modal onClose={onClose} titleId={titleId} closeLabel={t('common.close')}>
       <h2 id={titleId}>{t('github.heading')}</h2>
-      <p className={styles.note}>{t('github.note')}</p>
+      <SectionNote>{t('github.note')}</SectionNote>
 
       {activity.kind === 'loading' && <GithubActivitySkeleton />}
 
@@ -113,14 +115,8 @@ export function GithubReposModal({ onClose }: GithubReposModalProps) {
       {activity.kind === 'success' && (
         <>
           <ul className={styles.stats}>
-            <li className={styles.stat}>
-              <span className={styles.statValue}>{activity.data.profile.publicRepos}</span>
-              <span className={styles.statLabel}>{t('github.publicRepos')}</span>
-            </li>
-            <li className={styles.stat}>
-              <span className={styles.statValue}>{activity.data.profile.followers}</span>
-              <span className={styles.statLabel}>{t('github.followers')}</span>
-            </li>
+            <Stat value={activity.data.profile.publicRepos} label={t('github.publicRepos')} size="md" />
+            <Stat value={activity.data.profile.followers} label={t('github.followers')} size="md" />
           </ul>
 
           <ul className={styles.repoList}>

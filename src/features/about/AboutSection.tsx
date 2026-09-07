@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { profile } from '@/content/profile/profile'
 import { Badge } from '@/design-system/Badge/Badge'
 import { Section } from '@/design-system/Section/Section'
+import { Stat } from '@/design-system/Stat/Stat'
 import { GithubIcon } from '@/design-system/icons/GithubIcon'
 import { MailIcon } from '@/design-system/icons/MailIcon'
 import { PinIcon } from '@/design-system/icons/PinIcon'
@@ -34,18 +35,9 @@ export function AboutSection() {
 
         <aside className={styles.sidebar}>
           <ul className={styles.stats}>
-            <li className={styles.stat}>
-              <span className={styles.statValue}>{stats.yearsOfExperience}+</span>
-              <span className={styles.statLabel}>{t('about.stats.experience')}</span>
-            </li>
-            <li className={styles.stat}>
-              <span className={styles.statValue}>{stats.roleCount}</span>
-              <span className={styles.statLabel}>{t('about.stats.roles')}</span>
-            </li>
-            <li className={styles.stat}>
-              <span className={styles.statValue}>{stats.technologyCount}</span>
-              <span className={styles.statLabel}>{t('about.stats.technologies')}</span>
-            </li>
+            <Stat value={`${stats.yearsOfExperience}+`} label={t('about.stats.experience')} />
+            <Stat value={stats.roleCount} label={t('about.stats.roles')} />
+            <Stat value={stats.technologyCount} label={t('about.stats.technologies')} />
           </ul>
 
           <ul className={styles.factList}>

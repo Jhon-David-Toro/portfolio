@@ -1,12 +1,5 @@
 @use '@/styles/abstracts/breakpoints' as breakpoints;
 
-.note {
-  margin-top: var(--space-2);
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
-  font-style: italic;
-}
-
 .grid {
   display: grid;
   gap: var(--space-6);

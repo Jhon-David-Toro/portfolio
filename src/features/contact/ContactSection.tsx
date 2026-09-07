@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { profile } from '@/content/profile/profile'
+import { Button } from '@/design-system/Button/Button'
 import { Section } from '@/design-system/Section/Section'
 import { GithubIcon } from '@/design-system/icons/GithubIcon'
 import { MailIcon } from '@/design-system/icons/MailIcon'
@@ -20,21 +21,22 @@ export function ContactSection() {
           <p className={styles.intro}>{t('contact.intro')}</p>
           <ul className={styles.links}>
             <li>
-              <a className={styles.primaryLink} href={`mailto:${profile.email}`}>
+              <Button href={`mailto:${profile.email}`} className={styles.primaryLink}>
                 <MailIcon />
                 {t('contact.emailCta')}
-              </a>
+              </Button>
             </li>
             <li>
-              <a
-                className={styles.secondaryLink}
+              <Button
+                variant="secondary"
                 href={profile.github}
                 target="_blank"
                 rel="noopener noreferrer"
+                className={styles.secondaryLink}
               >
                 <GithubIcon />
                 {t('contact.githubCta')}
-              </a>
+              </Button>
             </li>
           </ul>
           <p className={styles.location}>

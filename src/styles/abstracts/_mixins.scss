@@ -12,3 +12,18 @@
   align-items: center;
   justify-content: center;
 }
+
+/// Visually hides content while keeping it readable by screen readers —
+/// the standard "sr-only" recipe, previously copy-pasted verbatim in a
+/// couple of components.
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

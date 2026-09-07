@@ -55,28 +55,6 @@
   gap: var(--space-4);
 }
 
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  padding-inline-start: var(--space-3);
-  border-left: 2px solid var(--color-accent);
-}
-
-.statValue {
-  font-family: var(--font-family-display);
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-semibold);
-  line-height: 1;
-  color: var(--color-text-primary);
-}
-
-.statLabel {
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-tight);
-}
-
 .factList {
   display: flex;
   flex-direction: column;

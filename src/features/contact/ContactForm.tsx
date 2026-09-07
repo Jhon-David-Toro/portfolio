@@ -1,16 +1,122 @@
 import { useState, type FormEvent } from 'react'
 import emailjs from '@emailjs/browser'
-import { motion } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
+import type { TFunction } from 'i18next'
+import { durations, easings } from '@/core/motion/tokens'
 import { fadeUpVariants, staggerContainerVariants } from '@/core/motion/variants'
-import { Button } from '@/design-system/Button/Button'
-import type { SubmitStatus } from './ContactForm.types'
+import { cx } from '@/core/style/cx'
+import type { SubmitButtonProps, SubmitStatus } from './ContactForm.types'
 import styles from './ContactForm.module.scss'
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 const IS_EMAILJS_CONFIGURED = Boolean(SERVICE_ID && TEMPLATE_ID && PUBLIC_KEY)
+
+const SHAKE_KEYFRAMES = { x: [0, -8, 8, -8, 8, 0] }
+const SPIN_TRANSITION = { duration: 0.7, repeat: Infinity, ease: 'linear' } as const
+
+/** A continuously rotating ring — the submit button's in-progress state. */
+function Spinner() {
+  return (
+    <motion.svg
+      viewBox="0 0 24 24"
+      width="18"
+      height="18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      aria-hidden="true"
+      animate={{ rotate: 360 }}
+      transition={SPIN_TRANSITION}
+    >
+      <circle cx="12" cy="12" r="9" opacity="0.25" />
+      <path d="M12 3a9 9 0 0 1 9 9" />
+    </motion.svg>
+  )
+}
+
+/** Draws a checkmark stroke-by-stroke — the submit button's success state. */
+function DrawnCheckmark() {
+  return (
+    <motion.svg
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <motion.path
+        d="M4 12.5l5 5L20 6"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: durations.slower, ease: easings.decelerate }}
+      />
+    </motion.svg>
+  )
+}
+
+function resolveSubmitContent(status: SubmitStatus, t: TFunction) {
+  if (status.kind === 'success') {
+    return { key: 'success', node: <DrawnCheckmark /> }
+  }
+  if (status.kind === 'submitting') {
+    return { key: 'submitting', node: <Spinner /> }
+  }
+  return { key: 'idle', node: t('contact.form.send') }
+}
+
+/** Icon-only states (submitting, success) collapse the button to a circle. */
+function isCompactStatus(status: SubmitStatus): boolean {
+  return status.kind === 'submitting' || status.kind === 'success'
+}
+
+function resolveSubmitLabel(status: SubmitStatus, t: TFunction): string {
+  if (status.kind === 'success') {
+    return t('contact.form.success')
+  }
+  if (status.kind === 'submitting') {
+    return t('contact.form.sending')
+  }
+  return t('contact.form.send')
+}
+
+/** Renders the submit button — morphs into a circle and draws a check on success, shakes on error. */
+function SubmitButton({ status }: SubmitButtonProps) {
+  const { t } = useTranslation()
+  const content = resolveSubmitContent(status, t)
+
+  return (
+    <motion.button
+      type="submit"
+      layout
+      className={cx(styles.submitButton, isCompactStatus(status) && styles.submitButtonCompact)}
+      disabled={status.kind === 'submitting'}
+      aria-label={resolveSubmitLabel(status, t)}
+      animate={status.kind === 'error' ? SHAKE_KEYFRAMES : undefined}
+      transition={status.kind === 'error' ? { duration: durations.slow } : undefined}
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={content.key}
+          className={styles.submitContent}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: durations.fast }}
+        >
+          {content.node}
+        </motion.span>
+      </AnimatePresence>
+    </motion.button>
+  )
+}
 
 /** Renders the inline contact form with EmailJS submission and status handling. */
 export function ContactForm() {
@@ -81,13 +187,31 @@ export function ContactForm() {
       </motion.div>
 
       <motion.div variants={fadeUpVariants} className={styles.formFooter}>
-        <Button type="submit" disabled={status.kind === 'submitting'}>
-          {status.kind === 'submitting' ? t('contact.form.sending') : t('contact.form.send')}
-        </Button>
+        <SubmitButton status={status} />
 
         <p role="status" aria-live="polite" className={styles.status}>
-          {status.kind === 'success' && t('contact.form.success')}
-          {status.kind === 'error' && t('contact.form.error')}
+          <AnimatePresence mode="wait">
+            {status.kind === 'success' && (
+              <motion.span
+                key="success"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: durations.base }}
+              >
+                {t('contact.form.success')}
+              </motion.span>
+            )}
+            {status.kind === 'error' && (
+              <motion.span
+                key="error"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: durations.base }}
+              >
+                {t('contact.form.error')}
+              </motion.span>
+            )}
+          </AnimatePresence>
         </p>
       </motion.div>
     </motion.form>

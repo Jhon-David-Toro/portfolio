@@ -6,6 +6,7 @@ import { fadeUpVariants, staggerContainerVariants } from '@/core/motion/variants
 import { getProjectMeta, getProjects } from '@/content/projects/projects'
 import { Badge } from '@/design-system/Badge/Badge'
 import { Modal } from '@/design-system/Modal/Modal'
+import { SectionNote } from '@/design-system/SectionNote/SectionNote'
 import { Section } from '@/design-system/Section/Section'
 import styles from './ProjectsSection.module.scss'
 
@@ -25,7 +26,7 @@ export function ProjectsSection() {
   return (
     <Section id="projects" aria-labelledby="projects-heading">
       <h2 id="projects-heading">{t('projects.heading')}</h2>
-      <p className={styles.note}>{t('projects.mock.note')}</p>
+      <SectionNote>{t('projects.mock.note')}</SectionNote>
 
       <motion.ol className={styles.grid} variants={staggerContainerVariants}>
         {projects.map((project, index) => (

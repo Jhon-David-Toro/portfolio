@@ -1,22 +1,8 @@
 @use '@/styles/abstracts/functions' as functions;
-
-.note {
-  margin-top: var(--space-2);
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
-  font-style: italic;
-}
+@use '@/styles/abstracts/mixins' as mixins;
 
 .srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  white-space: nowrap;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+  @include mixins.visually-hidden;
 }
 
 // Sweeping gradient highlight — a static pulse reads as "broken", a moving
@@ -112,28 +98,6 @@
   max-width: functions.rem(320px);
   gap: var(--space-4);
   margin-top: var(--space-6);
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  padding-inline-start: var(--space-3);
-  border-left: 2px solid var(--color-accent);
-}
-
-.statValue {
-  font-family: var(--font-family-display);
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-semibold);
-  line-height: 1;
-  color: var(--color-text-primary);
-}
-
-.statLabel {
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-tight);
 }
 
 .repoList {

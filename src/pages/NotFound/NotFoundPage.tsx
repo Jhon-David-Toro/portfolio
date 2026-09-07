@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { upsertMeta, usePageMeta } from '@/core/seo/usePageMeta'
 import { profile } from '@/content/profile/profile'
+import { Button } from '@/design-system/Button/Button'
 import { Section } from '@/design-system/Section/Section'
 import styles from './NotFoundPage.module.scss'
 
@@ -33,9 +33,9 @@ export function NotFoundPage() {
         {t('notFound.heading')}
       </h1>
       <p className={styles.message}>{t('notFound.message')}</p>
-      <Link to="/" className={styles.action}>
+      <Button to="/" className={styles.action}>
         {t('notFound.backHome')}
-      </Link>
+      </Button>
     </Section>
   )
 }

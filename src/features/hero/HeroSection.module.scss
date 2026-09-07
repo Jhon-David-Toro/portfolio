@@ -136,36 +136,30 @@
   margin-top: var(--space-8);
 }
 
-.primaryAction {
-  display: inline-flex;
-  align-items: center;
+// Full overrides (not partial) on top of the shared Button's base
+// rounded-rect styles — guarantees the Hero's pill shape stays pixel-exact
+// regardless of stylesheet load order between Button.module.scss and this.
+.primaryAction,
+.secondaryAction {
   min-height: functions.rem(44px);
-  padding-inline: var(--space-6);
+  padding: 0 var(--space-6);
   border-radius: var(--radius-full);
+}
+
+.primaryAction {
   background-color: var(--color-accent-solid);
   color: var(--color-accent-solid-foreground);
-  font-weight: var(--font-weight-medium);
-  transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
 
-  &:hover {
+  &:hover:not(:disabled) {
     opacity: 0.9;
   }
 }
 
 .secondaryAction {
-  display: inline-flex;
-  align-items: center;
-  min-height: functions.rem(44px);
-  padding-inline: var(--space-6);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
+  border-color: var(--color-border);
   color: var(--color-text-primary);
-  font-weight: var(--font-weight-medium);
-  transition:
-    border-color var(--motion-duration-fast) var(--motion-easing-standard),
-    background-color var(--motion-duration-fast) var(--motion-easing-standard);
 
-  &:hover {
+  &:hover:not(:disabled) {
     border-color: var(--color-accent);
     background-color: var(--color-surface);
   }

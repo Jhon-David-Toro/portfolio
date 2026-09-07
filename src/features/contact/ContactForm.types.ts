@@ -4,3 +4,8 @@ export type SubmitStatus =
   | { readonly kind: 'submitting' }
   | { readonly kind: 'success' }
   | { readonly kind: 'error' }
+
+/** Props for the animated submit button. */
+export type SubmitButtonProps = {
+  readonly status: SubmitStatus
+}

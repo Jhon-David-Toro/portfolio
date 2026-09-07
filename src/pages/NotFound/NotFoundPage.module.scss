@@ -70,19 +70,18 @@
   line-height: var(--line-height-relaxed);
 }
 
+// Full override (not partial) on top of the shared Button's base
+// rounded-rect styles — keeps this pill shape pixel-exact regardless of
+// stylesheet load order between Button.module.scss and this.
 .action {
-  display: inline-flex;
-  align-items: center;
   min-height: functions.rem(44px);
   margin-top: var(--space-8);
-  padding-inline: var(--space-6);
+  padding: 0 var(--space-6);
   border-radius: var(--radius-full);
   background-color: var(--color-accent-solid);
   color: var(--color-accent-solid-foreground);
-  font-weight: var(--font-weight-medium);
-  transition: opacity var(--motion-duration-fast) var(--motion-easing-standard);
 
-  &:hover {
+  &:hover:not(:disabled) {
     opacity: 0.9;
   }
 }

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { fadeUpVariants, staggerContainerVariants } from '@/core/motion/variants'
 import { profile } from '@/content/profile/profile'
 import { Badge } from '@/design-system/Badge/Badge'
+import { Button } from '@/design-system/Button/Button'
 import { Section } from '@/design-system/Section/Section'
 import { ChevronDownIcon } from '@/design-system/icons/ChevronDownIcon'
 import { PinIcon } from '@/design-system/icons/PinIcon'
@@ -74,12 +75,12 @@ export function HeroSection() {
         </motion.div>
 
         <motion.div variants={fadeUpVariants} className={styles.actions}>
-          <Link to="/#projects" className={styles.primaryAction}>
+          <Button to="/#projects" className={styles.primaryAction}>
             {t('hero.viewWork')}
-          </Link>
-          <Link to="/#contact" className={styles.secondaryAction}>
+          </Button>
+          <Button variant="secondary" to="/#contact" className={styles.secondaryAction}>
             {t('hero.getInTouch')}
-          </Link>
+          </Button>
         </motion.div>
       </motion.div>
 

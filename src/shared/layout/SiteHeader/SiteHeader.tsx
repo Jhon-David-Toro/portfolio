@@ -6,6 +6,7 @@ import { useActiveSection } from '@/core/scroll/useActiveSection'
 import { cx } from '@/core/style/cx'
 import { BottomNav } from '@/design-system/BottomNav/BottomNav'
 import type { BottomNavItem } from '@/design-system/BottomNav/BottomNav.types'
+import { Button } from '@/design-system/Button/Button'
 import { Container } from '@/design-system/Container/Container'
 import { Navigation } from '@/design-system/Navigation/Navigation'
 import type { NavItem } from '@/design-system/Navigation/Navigation.types'
@@ -60,9 +61,9 @@ export function SiteHeader() {
 
             <div className={styles.controls}>
               <CommandPalette />
-              <a className={styles.cvLink} href={CV_FILE_PATH} download>
+              <Button variant="secondary" href={CV_FILE_PATH} download className={styles.cvLink}>
                 {t('nav.downloadCv')}
-              </a>
+              </Button>
             </div>
           </div>
         </Container>
