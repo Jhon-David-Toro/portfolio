@@ -5,8 +5,10 @@ import styles from './Terminal.module.scss'
 
 /** Whether the visitor is typing into a field elsewhere on the page. */
 export function isTypingInField(target: EventTarget | null): boolean {
-  const element = target as HTMLElement
-  return element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.isContentEditable
+  if (!(target instanceof HTMLElement)) {
+    return false
+  }
+  return target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable
 }
 
 export function getPositionerClassName(maximized: boolean): string {
