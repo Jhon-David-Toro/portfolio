@@ -1,5 +1,5 @@
 import { useCallback, useId, useState } from 'react'
-import { motion } from 'motion/react'
+import { m } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { useSpotlight } from '@/core/dom/useSpotlight'
 import { durations } from '@/core/motion/tokens'
@@ -30,10 +30,10 @@ export function ProjectsSection() {
       <h2 id="projects-heading">{t('projects.heading')}</h2>
       <SectionNote>{t('projects.mock.note')}</SectionNote>
 
-      <motion.ol className={styles.grid} variants={staggerContainerVariants}>
+      <m.ol className={styles.grid} variants={staggerContainerVariants}>
         {projects.map((project, index) => (
-          <motion.li key={project.slug} variants={fadeUpVariants}>
-            <motion.button
+          <m.li key={project.slug} variants={fadeUpVariants}>
+            <m.button
               type="button"
               className={styles.card}
               whileHover={{ y: -4 }}
@@ -54,10 +54,10 @@ export function ProjectsSection() {
                   <Badge key={tag}>{tag}</Badge>
                 ))}
               </span>
-            </motion.button>
-          </motion.li>
+            </m.button>
+          </m.li>
         ))}
-      </motion.ol>
+      </m.ol>
 
       {openProject && (
         <Modal

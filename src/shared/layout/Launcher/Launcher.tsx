@@ -1,5 +1,5 @@
 import { lazy, Suspense, useCallback, useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { useDismissablePanel } from '@/core/dom/useDismissablePanel'
 import { durations } from '@/core/motion/tokens'
@@ -26,7 +26,7 @@ const GithubReposModal = lazy(() =>
 /** The floating ball button itself — its own rotate animation and resume badge. */
 function LauncherTrigger({ open, terminalMinimized, label, onClick }: LauncherTriggerProps) {
   return (
-    <motion.button
+    <m.button
       type="button"
       className={styles.trigger}
       aria-haspopup="dialog"
@@ -42,7 +42,7 @@ function LauncherTrigger({ open, terminalMinimized, label, onClick }: LauncherTr
           1
         </span>
       )}
-    </motion.button>
+    </m.button>
   )
 }
 
@@ -86,7 +86,7 @@ export function Launcher() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             key="launcher-panel"
             ref={panelRef}
             className={styles.panel}
@@ -134,7 +134,7 @@ export function Launcher() {
 
             <ThemeToggle />
             <LanguageSwitcher />
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 

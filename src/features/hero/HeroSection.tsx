@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import { m, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { fadeUpVariants, staggerContainerVariants } from '@/core/motion/variants'
@@ -39,29 +39,29 @@ export function HeroSection() {
     <Section id="hero" aria-label={t('hero.eyebrow')} className={styles.heroSection}>
       <AmbientGlow position="center" />
       <span className={styles.backdrop} aria-hidden="true" />
-      <motion.div
+      <m.div
         ref={containerRef}
         variants={staggerContainerVariants}
         style={prefersReducedMotion ? undefined : { opacity: scrollOpacity, y: scrollY }}
       >
-        <motion.div variants={fadeUpVariants} className={styles.eyebrowRow}>
+        <m.div variants={fadeUpVariants} className={styles.eyebrowRow}>
           <span className={styles.eyebrowLine} aria-hidden="true" />
           <p className={styles.eyebrow}>
             <span aria-hidden="true">$ </span>
             {t('hero.eyebrow')}
             <span className={styles.cursor} aria-hidden="true" />
           </p>
-        </motion.div>
+        </m.div>
 
-        <motion.h1 variants={fadeUpVariants} className={styles.name}>
+        <m.h1 variants={fadeUpVariants} className={styles.name}>
           {profile.name}
-        </motion.h1>
+        </m.h1>
 
-        <motion.p variants={fadeUpVariants} className={styles.tagline}>
+        <m.p variants={fadeUpVariants} className={styles.tagline}>
           {t('hero.tagline')}
-        </motion.p>
+        </m.p>
 
-        <motion.div variants={fadeUpVariants} className={styles.meta}>
+        <m.div variants={fadeUpVariants} className={styles.meta}>
           <span className={styles.location}>
             <PinIcon />
             {profile.location}
@@ -73,34 +73,34 @@ export function HeroSection() {
               </li>
             ))}
           </ul>
-        </motion.div>
+        </m.div>
 
-        <motion.div variants={fadeUpVariants} className={styles.actions}>
+        <m.div variants={fadeUpVariants} className={styles.actions}>
           <Button to="/#projects" className={styles.primaryAction}>
             {t('hero.viewWork')}
           </Button>
           <Button variant="secondary" to="/#contact" className={styles.secondaryAction}>
             {t('hero.getInTouch')}
           </Button>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         className={styles.scrollCue}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.4 }}
       >
         <Link to="/#about" className={styles.scrollCueLink} aria-label={t('hero.scrollCue')}>
-          <motion.span
+          <m.span
             className={styles.scrollCueIcon}
             animate={prefersReducedMotion ? undefined : { y: [0, 6, 0] }}
             transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
           >
             <ChevronDownIcon />
-          </motion.span>
+          </m.span>
         </Link>
-      </motion.div>
+      </m.div>
     </Section>
   )
 }

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'motion/react'
+import { m } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { formatMonthYear } from '@/core/date/formatMonthYear'
 import { cx } from '@/core/style/cx'
@@ -56,7 +56,7 @@ export function ExperienceSection() {
     <Section id="experience" aria-labelledby="experience-heading">
       <AmbientGlow position="bottom-left" />
       <h2 id="experience-heading">{t('experience.heading')}</h2>
-      <motion.ol className={styles.timeline} variants={staggerContainerVariants}>
+      <m.ol className={styles.timeline} variants={staggerContainerVariants}>
         <span
           className={styles.progressLine}
           aria-hidden="true"
@@ -76,7 +76,7 @@ export function ExperienceSection() {
           const isActive = item.id === activeId
 
           return (
-            <motion.li
+            <m.li
               key={item.id}
               data-id={item.id}
               ref={(element) => {
@@ -108,10 +108,10 @@ export function ExperienceSection() {
                   </ul>
                 )}
               </div>
-            </motion.li>
+            </m.li>
           )
         })}
-      </motion.ol>
+      </m.ol>
     </Section>
   )
 }

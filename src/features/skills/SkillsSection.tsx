@@ -1,4 +1,4 @@
-import { motion } from 'motion/react'
+import { m } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { useSpotlight } from '@/core/dom/useSpotlight'
 import { fadeUpVariants, staggerContainerVariants } from '@/core/motion/variants'
@@ -30,11 +30,11 @@ export function SkillsSection() {
     <Section id="skills" aria-labelledby="skills-heading">
       <AmbientGlow position="top-left" />
       <h2 id="skills-heading">{t('skills.heading')}</h2>
-      <motion.ul className={styles.grid} variants={staggerContainerVariants}>
+      <m.ul className={styles.grid} variants={staggerContainerVariants}>
         {skillGroups.map((group) => {
           const GroupIcon = GROUP_ICONS[group.id]
           return (
-            <motion.li
+            <m.li
               key={group.id}
               className={styles.panel}
               variants={fadeUpVariants}
@@ -57,10 +57,10 @@ export function SkillsSection() {
               <p className={styles.punctuation} aria-hidden="true">
                 ]
               </p>
-            </motion.li>
+            </m.li>
           )
         })}
-      </motion.ul>
+      </m.ul>
     </Section>
   )
 }

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
-import { motion } from 'motion/react'
+import { m } from 'motion/react'
 import { trapTabFocus } from '@/core/dom/trapTabFocus'
 import type { ModalProps } from './Modal.types'
 import styles from './Modal.module.scss'
@@ -41,13 +41,13 @@ export function Modal({ onClose, titleId, closeLabel, children }: ModalProps) {
   }, [onClose])
 
   return createPortal(
-    <motion.div
+    <m.div
       className={styles.backdrop}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       onClick={onClose}
     >
-      <motion.div
+      <m.div
         ref={dialogRef}
         className={styles.dialog}
         role="dialog"
@@ -62,8 +62,8 @@ export function Modal({ onClose, titleId, closeLabel, children }: ModalProps) {
           ×
         </button>
         {children}
-      </motion.div>
-    </motion.div>,
+      </m.div>
+    </m.div>,
     document.body,
   )
 }

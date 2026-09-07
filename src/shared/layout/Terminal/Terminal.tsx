@@ -8,7 +8,7 @@ import {
   type KeyboardEvent,
 } from 'react'
 import { createPortal } from 'react-dom'
-import { motion } from 'motion/react'
+import { m } from 'motion/react'
 import { useNavigate } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { askAssistant } from '@/core/api/assistantClient'
@@ -474,7 +474,7 @@ export function Terminal({ initialOpen }: TerminalProps) {
       className={getPositionerClassName(maximized)}
       style={getPositionerStyle(maximized, position)}
     >
-      <motion.div
+      <m.div
         className={getTerminalClassName(maximized)}
         role="dialog"
         aria-labelledby={titleId}
@@ -520,7 +520,7 @@ export function Terminal({ initialOpen }: TerminalProps) {
 
         <ul ref={outputRef} className={styles.output}>
           {entries.map((entry) => (
-            <motion.li
+            <m.li
               key={entry.id}
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
@@ -542,7 +542,7 @@ export function Terminal({ initialOpen }: TerminalProps) {
                   {line || ' '}
                 </p>
               ))}
-            </motion.li>
+            </m.li>
           ))}
         </ul>
 
@@ -565,7 +565,7 @@ export function Terminal({ initialOpen }: TerminalProps) {
             spellCheck={false}
           />
         </form>
-      </motion.div>
+      </m.div>
     </div>,
     document.body,
   )

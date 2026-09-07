@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
-import { MotionConfig } from 'motion/react'
+import { LazyMotion, MotionConfig } from 'motion/react'
 import { BrowserRouter } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { AppRoutes } from './app/router/AppRoutes'
@@ -13,6 +13,15 @@ import { SiteFooter } from './shared/layout/SiteFooter/SiteFooter'
 import { SiteHeader } from './shared/layout/SiteHeader/SiteHeader'
 import { isTypingInField } from './shared/layout/Terminal/Terminal.helpers'
 import { OPEN_TERMINAL_EVENT } from './shared/layout/Terminal/terminalEvents'
+
+// A stable reference, defined once at module scope — passing a fresh
+// arrow function here on every render would make LazyMotion think the
+// loader changed and re-request it. Code-splits Motion's actual gesture/
+// layout/drag implementation into its own chunk (see core/motion/features.ts)
+// instead of shipping it in the main bundle every visitor downloads up front.
+function loadMotionFeatures() {
+  return import('./core/motion/features').then((module) => module.default)
+}
 
 // Both widgets are opt-in (opened via the Launcher menu, the command
 // palette, or — for the terminal — a keyboard shortcut) and each pulls in
@@ -71,29 +80,31 @@ function App() {
   }, [terminalRequested])
 
   return (
-    <MotionConfig reducedMotion="user">
-      <BrowserRouter>
-        <SkipLink label={t('common.skipToContent')} />
-        <ScrollToHash />
-        <FocusOnNavigate />
-        <SiteHeader />
-        <Launcher />
-        {assistantRequested && (
-          <Suspense fallback={null}>
-            <AiAssistant initialOpen />
-          </Suspense>
-        )}
-        {terminalRequested && (
-          <Suspense fallback={null}>
-            <Terminal initialOpen />
-          </Suspense>
-        )}
-        <main id="main-content" tabIndex={-1}>
-          <AppRoutes />
-        </main>
-        <SiteFooter />
-      </BrowserRouter>
-    </MotionConfig>
+    <LazyMotion features={loadMotionFeatures} strict>
+      <MotionConfig reducedMotion="user">
+        <BrowserRouter>
+          <SkipLink label={t('common.skipToContent')} />
+          <ScrollToHash />
+          <FocusOnNavigate />
+          <SiteHeader />
+          <Launcher />
+          {assistantRequested && (
+            <Suspense fallback={null}>
+              <AiAssistant initialOpen />
+            </Suspense>
+          )}
+          {terminalRequested && (
+            <Suspense fallback={null}>
+              <Terminal initialOpen />
+            </Suspense>
+          )}
+          <main id="main-content" tabIndex={-1}>
+            <AppRoutes />
+          </main>
+          <SiteFooter />
+        </BrowserRouter>
+      </MotionConfig>
+    </LazyMotion>
   )
 }
 

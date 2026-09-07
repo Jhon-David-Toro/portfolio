@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import emailjs from '@emailjs/browser'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
 import { durations, easings } from '@/core/motion/tokens'
@@ -20,7 +20,7 @@ const SPIN_TRANSITION = { duration: 0.7, repeat: Infinity, ease: 'linear' } as c
 /** A continuously rotating ring — the submit button's in-progress state. */
 function Spinner() {
   return (
-    <motion.svg
+    <m.svg
       viewBox="0 0 24 24"
       width="18"
       height="18"
@@ -34,14 +34,14 @@ function Spinner() {
     >
       <circle cx="12" cy="12" r="9" opacity="0.25" />
       <path d="M12 3a9 9 0 0 1 9 9" />
-    </motion.svg>
+    </m.svg>
   )
 }
 
 /** Draws a checkmark stroke-by-stroke — the submit button's success state. */
 function DrawnCheckmark() {
   return (
-    <motion.svg
+    <m.svg
       viewBox="0 0 24 24"
       width="20"
       height="20"
@@ -52,13 +52,13 @@ function DrawnCheckmark() {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <motion.path
+      <m.path
         d="M4 12.5l5 5L20 6"
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1 }}
         transition={{ duration: durations.slower, ease: easings.decelerate }}
       />
-    </motion.svg>
+    </m.svg>
   )
 }
 
@@ -93,7 +93,7 @@ function SubmitButton({ status }: SubmitButtonProps) {
   const content = resolveSubmitContent(status, t)
 
   return (
-    <motion.button
+    <m.button
       type="submit"
       layout="size"
       className={cx(styles.submitButton, isCompactStatus(status) && styles.submitButtonCompact)}
@@ -103,7 +103,7 @@ function SubmitButton({ status }: SubmitButtonProps) {
       transition={status.kind === 'error' ? { duration: durations.slow } : undefined}
     >
       <AnimatePresence mode="wait" initial={false}>
-        <motion.span
+        <m.span
           key={content.key}
           className={styles.submitContent}
           initial={{ opacity: 0, scale: 0.8 }}
@@ -112,9 +112,9 @@ function SubmitButton({ status }: SubmitButtonProps) {
           transition={{ duration: durations.fast }}
         >
           {content.node}
-        </motion.span>
+        </m.span>
       </AnimatePresence>
-    </motion.button>
+    </m.button>
   )
 }
 
@@ -144,14 +144,14 @@ export function ContactForm() {
   }
 
   return (
-    <motion.form
+    <m.form
       className={styles.form}
       variants={staggerContainerVariants}
       onSubmit={(event) => {
         void handleSubmit(event)
       }}
     >
-      <motion.div variants={fadeUpVariants} className={styles.field}>
+      <m.div variants={fadeUpVariants} className={styles.field}>
         <label htmlFor="contact-name" className={styles.label}>
           {t('contact.form.nameLabel')}
         </label>
@@ -163,9 +163,9 @@ export function ContactForm() {
           required
           className={styles.input}
         />
-      </motion.div>
+      </m.div>
 
-      <motion.div variants={fadeUpVariants} className={styles.field}>
+      <m.div variants={fadeUpVariants} className={styles.field}>
         <label htmlFor="contact-email" className={styles.label}>
           {t('contact.form.emailLabel')}
         </label>
@@ -177,43 +177,43 @@ export function ContactForm() {
           required
           className={styles.input}
         />
-      </motion.div>
+      </m.div>
 
-      <motion.div variants={fadeUpVariants} className={styles.field}>
+      <m.div variants={fadeUpVariants} className={styles.field}>
         <label htmlFor="contact-message" className={styles.label}>
           {t('contact.form.messageLabel')}
         </label>
         <textarea id="contact-message" name="message" rows={4} required className={styles.textarea} />
-      </motion.div>
+      </m.div>
 
-      <motion.div variants={fadeUpVariants} className={styles.formFooter}>
+      <m.div variants={fadeUpVariants} className={styles.formFooter}>
         <SubmitButton status={status} />
 
         <p role="status" aria-live="polite" className={styles.status}>
           <AnimatePresence mode="wait">
             {status.kind === 'success' && (
-              <motion.span
+              <m.span
                 key="success"
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: durations.base }}
               >
                 {t('contact.form.success')}
-              </motion.span>
+              </m.span>
             )}
             {status.kind === 'error' && (
-              <motion.span
+              <m.span
                 key="error"
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: durations.base }}
               >
                 {t('contact.form.error')}
-              </motion.span>
+              </m.span>
             )}
           </AnimatePresence>
         </p>
-      </motion.div>
-    </motion.form>
+      </m.div>
+    </m.form>
   )
 }
