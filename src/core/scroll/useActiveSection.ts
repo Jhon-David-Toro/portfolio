@@ -52,7 +52,12 @@ export function useActiveSection(sectionIds: readonly string[]): string | null {
       frame = requestAnimationFrame(updateActiveSection)
     }
 
-    updateActiveSection()
+    // Deferred to the next frame rather than measured synchronously here:
+    // this effect runs right after the whole page's initial DOM lands, so a
+    // synchronous getBoundingClientRect() read at this exact point forces
+    // the browser to flush layout immediately instead of on its own
+    // schedule — a real forced reflow caught in production traces.
+    scheduleUpdate()
     window.addEventListener('scroll', scheduleUpdate, { passive: true })
     window.addEventListener('resize', scheduleUpdate)
 
