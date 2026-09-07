@@ -25,7 +25,7 @@ import { PORTFOLIO_SECTION_IDS } from '@/content/navigation/sections'
 import { skillGroups } from '@/content/skills/skills'
 import { getProjects } from '@/content/projects/projects'
 import { dispatchTerminalBackground, OPEN_TERMINAL_EVENT } from './terminalEvents'
-import type { CommandResult, Entry, EntryKind } from './Terminal.types'
+import type { CommandResult, Entry, EntryKind, TerminalProps } from './Terminal.types'
 import { getPositionerClassName, getPositionerStyle, getTerminalClassName, isTypingInField } from './Terminal.helpers'
 import styles from './Terminal.module.scss'
 
@@ -58,7 +58,7 @@ const COMMAND_NAMES = [
  * widget uses). Opens via the backtick key (ignored while typing elsewhere)
  * or the command palette's "Open terminal" entry.
  */
-export function Terminal() {
+export function Terminal({ initialOpen }: TerminalProps) {
   const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const { theme, setTheme } = useTheme()
@@ -73,6 +73,7 @@ export function Terminal() {
   const outputRef = useRef<HTMLUListElement>(null)
   const windowRef = useRef<HTMLDivElement>(null)
   const nextIdRef = useRef(0)
+  const hasAppliedInitialOpen = useRef(false)
   const baseId = useId()
   const projects = getProjects()
   const { position, dragHandleProps } = useDraggable(windowRef)
@@ -100,6 +101,17 @@ export function Terminal() {
     setMaximized(false)
     setOpen(true)
   }, [t, nextId])
+
+  // App.tsx lazy-mounts this component only once it's been requested (see
+  // its own gate effect) — by the time this runs, the keypress/event that
+  // triggered that mount has already fired and gone, so it can't be caught
+  // by the listeners below. This opens once, immediately, in its place.
+  useEffect(() => {
+    if (initialOpen && !hasAppliedInitialOpen.current) {
+      hasAppliedInitialOpen.current = true
+      openTerminal()
+    }
+  }, [initialOpen, openTerminal])
 
   // Global '`' shortcut — ignored while the visitor is typing anywhere else
   // on the page (contact form, AI assistant, command palette, etc.).

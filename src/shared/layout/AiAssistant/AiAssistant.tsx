@@ -5,7 +5,7 @@ import type { AssistantMessage } from '@/core/api/assistantClient.types'
 import { useDismissablePanel } from '@/core/dom/useDismissablePanel'
 import { useFocusOnOpen } from '@/core/dom/useFocusOnOpen'
 import { profile } from '@/content/profile/profile'
-import type { AssistantMessagesProps, Status } from './AiAssistant.types'
+import type { AiAssistantProps, AssistantMessagesProps, Status } from './AiAssistant.types'
 import styles from './AiAssistant.module.scss'
 import { OPEN_ASSISTANT_EVENT } from './aiAssistantEvents'
 
@@ -57,7 +57,7 @@ function AssistantMessages({ messages, status, starterQuestions, onStarterClick 
  * at /api/chat (see api/chat.ts). Opened via the Launcher's menu, which
  * dispatches OPEN_ASSISTANT_EVENT — see aiAssistantEvents.ts.
  */
-export function AiAssistant() {
+export function AiAssistant({ initialOpen }: AiAssistantProps) {
   const { t, i18n } = useTranslation()
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState<readonly AssistantMessage[]>([])
@@ -65,6 +65,7 @@ export function AiAssistant() {
   const [status, setStatus] = useState<Status>({ kind: 'idle' })
   const inputRef = useRef<HTMLInputElement>(null)
   const headingId = useId()
+  const hasAppliedInitialOpen = useRef(false)
 
   // Safe: `assistant.starterQuestions` is always authored as a string array
   // in content/locales/{en,es}.json — we own the shape.
@@ -80,6 +81,17 @@ export function AiAssistant() {
     window.addEventListener(OPEN_ASSISTANT_EVENT, handleOpenEvent)
     return () => window.removeEventListener(OPEN_ASSISTANT_EVENT, handleOpenEvent)
   }, [])
+
+  // App.tsx lazy-mounts this component only once it's been requested (see
+  // its own gate effect) — the OPEN_ASSISTANT_EVENT that triggered that
+  // mount has already fired and gone, so the listener above can't catch it.
+  // This opens once, immediately, in its place.
+  useEffect(() => {
+    if (initialOpen && !hasAppliedInitialOpen.current) {
+      hasAppliedInitialOpen.current = true
+      setOpen(true)
+    }
+  }, [initialOpen])
 
   useFocusOnOpen(open, inputRef)
 

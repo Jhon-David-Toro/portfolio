@@ -31,4 +31,10 @@
   --color-accent-solid-foreground: #ffffff;
 
   --color-focus-ring: #6d28d9;
+
+  // Status colors — deliberately constant across themes (not swapped in
+  // themes/_dark.scss) since the values they replace were already used
+  // identically in both themes.
+  --color-danger: #f87171;
+  --color-success: #4ade80;
 }
