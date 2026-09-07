@@ -24,20 +24,6 @@
   opacity: 0.6;
 }
 
-// A soft accent bloom behind the content — adds depth without competing
-// with the dot-grid or the name's own typography.
-.glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: -1;
-  width: min(60vw, functions.rem(640px));
-  height: min(60vw, functions.rem(640px));
-  background: radial-gradient(circle, var(--color-accent-muted) 0%, transparent 70%);
-  filter: blur(functions.rem(40px));
-  transform: translate(-50%, -50%);
-}
-
 .eyebrowRow {
   display: flex;
   align-items: center;

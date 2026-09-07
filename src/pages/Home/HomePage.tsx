@@ -8,6 +8,7 @@ import { ExperienceSection } from '@/features/experience/ExperienceSection'
 import { HeroSection } from '@/features/hero/HeroSection'
 import { ProjectsSection } from '@/features/projects/ProjectsSection'
 import { SkillsSection } from '@/features/skills/SkillsSection'
+import { Constellation } from '@/shared/layout/Constellation/Constellation'
 
 /** Renders the complete portfolio home page. */
 export function HomePage() {
@@ -16,6 +17,7 @@ export function HomePage() {
 
   return (
     <>
+      <Constellation />
       <HeroSection />
       <AboutSection />
       <ExperienceSection />

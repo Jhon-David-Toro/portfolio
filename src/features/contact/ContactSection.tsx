@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { profile } from '@/content/profile/profile'
+import { AmbientGlow } from '@/design-system/AmbientGlow/AmbientGlow'
 import { Button } from '@/design-system/Button/Button'
 import { Section } from '@/design-system/Section/Section'
 import { GithubIcon } from '@/design-system/icons/GithubIcon'
@@ -14,6 +15,7 @@ export function ContactSection() {
 
   return (
     <Section id="contact" aria-labelledby="contact-heading">
+      <AmbientGlow position="bottom-right" />
       <h2 id="contact-heading">{t('contact.heading')}</h2>
 
       <div className={styles.grid}>

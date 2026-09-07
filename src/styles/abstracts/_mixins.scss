@@ -13,6 +13,35 @@
   justify-content: center;
 }
 
+/// A radial-gradient glow that tracks the pointer via --spotlight-x/-y (set
+/// by core/dom/useSpotlight.ts). Include on a hoverable card that already
+/// has `position: relative; overflow: hidden` and spreads useSpotlight()'s
+/// handlers onto the same element. Skipped on touch — there's no persistent
+/// cursor to follow, so the glow would just stick wherever the last tap
+/// landed instead of reacting to anything.
+@mixin spotlight-hover {
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: radial-gradient(
+      circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+      var(--color-accent-muted),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity var(--motion-duration-base) var(--motion-easing-standard);
+    pointer-events: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover::before {
+      opacity: 1;
+    }
+  }
+}
+
 /// Visually hides content while keeping it readable by screen readers —
 /// the standard "sr-only" recipe, previously copy-pasted verbatim in a
 /// couple of components.

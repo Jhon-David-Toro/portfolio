@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { profile } from '@/content/profile/profile'
+import { AmbientGlow } from '@/design-system/AmbientGlow/AmbientGlow'
 import { Badge } from '@/design-system/Badge/Badge'
 import { Section } from '@/design-system/Section/Section'
 import { Stat } from '@/design-system/Stat/Stat'
@@ -19,6 +20,7 @@ export function AboutSection() {
 
   return (
     <Section id="about" aria-labelledby="about-heading">
+      <AmbientGlow position="top-right" />
       <h2 id="about-heading">{t('about.heading')}</h2>
       <div className={styles.grid}>
         <div className={styles.primary}>

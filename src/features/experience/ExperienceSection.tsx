@@ -5,6 +5,7 @@ import { formatMonthYear } from '@/core/date/formatMonthYear'
 import { cx } from '@/core/style/cx'
 import { fadeUpVariants, staggerContainerVariants } from '@/core/motion/variants'
 import { experience } from '@/content/experience/experience'
+import { AmbientGlow } from '@/design-system/AmbientGlow/AmbientGlow'
 import { Badge } from '@/design-system/Badge/Badge'
 import { Section } from '@/design-system/Section/Section'
 import styles from './ExperienceSection.module.scss'
@@ -53,6 +54,7 @@ export function ExperienceSection() {
 
   return (
     <Section id="experience" aria-labelledby="experience-heading">
+      <AmbientGlow position="bottom-left" />
       <h2 id="experience-heading">{t('experience.heading')}</h2>
       <motion.ol className={styles.timeline} variants={staggerContainerVariants}>
         <span

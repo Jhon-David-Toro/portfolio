@@ -1,5 +1,6 @@
 @use '@/styles/abstracts/breakpoints' as breakpoints;
 @use '@/styles/abstracts/functions' as functions;
+@use '@/styles/abstracts/mixins' as mixins;
 
 .grid {
   display: grid;
@@ -12,7 +13,9 @@
 }
 
 .panel {
+  position: relative;
   padding: var(--space-6);
+  overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   background-color: var(--color-surface);
@@ -20,6 +23,8 @@
     border-color var(--motion-duration-base) var(--motion-easing-standard),
     transform var(--motion-duration-base) var(--motion-easing-standard),
     box-shadow var(--motion-duration-base) var(--motion-easing-standard);
+
+  @include mixins.spotlight-hover;
 
   &:hover {
     border-color: var(--color-accent);

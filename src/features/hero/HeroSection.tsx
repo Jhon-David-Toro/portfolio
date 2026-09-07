@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { fadeUpVariants, staggerContainerVariants } from '@/core/motion/variants'
 import { profile } from '@/content/profile/profile'
+import { AmbientGlow } from '@/design-system/AmbientGlow/AmbientGlow'
 import { Badge } from '@/design-system/Badge/Badge'
 import { Button } from '@/design-system/Button/Button'
 import { Section } from '@/design-system/Section/Section'
@@ -36,7 +37,7 @@ export function HeroSection() {
 
   return (
     <Section id="hero" aria-label={t('hero.eyebrow')} className={styles.heroSection}>
-      <span className={styles.glow} aria-hidden="true" />
+      <AmbientGlow position="center" />
       <span className={styles.backdrop} aria-hidden="true" />
       <motion.div
         ref={containerRef}

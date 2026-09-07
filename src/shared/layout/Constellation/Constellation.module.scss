@@ -1,0 +1,16 @@
+// Fixed to the viewport (not the page) so it reads as one continuous
+// background behind every section while scrolling, without needing a
+// document-height canvas — matches the -1 layering HeroSection's own
+// .glow/.backdrop use for the same "behind everything, but above the plain
+// body background" effect. pointer-events: none keeps it fully out of the
+// way of every link and button on the page; the component tracks the
+// pointer via a window listener instead of relying on this element
+// receiving pointer events.
+.canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}

@@ -18,9 +18,21 @@
 
   --color-border: #c7c7d1;
 
+  // Just for the Constellation background — lighter than --color-text-
+  // secondary on purpose. That token is dark enough to read as near-black
+  // next to it here, so its dots/lines visually collided with headings and
+  // body copy instead of staying in the background where they belong.
+  --color-constellation: #a3a3ae;
+
   --color-accent: #6d28d9;
   --color-accent-foreground: #ffffff;
   --color-accent-muted: rgb(109 40 217 / 12%);
+
+  // A softer, lower-opacity relative of --color-accent-muted, just for large
+  // decorative washes (the Hero's blur, the constellation background) — the
+  // background here already carries a faint cool tint of its own, so a glow
+  // at badge/icon-strength opacity reads muddy rather than crisp at that size.
+  --color-accent-glow: rgb(109 40 217 / 6%);
 
   // A fixed, always-saturated purple for solid-filled buttons/bubbles —
   // deliberately *not* theme-swapped like --color-accent (which goes light

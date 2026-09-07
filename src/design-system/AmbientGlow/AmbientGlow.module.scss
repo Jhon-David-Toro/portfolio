@@ -1,0 +1,53 @@
+@use '@/styles/abstracts/functions' as functions;
+
+// Shared recipe for a static, decorative accent bloom — sits behind a
+// section's content (z-index: -1) and never intercepts pointer events. The
+// host section clips its own overflow (see Section.module.scss), so these
+// presets stay comfortably inset from the edges rather than corner-hugging:
+// a section isn't guaranteed to be tall enough for a bigger, more off-center
+// bloom to clear that edge without visibly flattening off.
+.glow {
+  position: absolute;
+  z-index: -1;
+  background: radial-gradient(circle, var(--color-accent-glow) 0%, transparent 70%);
+  filter: blur(functions.rem(40px));
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+// The Hero's own centered bloom — bigger, since Hero is the one section
+// tall enough (near-viewport-height) to comfortably fit it.
+.center {
+  top: 50%;
+  left: 50%;
+  width: min(60vw, functions.rem(640px));
+  height: min(60vw, functions.rem(640px));
+}
+
+.topLeft {
+  top: 25%;
+  left: 22%;
+  width: min(38vw, functions.rem(340px));
+  height: min(38vw, functions.rem(340px));
+}
+
+.topRight {
+  top: 22%;
+  left: 78%;
+  width: min(38vw, functions.rem(340px));
+  height: min(38vw, functions.rem(340px));
+}
+
+.bottomLeft {
+  top: 78%;
+  left: 22%;
+  width: min(38vw, functions.rem(360px));
+  height: min(38vw, functions.rem(360px));
+}
+
+.bottomRight {
+  top: 72%;
+  left: 78%;
+  width: min(40vw, functions.rem(380px));
+  height: min(40vw, functions.rem(380px));
+}

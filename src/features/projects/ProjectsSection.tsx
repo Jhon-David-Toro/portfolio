@@ -1,6 +1,7 @@
 import { useCallback, useId, useState } from 'react'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
+import { useSpotlight } from '@/core/dom/useSpotlight'
 import { durations } from '@/core/motion/tokens'
 import { fadeUpVariants, staggerContainerVariants } from '@/core/motion/variants'
 import { getProjectMeta, getProjects } from '@/content/projects/projects'
@@ -16,6 +17,7 @@ export function ProjectsSection() {
   const projects = getProjects()
   const [openSlug, setOpenSlug] = useState<string | null>(null)
   const titleId = useId()
+  const spotlight = useSpotlight()
 
   const closeModal = useCallback(() => {
     setOpenSlug(null)
@@ -40,6 +42,7 @@ export function ProjectsSection() {
               onClick={() => {
                 setOpenSlug(project.slug)
               }}
+              {...spotlight}
             >
               <span className={styles.cardNumber}>{String(index + 1).padStart(2, '0')}</span>
               <span className={styles.cardTitle}>{t(`projects.items.${project.slug}.title`)}</span>
