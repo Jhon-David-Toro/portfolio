@@ -8,10 +8,12 @@
   right: var(--space-3);
   bottom: calc(var(--bottom-nav-height) + var(--space-safe-bottom) + var(--space-3));
 
+  // Matches BottomNav's own breakpoint ('lg', not 'md') — only float clear
+  // of the safe-area/bottom-nav gap once BottomNav itself is actually gone.
   // Desktop has no bottom nav — floats bottom-right instead. This is the
   // single floating trigger on every breakpoint (tools + theme + language),
   // so it never competes with another corner button.
-  @include breakpoints.respond-to('md') {
+  @include breakpoints.respond-to('lg') {
     bottom: var(--space-4);
     right: var(--space-4);
   }

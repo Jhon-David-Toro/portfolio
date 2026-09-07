@@ -165,9 +165,6 @@ export function CommandPalette() {
         onClick={openPalette}
       >
         <SearchIcon />
-        <span className={styles.hint} aria-hidden="true">
-          ⌘K
-        </span>
       </button>
 
       {open && (

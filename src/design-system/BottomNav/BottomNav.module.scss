@@ -11,7 +11,9 @@
   background-color: var(--color-surface-raised);
   border-top: 1px solid var(--color-border);
 
-  @include breakpoints.respond-to('md') {
+  // Matches SiteHeader's .desktopNav breakpoint ('lg', not 'md') — covers
+  // navigation through the whole tablet range, where the top nav doesn't fit.
+  @include breakpoints.respond-to('lg') {
     display: none;
   }
 }

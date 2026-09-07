@@ -8,6 +8,7 @@ import { BottomNav } from '@/design-system/BottomNav/BottomNav'
 import type { BottomNavItem } from '@/design-system/BottomNav/BottomNav.types'
 import { Button } from '@/design-system/Button/Button'
 import { Container } from '@/design-system/Container/Container'
+import { DownloadIcon } from '@/design-system/icons/DownloadIcon'
 import { Navigation } from '@/design-system/Navigation/Navigation'
 import type { NavItem } from '@/design-system/Navigation/Navigation.types'
 import { CommandPalette } from '@/shared/layout/CommandPalette/CommandPalette'
@@ -61,8 +62,14 @@ export function SiteHeader() {
 
             <div className={styles.controls}>
               <CommandPalette />
-              <Button variant="secondary" href={CV_FILE_PATH} download className={styles.cvLink}>
-                {t('nav.downloadCv')}
+              <Button
+                variant="secondary"
+                href={CV_FILE_PATH}
+                download
+                aria-label={t('nav.downloadCv')}
+                className={styles.cvLink}
+              >
+                <DownloadIcon />
               </Button>
             </div>
           </div>

@@ -8,9 +8,10 @@
   right: var(--space-3);
   bottom: calc(var(--bottom-nav-height) + var(--space-safe-bottom) + var(--space-3));
 
+  // Matches BottomNav's and Launcher's own breakpoint ('lg', not 'md').
   // Desktop has no bottom nav — floats bottom-right instead, anchored to
   // the same corner as the Launcher trigger that opens this panel.
-  @include breakpoints.respond-to('md') {
+  @include breakpoints.respond-to('lg') {
     bottom: var(--space-4);
     right: var(--space-4);
   }

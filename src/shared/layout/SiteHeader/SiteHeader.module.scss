@@ -33,10 +33,14 @@
   }
 }
 
+// Waits for 'lg' (not 'md') — at tablet width the full 6-item nav plus the
+// header's icon buttons doesn't fit, especially with longer Spanish labels
+// (confirmed: overflows at 768px). BottomNav (see its own breakpoint) picks
+// up navigation through the whole tablet range instead.
 .desktopNav {
   display: none;
 
-  @include breakpoints.respond-to('md') {
+  @include breakpoints.respond-to('lg') {
     display: block;
   }
 }
@@ -47,14 +51,15 @@
   gap: var(--space-3);
 }
 
-// Full override (not partial) on top of the shared Button's base
-// styles — this one is deliberately smaller than a standalone CTA, sitting
-// inline in the header controls row.
+// Full override (not partial) on top of the shared Button's base styles —
+// icon-only, so it stays compact in the header controls row at every width
+// instead of a text label crowding out the nav on tablet.
 .cvLink {
+  width: functions.rem(40px);
+  height: functions.rem(40px);
   min-height: functions.rem(40px);
-  padding: 0 var(--space-5);
+  padding: 0;
   border-radius: var(--radius-full);
-  font-size: var(--font-size-sm);
 
   &:hover:not(:disabled) {
     border-color: var(--color-accent);

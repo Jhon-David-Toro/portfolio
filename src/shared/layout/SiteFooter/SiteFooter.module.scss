@@ -5,12 +5,17 @@
   border-top: 1px solid var(--color-border);
 
   // This is the last element on the page, so it — not #main-content — owns
-  // clearing the fixed mobile bottom nav; see design-system/BottomNav. Not
-  // needed at md+, where the bottom nav is hidden.
+  // clearing the fixed mobile bottom nav; see design-system/BottomNav.
+  // Matches BottomNav's own breakpoint ('lg', not 'md') below — not needed
+  // once BottomNav itself is actually hidden.
   padding-bottom: calc(var(--space-8) + var(--bottom-nav-height) + var(--space-safe-bottom));
 
   @include breakpoints.respond-to('md') {
-    padding-block: var(--space-6);
+    padding-top: var(--space-6);
+  }
+
+  @include breakpoints.respond-to('lg') {
+    padding-bottom: var(--space-6);
   }
 }
 
