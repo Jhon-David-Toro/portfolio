@@ -21,10 +21,10 @@ export const experience: readonly ExperienceItem[] = [
   {
     id: 'fisapay',
     company: 'Fisapay',
-    location: 'Bogotá, Colombia',
-    workMode: 'remote',
+    location: 'Medellín, Colombia',
+    workMode: 'onsite',
     startDate: '2025-05',
-    endDate: null,
+    endDate: '2025-08',
   },
   {
     id: 'emberalab',

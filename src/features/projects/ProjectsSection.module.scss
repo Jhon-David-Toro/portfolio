@@ -87,3 +87,10 @@
   color: var(--color-text-secondary);
   line-height: var(--line-height-relaxed);
 }
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}

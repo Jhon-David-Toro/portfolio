@@ -109,7 +109,7 @@
     "heading": "Sobre mí",
     "lead": "Soy un desarrollador de software con más de 2 años de experiencia profesional, principalmente enfocado en desarrollo frontend, con experiencia complementaria en backend y desarrollo full stack.",
     "body": "He participado en el desarrollo, mantenimiento y evolución de aplicaciones web, trabajando en proyectos empresariales y soluciones orientadas a las necesidades específicas de los clientes. Mi experiencia se centra en la construcción de interfaces de usuario modernas, responsivas y escalables, utilizando arquitecturas basadas en componentes, integración de APIs REST y buenas prácticas de desarrollo de software.",
-    "focusAreas": ["Desarrollo Frontend", "Arquitectura de Componentes", "APIs REST", "Full-Stack"],
+    "focusAreas": ["Desarrollo Frontend", "Desarrollo Backend", "GraphQL", "Arquitectura de Componentes", "APIs REST", "Full-Stack"],
     "stats": {
       "experience": "Años de experiencia",
       "roles": "Empresas",
@@ -127,38 +127,46 @@
     "items": {
       "epam": {
         "role": "Software Engineer",
-        "highlights": []
+        "highlights": [
+          "Desarrollo componentes web reutilizables y encapsulados bajo una arquitectura basada en componentes, priorizando la modularidad, escalabilidad y facilidad de mantenimiento de las aplicaciones.",
+          "Trabajo con Lit para construir interfaces y componentes web eficientes, aprovechando su sistema de renderizado reactivo y su arquitectura ligera para crear soluciones reutilizables.",
+          "Diseño y ejecuto pruebas unitarias con Mocha, Sinon y Open Web Components (open-wc), validando la lógica de los componentes, el comportamiento de eventos y sus dependencias mediante mocks, stubs y aserciones.",
+          "Desarrollo pruebas end-to-end utilizando Cucumber, verificando los principales flujos funcionales y asegurando que las aplicaciones cumplan con los escenarios de usuario y las reglas de negocio definidas.",
+          "Mantengo estándares de calidad y buenas prácticas de desarrollo, utilizando ESLint, cobertura de pruebas y criterios de baja complejidad para construir código limpio, consistente y mantenible.",
+          "Analizo requerimientos funcionales y los convierto en soluciones técnicas, considerando tanto las necesidades del cliente como la lógica del dominio para implementar funcionalidades alineadas con los objetivos del proyecto."
+        ]
       },
       "neoris": {
         "role": "Software Development Analyst",
         "highlights": [
-          "Diseñé, desarrollé y mantuve componentes web reutilizables y encapsulados bajo una arquitectura basada en componentes, priorizando modularidad, reutilización y mantenibilidad.",
-          "Construí y mantuve componentes web con Lit, aprovechando el renderizado reactivo y plantillas ligeras para entregar interfaces eficientes y reutilizables.",
-          "Desarrollé pruebas unitarias con Mocha, Sinon y Open Web Components (open-wc), cubriendo comportamiento de componentes, lógica de negocio, eventos y dependencias mediante mocks y stubs.",
-          "Implementé pruebas end-to-end con Cucumber para validar flujos completos de la aplicación y alinearlos con escenarios de usuario y procesos de negocio reales.",
-          "Apliqué prácticas estrictas de calidad de código con ESLint, cobertura de pruebas, baja complejidad y estándares consistentes para mantener un código limpio y escalable.",
-          "Traduje requisitos funcionales en soluciones técnicas alineadas con la lógica de negocio del cliente, asegurando que componentes y flujos soportaran los procesos esperados."
+          "Diseñé, desarrollé y mantuve componentes web reutilizables y encapsulados, adhiriéndome a los principios de la arquitectura basada en componentes para garantizar la modularidad, la reutilización y la mantenibilidad en todas las aplicaciones.",
+          "Construí y mantuve componentes web usando Lit, aprovechando su sistema de renderizado reactivo, capacidades de plantillas y arquitectura ligera para ofrecer componentes de interfaz de usuario eficientes y reutilizables",
+          "Desarrollé conjuntos completos de pruebas unitarias usando Mocha, Sinon y Open Web Components (open-wc), cubriendo el comportamiento de los componentes, la lógica de negocio, el manejo de eventos y las dependencias a través de mocks, stubs y aserciones. ",
+          "Implementé pruebas de extremo a extremo con Cucumber para validar flujos de trabajo completos de la aplicación, asegurando que la funcionalidad reflejara con precisión escenarios de usuario y procesos de negocio del mundo real.",
+          "Seguí prácticas estrictas de calidad de código, incluyendo ESLint, reglas de linting, cobertura de pruebas unitarias, código de baja complejidad, arquitectura mantenible y estándares de codificación consistentes, con un enfoque en escribir código limpio, escalable y mantenible.",
+          "Traduje los requisitos funcionales en implementaciones técnicas mediante el desarrollo de soluciones alineadas con los requisitos comerciales del cliente y la lógica del dominio, asegurando que los componentes y flujos de trabajo se ajustaran a los procesos comerciales previstos."
         ]
       },
       "fisapay": {
-        "role": "Software Engineer",
+        "role": "Desarrollador Fullstack Jr.",
         "highlights": [
           "Brindé soporte y mantenimiento a sistemas de software en entornos frontend y backend, asegurando la estabilidad, el rendimiento y la mejora continua de las aplicaciones.",
-          "Gestioné y optimicé bases de datos, centrándome en la indexación, el rendimiento de las consultas, la organización de los datos y la eficiencia general de la base de datos.",
+          "Gestioné y optimicé bases de datos, centrándome en la indexación, el rendimiento de las consultas, la organización de los datos y la eficiencia general de la base de datos. Analicé y mejoré las estructuras de las bases de datos para asegurar un rendimiento confiable con volúmenes crecientes de sistemas y datos.",
           "Brindé soporte y mejoré una aplicación Angular 14 implementando nuevas funcionalidades, manteniendo las características existentes, resolviendo problemas y mejorando la usabilidad y el rendimiento.",
-          "Brindé soporte y mantuve la funcionalidad backend usando .NET y ASP.NET Core, incluyendo API, lógica de negocio, acceso a datos e integraciones entre aplicaciones frontend y servicios backend.",
-          "Brindé soporte técnico al cliente identificando, analizando y resolviendo problemas relacionados con la plataforma, y me comuniqué con los usuarios para entender requisitos y brindar soluciones apropiadas."
+          "Brinde soporte y mantuve la funcionalidad backend usando .NET y ASP.NET Core, incluyendo API, lógica de negocio, acceso a datos e integraciones entre aplicaciones frontend y servicios backend.",
+          "Brindé soporte técnico al cliente identificando, analizando y resolviendo problemas relacionados con la plataforma. Me comuniqué con los usuarios para comprender los requisitos y brindar soluciones técnicas apropiadas."
         ]
       },
       "emberalab": {
         "role": "Desarrollador de Software",
         "highlights": [
-          "Implementé interfaces responsivas y visualmente consistentes a partir de diseños en Figma, con un enfoque pixel-perfect.",
-          "Participé en el desarrollo y mantenimiento de múltiples proyectos de software en entornos frontend.",
-          "Desarrollé aplicaciones web con Angular 18 y 19, integrando servicios mediante GraphQL, estilos con Sass y manejo reactivo con RxJS.",
-          "Construí interfaces interactivas con React 18, usando Framer Motion para animaciones, Tailwind CSS para estilos y herramientas de analítica para monitorear el comportamiento de usuario.",
-          "Contribuí al backend con un prototipo de chatbot de WhatsApp en Go, orientado a automatizar interacciones y procesamiento de mensajes.",
-          "Desarrollé, personalicé y mantuve sitios en WordPress con funcionalidades adaptadas a los requerimientos de cada proyecto."
+          "Adopté la modalidad pixel perfect",
+          "Implementación de interfaz de usuario impecables al desarrollar cumpliendo figma en interfaces responsivas y visualmente consistentes en diferentes navegadores y dispositivos",
+          "Participé en el desarrollo y mantenimiento de múltiples proyectos de software",
+          "Desarrollo aplicaciones web utilizando Angular 18 y 19, integrando servicios a través de GraphQL, implementando interfaces responsivas y aplicando estilos con Sass y RxJS.",
+          "Desarrollo interfaces de usuario interactivas y dinámicas con React 18, utilizando Framer Motion para animaciones, Tailwind CSS para el estilo y herramientas de análisis para monitorizar el comportamiento del usuario.",
+          "Contribuí al desarrollo del backend con Go, creando un prototipo de chatbot para WhatsApp que automatiza las interacciones del usuario y el procesamiento de mensajes.",
+          "Desarrollé, personalicé y mantuve sitios web de WordPress, implementando funcionalidades y componentes adaptados a los requisitos del proyecto."
         ]
       }
     }
@@ -178,23 +186,27 @@
   "projects": {
     "heading": "Proyectos",
     "mock": {
-      "note": "Proyectos de ejemplo — muy pronto agregaré casos de estudio reales aquí."
+      "note": "Proyectos seleccionados construidos con tecnologías frontend y full-stack modernas."
+    },
+    "links": {
+      "repository": "Ver repositorio",
+      "live": "Ver proyecto en vivo"
     },
     "items": {
       "project-one": {
-        "title": "Panel de Analítica",
-        "summary": "Proyecto de ejemplo — un concepto de dashboard de datos para previsualizar esta tarjeta.",
-        "description": "Espacio de ejemplo para un caso de estudio real. Ahí normalmente iría el problema, el enfoque y el impacto medible de un panel de analítica construido con React, TypeScript, GraphQL y MySQL."
+        "title": "Plataforma de E-commerce",
+        "summary": "Una plataforma de comercio electrónico escalable con frontend en Next.js y CMS headless en Strapi.",
+        "description": "Una aplicación moderna de comercio electrónico construida con Next.js, TypeScript y SASS modular. Strapi gestiona productos, usuarios y pedidos, mientras el frontend integra la API del CMS y utiliza renderizado del lado del servidor para ofrecer una experiencia responsive y orientada al SEO."
       },
       "project-two": {
-        "title": "Plataforma de Reservas",
-        "summary": "Proyecto de ejemplo — un concepto de flujo de reservas para probar la cuadrícula con más contenido.",
-        "description": "Espacio de ejemplo para un caso de estudio real. Ahí normalmente iría la lógica de agendamiento, actualizaciones en tiempo real y las decisiones de UX detrás de una plataforma de reservas construida con Angular, RxJS y Node.js."
+        "title": "Todo App",
+        "summary": "Una aplicación de gestión de tareas con filtros, checklists, fechas límite, temas y persistencia offline.",
+        "description": "Un gestor de tareas desarrollado con React, TypeScript y SASS que permite crear, buscar, clasificar y filtrar tareas por estado. Incluye descripciones, checklists, fechas límite y comandos, con persistencia en IndexedDB para conservar la información después de recargar o trabajar sin conexión."
       },
       "project-three": {
-        "title": "Librería de Componentes",
-        "summary": "Proyecto de ejemplo — un concepto de design system para completar la cuadrícula mock.",
-        "description": "Espacio de ejemplo para un caso de estudio real. Ahí normalmente iría el diseño de la API de componentes, la estrategia de testing y la adopción de una librería de componentes compartida construida con Lit y TypeScript."
+        "title": "StoreFrontEnd",
+        "summary": "Un frontend de comercio electrónico con catálogo, carrito, pagos con PayPal y administración.",
+        "description": "Un storefront construido con React, TypeScript, SASS y Redux, conectado a un backend desarrollado con FastAPI. Permite explorar productos por categoría, gestionar el carrito, pagar mediante PayPal y añadir reseñas, además de incluir un panel para administrar productos y categorías."
       }
     }
   },

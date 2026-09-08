@@ -15,7 +15,7 @@ import styles from './HeroSection.module.scss'
 // Curated for a quick-glance stack in the Hero — same real technologies from
 // content/skills/skills.ts, just a smaller, higher-signal subset than the
 // full Skills section list.
-const FEATURED_STACK = ['TypeScript', 'React', 'Angular', 'Node.js'] as const
+const FEATURED_STACK = ['React', 'Angular', 'LitElement', 'NextJS', 'UnitTest', 'SpringBoot', 'PostgreSQL'] as const
 
 /** Renders the introductory hero content for the home page. */
 export function HeroSection() {

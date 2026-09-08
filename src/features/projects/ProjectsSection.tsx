@@ -6,6 +6,7 @@ import { durations } from '@/core/motion/tokens'
 import { fadeUpVariants, staggerContainerVariants } from '@/core/motion/variants'
 import { getProjectMeta, getProjects } from '@/content/projects/projects'
 import { Badge } from '@/design-system/Badge/Badge'
+import { Button } from '@/design-system/Button/Button'
 import { Modal } from '@/design-system/Modal/Modal'
 import { SectionNote } from '@/design-system/SectionNote/SectionNote'
 import { Section } from '@/design-system/Section/Section'
@@ -75,6 +76,26 @@ export function ProjectsSection() {
               <Badge key={tag}>{tag}</Badge>
             ))}
           </span>
+          <div className={styles.links}>
+            <Button
+              href={openProject.repositoryUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="secondary"
+            >
+              {t('projects.links.repository')}
+            </Button>
+            {openProject.liveUrl && (
+              <Button
+                href={openProject.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="secondary"
+              >
+                {t('projects.links.live')}
+              </Button>
+            )}
+          </div>
         </Modal>
       )}
     </Section>

@@ -109,7 +109,7 @@
     "heading": "About",
     "lead": "I'm a software developer with over 2 years of professional experience, primarily focused on frontend development, with complementary backend and full-stack experience.",
     "body": "I've worked on the development, maintenance, and evolution of web applications across enterprise projects and client-specific solutions. My experience centers on building modern, responsive, and scalable user interfaces using component-based architectures, REST API integration, and solid software engineering practices.",
-    "focusAreas": ["Frontend Development", "Component Architecture", "REST APIs", "Full-Stack"],
+    "focusAreas": ["Frontend Development", "Backend Development", "GraphQL", "Component Architecture", "REST APIs", "Full-Stack"],
     "stats": {
       "experience": "Years of experience",
       "roles": "Companies",
@@ -127,38 +127,46 @@
     "items": {
       "epam": {
         "role": "Software Engineer",
-        "highlights": []
+        "highlights": [
+          "Develop reusable and encapsulated web components following a component-based architecture, prioritizing modularity, scalability, and application maintainability.",
+          "Work with Lit to build efficient web interfaces and components, leveraging its reactive rendering system and lightweight architecture to create reusable solutions.",
+          "Design and execute unit tests using Mocha, Sinon, and Open Web Components (open-wc), validating component logic, event behavior, and dependencies through mocks, stubs, and assertions.",
+          "Develop end-to-end tests using Cucumber, validating key functional flows and ensuring applications meet defined user scenarios and business rules.",
+          "Maintain code quality standards and development best practices by using ESLint, test coverage, and low-complexity criteria to build clean, consistent, and maintainable code.",
+          "Analyze functional requirements and translate them into technical solutions, considering both client needs and domain logic to implement features aligned with project objectives."
+        ]
       },
       "neoris": {
         "role": "Software Development Analyst",
         "highlights": [
-          "Designed, built, and maintained reusable, encapsulated web components under a component-based architecture, prioritizing modularity, reusability, and maintainability.",
-          "Built and maintained web components with Lit, leveraging reactive rendering and lightweight templates to ship efficient, reusable interfaces.",
-          "Wrote unit tests with Mocha, Sinon, and Open Web Components (open-wc), covering component behavior, business logic, events, and dependencies via mocks and stubs.",
-          "Implemented end-to-end tests with Cucumber to validate complete application flows against real user scenarios and business processes.",
-          "Applied strict code quality practices — ESLint, test coverage, low complexity, and consistent standards — to keep the codebase clean and scalable.",
-          "Translated functional requirements into technical solutions aligned with the client's business logic, ensuring components and flows supported the expected processes."
+          "Designed, developed, and maintained reusable and encapsulated web components, adhering to component-based architecture principles to ensure modularity, reusability, and maintainability across applications.",
+          "Built and maintained web components using Lit, leveraging its reactive rendering system, templating capabilities, and lightweight architecture to deliver efficient and reusable user interface components.",
+          "Developed comprehensive unit test suites using Mocha, Sinon, and Open Web Components (open-wc), covering component behavior, business logic, event handling, and dependencies through mocks, stubs, and assertions.",
+          "Implemented end-to-end tests with Cucumber to validate complete application workflows, ensuring functionality accurately reflected real-world user scenarios and business processes.",
+          "Followed strict code quality practices, including ESLint, linting rules, unit test coverage, low-complexity code, maintainable architecture, and consistent coding standards, with a focus on writing clean, scalable, and maintainable code.",
+          "Translated functional requirements into technical implementations by developing solutions aligned with client business requirements and domain logic, ensuring components and workflows matched the intended business processes."
         ]
       },
       "fisapay": {
-        "role": "Software Engineer",
+        "role": "Junior Fullstack Developer",
         "highlights": [
-          "Supported and maintained software systems across frontend and backend environments, ensuring stability, performance, and continuous improvement.",
-          "Managed and optimized databases, focusing on indexing, query performance, data organization, and overall database efficiency.",
-          "Supported and enhanced an Angular 14 application — building new features, maintaining existing ones, fixing issues, and improving usability and performance.",
-          "Supported backend functionality built with .NET and ASP.NET Core, including APIs, business logic, data access, and integrations between frontend applications and backend services.",
-          "Provided technical support to clients by identifying, analyzing, and resolving platform issues, communicating with users to understand requirements and deliver appropriate solutions."
+          "Provided support and maintenance for software systems across frontend and backend environments, ensuring application stability, performance, and continuous improvement.",
+          "Managed and optimized databases, focusing on indexing, query performance, data organization, and overall database efficiency. Analyzed and improved database structures to ensure reliable performance as system and data volumes increased.",
+          "Supported and enhanced an Angular 14 application by implementing new features, maintaining existing functionality, resolving issues, and improving usability and performance.",
+          "Supported and maintained backend functionality using .NET and ASP.NET Core, including APIs, business logic, data access, and integrations between frontend applications and backend services.",
+          "Provided technical support to clients by identifying, analyzing, and resolving platform-related issues. Communicated with users to understand requirements and provide appropriate technical solutions."
         ]
       },
       "emberalab": {
         "role": "Software Developer",
         "highlights": [
-          "Implemented responsive, visually consistent interfaces from Figma designs with a pixel-perfect approach.",
-          "Contributed to the development and maintenance of multiple frontend software projects.",
-          "Built web applications with Angular 18 and 19, integrating services via GraphQL, styling with Sass, and reactive state management with RxJS.",
-          "Built interactive interfaces with React 18, using Framer Motion for animations, Tailwind CSS for styling, and analytics tooling to monitor user behavior.",
-          "Contributed to the backend with a Go-based WhatsApp chatbot prototype aimed at automating interactions and message processing.",
-          "Developed, customized, and maintained WordPress sites with functionality tailored to each project's requirements."
+          "Adopted a pixel-perfect development approach.",
+          "Implemented pixel-perfect user interfaces based on Figma designs, delivering responsive and visually consistent experiences across different browsers and devices.",
+          "Participated in the development and maintenance of multiple software projects.",
+          "Developed web applications using Angular 18 and 19, integrating services through GraphQL, implementing responsive interfaces, and applying styles with Sass and RxJS.",
+          "Developed interactive and dynamic user interfaces with React 18, using Framer Motion for animations, Tailwind CSS for styling, and analytics tools to monitor user behavior.",
+          "Contributed to backend development with Go by creating a WhatsApp chatbot prototype that automated user interactions and message processing.",
+          "Developed, customized, and maintained WordPress websites, implementing features and components tailored to project requirements."
         ]
       }
     }
@@ -178,23 +186,27 @@
   "projects": {
     "heading": "Projects",
     "mock": {
-      "note": "Placeholder projects — real case studies coming soon."
+      "note": "Selected projects built with modern frontend and full-stack technologies."
+    },
+    "links": {
+      "repository": "View repository",
+      "live": "View live project"
     },
     "items": {
       "project-one": {
-        "title": "Analytics Dashboard",
-        "summary": "Placeholder project — a data dashboard concept used to preview this card layout.",
-        "description": "Sample case study slot. A real write-up would cover the problem, the approach, and the measurable impact of an analytics dashboard built with React, TypeScript, GraphQL, and MySQL."
+        "title": "E-commerce Platform",
+        "summary": "A scalable e-commerce platform with a Next.js frontend and Strapi headless CMS.",
+        "description": "A modern e-commerce application built with Next.js, TypeScript, and modular SASS. Strapi powers product, user, and order management, while the frontend integrates the CMS API and uses server-side rendering to support a responsive, SEO-conscious shopping experience."
       },
       "project-two": {
-        "title": "Booking Platform",
-        "summary": "Placeholder project — a booking flow concept used to test the grid with more content.",
-        "description": "Sample case study slot. A real write-up would walk through the scheduling logic, real-time updates, and UX decisions behind a booking platform built with Angular, RxJS, and Node.js."
+        "title": "Todo App",
+        "summary": "A task management app with filtering, checklists, due dates, themes, and offline persistence.",
+        "description": "A React, TypeScript, and SASS task manager that lets users create, search, classify, and filter tasks by status. Tasks support descriptions, checklists, due dates, and command-based actions, with IndexedDB persistence for retaining data across reloads and offline use."
       },
       "project-three": {
-        "title": "Component Library",
-        "summary": "Placeholder project — a design-system concept rounding out the mock grid.",
-        "description": "Sample case study slot. A real write-up would explain the component API design, testing strategy, and adoption story for a shared component library built with Lit and TypeScript."
+        "title": "StoreFrontEnd",
+        "summary": "An e-commerce frontend with product browsing, cart management, PayPal payments, and administration.",
+        "description": "A React, TypeScript, SASS, and Redux storefront connected to a FastAPI backend. Users can browse products by category, manage their cart, pay through PayPal, and add reviews, while an administration panel supports product and category management."
       }
     }
   },
