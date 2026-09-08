@@ -27,7 +27,7 @@ describe('readCachedActivity', () => {
   })
 
   it('returns null when the cache entry is malformed JSON', () => {
-    sessionStorage.setItem('github-activity:Jhon-Toro:v5', '{not json')
+    sessionStorage.setItem('github-activity:Jhon-David-Toro:v5', '{not json')
     expect(readCachedActivity()).toBeNull()
   })
 })

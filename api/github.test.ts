@@ -54,8 +54,8 @@ describe('api/github handler', () => {
               nodes: [
                 {
                   databaseId: 1,
-                  name: 'Jhon-Toro',
-                  url: 'https://github.com/Jhon-Toro/Jhon-Toro',
+                  name: 'Jhon-David-Toro',
+                  url: 'https://github.com/Jhon-David-Toro/Jhon-David-Toro',
                   description: null,
                   primaryLanguage: null,
                   stargazerCount: 0,
@@ -64,7 +64,7 @@ describe('api/github handler', () => {
                 {
                   databaseId: 2,
                   name: 'cool-project',
-                  url: 'https://github.com/Jhon-Toro/cool-project',
+                  url: 'https://github.com/Jhon-David-Toro/cool-project',
                   description: 'A cool project',
                   primaryLanguage: { name: 'TypeScript' },
                   stargazerCount: 7,

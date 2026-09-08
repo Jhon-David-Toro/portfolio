@@ -132,4 +132,4 @@ Built for [Vercel](https://vercel.com): `vite build` produces the static site, a
 
 ## Contact
 
-**Jhon David Toro Muriel** — [GitHub](https://github.com/Jhon-Toro) · [toromurieljhon@gmail.com](mailto:toromurieljhon@gmail.com)
+**Jhon David Toro Muriel** — [GitHub](https://github.com/Jhon-David-Toro) · [toromurieljhon@gmail.com](mailto:toromurieljhon@gmail.com)

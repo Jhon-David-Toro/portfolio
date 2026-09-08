@@ -132,4 +132,4 @@ Preparado para [Vercel](https://vercel.com): `vite build` genera el sitio estát
 
 ## Contacto
 
-**Jhon David Toro Muriel** — [GitHub](https://github.com/Jhon-Toro) · [toromurieljhon@gmail.com](mailto:toromurieljhon@gmail.com)
+**Jhon David Toro Muriel** — [GitHub](https://github.com/Jhon-David-Toro) · [toromurieljhon@gmail.com](mailto:toromurieljhon@gmail.com)
