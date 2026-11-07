@@ -229,7 +229,7 @@
         "title": "Todo App",
         "summary": "Una aplicación de gestión de tareas con filtros, checklists, fechas límite, temas y persistencia offline.",
         "description": "Un gestor de tareas desarrollado con React, TypeScript y SASS que permite crear, buscar, clasificar y filtrar tareas por estado. Incluye descripciones, checklists, fechas límite y comandos, con persistencia en IndexedDB para conservar la información después de recargar o trabajar sin conexión.",
-        "imageAlt": "Lista de tareas con título, fecha límite y estado, y el panel de detalles de la tarea seleccionada"
+        "imageAlt": "Lista de tareas en modo oscuro con título, fecha límite y estado, y el panel de detalles de la tarea seleccionada"
       },
       "api-ecommerce": {
         "title": "API de E-commerce (Spring Boot)",
