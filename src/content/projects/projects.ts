@@ -1,22 +1,17 @@
 import type { ProjectMeta } from './project.types'
 
-/** Project metadata used by the portfolio project views. Apps come first, then APIs. */
+/**
+ * Project metadata used by the portfolio project views.
+ * Order: web front ends, then the desktop and Android apps, then the backend APIs.
+ */
 const projects: readonly ProjectMeta[] = [
   {
-    slug: 'flix-music',
+    slug: 'convet',
     category: 'app',
-    tags: ['Kotlin', 'Jetpack Compose', 'Media3', 'Room', 'Hilt'],
-    repositoryUrl: 'https://github.com/Jhon-David-Toro/FlixMusic-App',
-    downloadUrl: 'https://github.com/Jhon-David-Toro/FlixMusic-App/releases/latest',
-    image: '/projects/flix-music.jpg',
-  },
-  {
-    slug: 'flix-desktop',
-    category: 'app',
-    tags: ['Kotlin', 'Compose Desktop', 'libmpv', 'Room', 'Coroutines'],
-    repositoryUrl: 'https://github.com/Jhon-David-Toro/Flix-Desktop',
-    downloadUrl: 'https://github.com/Jhon-David-Toro/Flix-Desktop/releases/latest',
-    image: '/projects/flix-desktop.jpg',
+    tags: ['Next.js', 'React 19', 'TypeScript', 'SASS', 'Vitest'],
+    repositoryUrl: 'https://github.com/Jhon-David-Toro/convet-website',
+    liveUrl: 'https://convet-website.vercel.app/',
+    image: '/projects/convet.jpg',
   },
   {
     slug: 'project-one',
@@ -40,6 +35,22 @@ const projects: readonly ProjectMeta[] = [
     repositoryUrl: 'https://github.com/Jhon-David-Toro/todo-app',
     liveUrl: 'https://jhon-toro.github.io/todo-app/',
     image: '/projects/todo.jpg',
+  },
+  {
+    slug: 'flix-desktop',
+    category: 'app',
+    tags: ['Kotlin', 'Compose Desktop', 'libmpv', 'Room', 'Coroutines'],
+    repositoryUrl: 'https://github.com/Jhon-David-Toro/Flix-Desktop',
+    downloadUrl: 'https://github.com/Jhon-David-Toro/Flix-Desktop/releases/latest',
+    image: '/projects/flix-desktop.jpg',
+  },
+  {
+    slug: 'flix-music',
+    category: 'app',
+    tags: ['Kotlin', 'Jetpack Compose', 'Media3', 'Room', 'Hilt'],
+    repositoryUrl: 'https://github.com/Jhon-David-Toro/FlixMusic-App',
+    downloadUrl: 'https://github.com/Jhon-David-Toro/FlixMusic-App/releases/latest',
+    image: '/projects/flix-music.jpg',
   },
   {
     slug: 'api-ecommerce',

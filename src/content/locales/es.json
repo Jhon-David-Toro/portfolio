@@ -201,17 +201,11 @@
       "release": "Descargar la última versión"
     },
     "items": {
-      "flix-music": {
-        "title": "Flix Music (Android)",
-        "summary": "Un reproductor de música nativo para Android: búsqueda, letras sincronizadas, descargas sin conexión y reproducción automática.",
-        "description": "Una app nativa de Android en Kotlin y Jetpack Compose que habla directamente con YouTube Music, sin servidor propio. Tiene reproductor completo con cola reordenable, letras sincronizadas, descargas sin conexión, favoritos y playlists, estadísticas de escucha y reproducción automática que sigue con canciones parecidas. Construida con Media3, Room, DataStore y Hilt, con un design system propio y pruebas unitarias de los view models.",
-        "imageAlt": "Mockups del diseño de Flix Music: inicio, búsqueda, género y canción en tema oscuro"
-      },
-      "flix-desktop": {
-        "title": "Flix Desktop (Windows)",
-        "summary": "La versión de Flix para Windows: Compose Desktop, audio con libmpv, teclas multimedia, bandeja e instalador MSI.",
-        "description": "Un reproductor de música para Windows hecho con Kotlin y Compose Multiplatform Desktop, que comparte su lógica con la app de Android. Reproduce con libmpv, admite teclas multimedia, bandeja del sistema e instancia única, y recuerda por dónde ibas. Se distribuye como instalador MSI con el runtime de Java incluido, y tiene una suite de pruebas unitarias que corre con Gradle.",
-        "imageAlt": "Pantalla de reproducción de Flix Desktop con la carátula del álbum y la letra sincronizada"
+      "convet": {
+        "title": "VT Aruba (CONVET)",
+        "summary": "El sitio web y la app de clientes de una clínica veterinaria en Aruba, construidos a partir de su diseño en Figma.",
+        "description": "Una aplicación web y design system para CONVET, una clínica veterinaria en Aruba, llevados de su archivo de Figma a código funcional: el sitio público, el flujo de inicio de sesión, la app de clientes y las herramientas de personal y administración. Construida con Next.js 16 (App Router), React 19 con React Compiler, TypeScript estricto, módulos SCSS con design tokens y pruebas con Vitest. Por ahora es un front end con datos de ejemplo, listo para conectarse a una API.",
+        "imageAlt": "Página de inicio de CONVET: clínica veterinaria en Aruba con foto principal, botones de reserva y número de emergencias"
       },
       "project-one": {
         "title": "Plataforma de E-commerce",
@@ -230,6 +224,18 @@
         "summary": "Una aplicación de gestión de tareas con filtros, checklists, fechas límite, temas y persistencia offline.",
         "description": "Un gestor de tareas desarrollado con React, TypeScript y SASS que permite crear, buscar, clasificar y filtrar tareas por estado. Incluye descripciones, checklists, fechas límite y comandos, con persistencia en IndexedDB para conservar la información después de recargar o trabajar sin conexión.",
         "imageAlt": "Lista de tareas en modo oscuro con título, fecha límite y estado, y el panel de detalles de la tarea seleccionada"
+      },
+      "flix-desktop": {
+        "title": "Flix Desktop (Windows)",
+        "summary": "La versión de Flix para Windows: Compose Desktop, audio con libmpv, teclas multimedia, bandeja e instalador MSI.",
+        "description": "Un reproductor de música para Windows hecho con Kotlin y Compose Multiplatform Desktop, que comparte su lógica con la app de Android. Reproduce con libmpv, admite teclas multimedia, bandeja del sistema e instancia única, y recuerda por dónde ibas. Se distribuye como instalador MSI con el runtime de Java incluido, y tiene una suite de pruebas unitarias que corre con Gradle.",
+        "imageAlt": "Pantalla de reproducción de Flix Desktop con la carátula del álbum y la letra sincronizada"
+      },
+      "flix-music": {
+        "title": "Flix Music (Android)",
+        "summary": "Un reproductor de música nativo para Android: búsqueda, letras sincronizadas, descargas sin conexión y reproducción automática.",
+        "description": "Una app nativa de Android en Kotlin y Jetpack Compose que habla directamente con YouTube Music, sin servidor propio. Tiene reproductor completo con cola reordenable, letras sincronizadas, descargas sin conexión, favoritos y playlists, estadísticas de escucha y reproducción automática que sigue con canciones parecidas. Construida con Media3, Room, DataStore y Hilt, con un design system propio y pruebas unitarias de los view models.",
+        "imageAlt": "Mockups del diseño de Flix Music: inicio, búsqueda, género y canción en tema oscuro"
       },
       "api-ecommerce": {
         "title": "API de E-commerce (Spring Boot)",

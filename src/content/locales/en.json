@@ -201,17 +201,11 @@
       "release": "Download latest release"
     },
     "items": {
-      "flix-music": {
-        "title": "Flix Music (Android)",
-        "summary": "A native Android music player: search, synced lyrics, offline downloads and autoplay.",
-        "description": "A native Android app in Kotlin and Jetpack Compose that talks to YouTube Music directly, with no server of its own. It has a full player with a reorderable queue, synced lyrics, offline downloads, favorites and playlists, listening stats, and autoplay that keeps going with similar songs. Built on Media3, Room, DataStore and Hilt, with a custom design system and unit tests for the view models.",
-        "imageAlt": "Flix Music design mockups: home, search, genre and song screens on a dark theme"
-      },
-      "flix-desktop": {
-        "title": "Flix Desktop (Windows)",
-        "summary": "The Windows version of Flix: Compose Desktop, libmpv audio, media keys, tray and an MSI installer.",
-        "description": "A Windows music player built with Kotlin and Compose Multiplatform Desktop, sharing its logic with the Android app. It plays through libmpv, supports media keys, a system tray and a single running instance, and remembers where the music was. It ships as an MSI installer with the Java runtime bundled, and it has a unit-test suite run through Gradle.",
-        "imageAlt": "Flix Desktop now-playing screen with the album cover and synced lyrics"
+      "convet": {
+        "title": "VT Aruba (CONVET)",
+        "summary": "The website and customer app of a veterinary clinic in Aruba, built from its Figma design.",
+        "description": "A web application and design system for CONVET, a veterinary clinic in Aruba, turned from its Figma file into working code: the public website, a sign-in flow, a customer app and staff and admin tools. Built with Next.js 16 (App Router), React 19 with the React Compiler, strict TypeScript, SCSS modules with design tokens, and Vitest tests. It is currently a front end running on mock data, ready to connect to an API.",
+        "imageAlt": "CONVET home page: a veterinary clinic in Aruba with a hero photo, booking buttons and an emergency number"
       },
       "project-one": {
         "title": "E-commerce Platform",
@@ -230,6 +224,18 @@
         "summary": "A task management app with filtering, checklists, due dates, themes, and offline persistence.",
         "description": "A React, TypeScript, and SASS task manager that lets users create, search, classify, and filter tasks by status. Tasks support descriptions, checklists, due dates, and command-based actions, with IndexedDB persistence for retaining data across reloads and offline use.",
         "imageAlt": "To-do app task list in dark mode with titles, due dates and status, and the details panel of the selected task"
+      },
+      "flix-desktop": {
+        "title": "Flix Desktop (Windows)",
+        "summary": "The Windows version of Flix: Compose Desktop, libmpv audio, media keys, tray and an MSI installer.",
+        "description": "A Windows music player built with Kotlin and Compose Multiplatform Desktop, sharing its logic with the Android app. It plays through libmpv, supports media keys, a system tray and a single running instance, and remembers where the music was. It ships as an MSI installer with the Java runtime bundled, and it has a unit-test suite run through Gradle.",
+        "imageAlt": "Flix Desktop now-playing screen with the album cover and synced lyrics"
+      },
+      "flix-music": {
+        "title": "Flix Music (Android)",
+        "summary": "A native Android music player: search, synced lyrics, offline downloads and autoplay.",
+        "description": "A native Android app in Kotlin and Jetpack Compose that talks to YouTube Music directly, with no server of its own. It has a full player with a reorderable queue, synced lyrics, offline downloads, favorites and playlists, listening stats, and autoplay that keeps going with similar songs. Built on Media3, Room, DataStore and Hilt, with a custom design system and unit tests for the view models.",
+        "imageAlt": "Flix Music design mockups: home, search, genre and song screens on a dark theme"
       },
       "api-ecommerce": {
         "title": "E-commerce API (Spring Boot)",
