@@ -223,7 +223,7 @@
         "title": "Todo App",
         "summary": "A task management app with filtering, checklists, due dates, themes, and offline persistence.",
         "description": "A React, TypeScript, and SASS task manager that lets users create, search, classify, and filter tasks by status. Tasks support descriptions, checklists, due dates, and command-based actions, with IndexedDB persistence for retaining data across reloads and offline use.",
-        "imageAlt": "To-do app task list in dark mode with titles, due dates and status, and the details panel of the selected task"
+        "imageAlt": "To-do app in dark mode with a task, its details panel and its checklist"
       },
       "flix-desktop": {
         "title": "Flix Desktop (Windows)",
