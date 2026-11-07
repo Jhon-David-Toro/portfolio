@@ -241,10 +241,6 @@
         "summary": "A Python FastAPI backend for products, categories, orders, reviews and PayPal payments.",
         "description": "A RESTful backend built with Python and FastAPI. It handles users with registration and login, product and category CRUD, orders with status tracking, product reviews and PayPal payment confirmation, and generates interactive Swagger documentation automatically. It is the backend of the StoreFrontEnd React app."
       }
-    },
-    "groups": {
-      "apps": "Applications",
-      "apis": "Backend APIs"
     }
   },
   "github": {
