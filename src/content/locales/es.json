@@ -109,7 +109,14 @@
     "heading": "Sobre mí",
     "lead": "Soy un desarrollador de software con más de 2 años de experiencia profesional, principalmente enfocado en desarrollo frontend, con experiencia complementaria en backend y desarrollo full stack.",
     "body": "He participado en el desarrollo, mantenimiento y evolución de aplicaciones web, trabajando en proyectos empresariales y soluciones orientadas a las necesidades específicas de los clientes. Mi experiencia se centra en la construcción de interfaces de usuario modernas, responsivas y escalables, utilizando arquitecturas basadas en componentes, integración de APIs REST y buenas prácticas de desarrollo de software.",
-    "focusAreas": ["Desarrollo Frontend", "Desarrollo Backend", "GraphQL", "Arquitectura de Componentes", "APIs REST", "Full-Stack"],
+    "focusAreas": [
+      "Desarrollo Frontend",
+      "Desarrollo Backend",
+      "GraphQL",
+      "Arquitectura de Componentes",
+      "APIs REST",
+      "Full-Stack"
+    ],
     "stats": {
       "experience": "Años de experiencia",
       "roles": "Empresas",
@@ -186,28 +193,58 @@
   "projects": {
     "heading": "Proyectos",
     "mock": {
-      "note": "Proyectos seleccionados construidos con tecnologías frontend y full-stack modernas."
+      "note": "Aplicaciones seleccionadas y las APIs de backend detrás de ellas."
     },
     "links": {
       "repository": "Ver repositorio",
-      "live": "Ver proyecto en vivo"
+      "live": "Ver proyecto en vivo",
+      "release": "Descargar la última versión"
     },
     "items": {
+      "flix-music": {
+        "title": "Flix Music (Android)",
+        "summary": "Un reproductor de música nativo para Android: búsqueda, letras sincronizadas, descargas sin conexión y reproducción automática.",
+        "description": "Una app nativa de Android en Kotlin y Jetpack Compose que habla directamente con YouTube Music, sin servidor propio. Tiene reproductor completo con cola reordenable, letras sincronizadas, descargas sin conexión, favoritos y playlists, estadísticas de escucha y reproducción automática que sigue con canciones parecidas. Construida con Media3, Room, DataStore y Hilt, con un design system propio y pruebas unitarias de los view models.",
+        "imageAlt": "Mockups del diseño de Flix Music: inicio, búsqueda, género y canción en tema oscuro"
+      },
+      "flix-desktop": {
+        "title": "Flix Desktop (Windows)",
+        "summary": "La versión de Flix para Windows: Compose Desktop, audio con libmpv, teclas multimedia, bandeja e instalador MSI.",
+        "description": "Un reproductor de música para Windows hecho con Kotlin y Compose Multiplatform Desktop, que comparte su lógica con la app de Android. Reproduce con libmpv, admite teclas multimedia, bandeja del sistema e instancia única, y recuerda por dónde ibas. Se distribuye como instalador MSI con el runtime de Java incluido, y tiene una suite de pruebas unitarias que corre con Gradle.",
+        "imageAlt": "Pantalla de reproducción de Flix Desktop con la carátula del álbum y la letra sincronizada"
+      },
       "project-one": {
         "title": "Plataforma de E-commerce",
         "summary": "Una plataforma de comercio electrónico escalable con frontend en Next.js y CMS headless en Strapi.",
-        "description": "Una aplicación moderna de comercio electrónico construida con Next.js, TypeScript y SASS modular. Strapi gestiona productos, usuarios y pedidos, mientras el frontend integra la API del CMS y utiliza renderizado del lado del servidor para ofrecer una experiencia responsive y orientada al SEO."
-      },
-      "project-two": {
-        "title": "Todo App",
-        "summary": "Una aplicación de gestión de tareas con filtros, checklists, fechas límite, temas y persistencia offline.",
-        "description": "Un gestor de tareas desarrollado con React, TypeScript y SASS que permite crear, buscar, clasificar y filtrar tareas por estado. Incluye descripciones, checklists, fechas límite y comandos, con persistencia en IndexedDB para conservar la información después de recargar o trabajar sin conexión."
+        "description": "Una aplicación moderna de comercio electrónico construida con Next.js, TypeScript y SASS modular. Strapi gestiona productos, usuarios y pedidos, mientras el frontend integra la API del CMS y utiliza renderizado del lado del servidor para ofrecer una experiencia responsive y orientada al SEO.",
+        "imageAlt": "Página de inicio de la tienda con un banner principal y la navegación de productos"
       },
       "project-three": {
         "title": "StoreFrontEnd",
         "summary": "Un frontend de comercio electrónico con catálogo, carrito, pagos con PayPal y administración.",
-        "description": "Un storefront construido con React, TypeScript, SASS y Redux, conectado a un backend desarrollado con FastAPI. Permite explorar productos por categoría, gestionar el carrito, pagar mediante PayPal y añadir reseñas, además de incluir un panel para administrar productos y categorías."
+        "description": "Un storefront construido con React, TypeScript, SASS y Redux, conectado a un backend desarrollado con FastAPI. Permite explorar productos por categoría, gestionar el carrito, pagar mediante PayPal y añadir reseñas, además de incluir un panel para administrar productos y categorías.",
+        "imageAlt": "Página de inicio de StoreFrontEnd con barra de navegación morada y un banner de productos"
+      },
+      "project-two": {
+        "title": "Todo App",
+        "summary": "Una aplicación de gestión de tareas con filtros, checklists, fechas límite, temas y persistencia offline.",
+        "description": "Un gestor de tareas desarrollado con React, TypeScript y SASS que permite crear, buscar, clasificar y filtrar tareas por estado. Incluye descripciones, checklists, fechas límite y comandos, con persistencia en IndexedDB para conservar la información después de recargar o trabajar sin conexión.",
+        "imageAlt": "Formulario de tarea con título, descripción, fecha límite, estado y checklist"
+      },
+      "api-ecommerce": {
+        "title": "API de E-commerce (Spring Boot)",
+        "summary": "Una API REST en Java 21 con autenticación JWT, catálogo público y endpoints de administración.",
+        "description": "Una API REST para una plataforma de comercio electrónico construida con Java 21, Spring Boot, Spring Security y PostgreSQL. Está organizada por dominio (controller, service, repository), expone DTOs en vez de entidades JPA, protege las rutas con JWT, valida la entrada y devuelve errores consistentes con un manejador global. El catálogo admite búsqueda, orden y paginación, y una suite de pruebas JUnit cubre los flujos principales."
+      },
+      "api-store": {
+        "title": "API de Tienda (FastAPI)",
+        "summary": "Un backend en Python con FastAPI para productos, categorías, pedidos, reseñas y pagos con PayPal.",
+        "description": "Un backend RESTful construido con Python y FastAPI. Gestiona usuarios con registro e inicio de sesión, CRUD de productos y categorías, pedidos con seguimiento de estado, reseñas de productos y confirmación de pagos con PayPal, y genera documentación Swagger interactiva automáticamente. Es el backend de la app React StoreFrontEnd."
       }
+    },
+    "groups": {
+      "apps": "Aplicaciones",
+      "apis": "APIs de backend"
     }
   },
   "github": {

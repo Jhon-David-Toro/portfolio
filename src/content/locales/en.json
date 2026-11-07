@@ -109,7 +109,14 @@
     "heading": "About",
     "lead": "I'm a software developer with over 2 years of professional experience, primarily focused on frontend development, with complementary backend and full-stack experience.",
     "body": "I've worked on the development, maintenance, and evolution of web applications across enterprise projects and client-specific solutions. My experience centers on building modern, responsive, and scalable user interfaces using component-based architectures, REST API integration, and solid software engineering practices.",
-    "focusAreas": ["Frontend Development", "Backend Development", "GraphQL", "Component Architecture", "REST APIs", "Full-Stack"],
+    "focusAreas": [
+      "Frontend Development",
+      "Backend Development",
+      "GraphQL",
+      "Component Architecture",
+      "REST APIs",
+      "Full-Stack"
+    ],
     "stats": {
       "experience": "Years of experience",
       "roles": "Companies",
@@ -186,28 +193,58 @@
   "projects": {
     "heading": "Projects",
     "mock": {
-      "note": "Selected projects built with modern frontend and full-stack technologies."
+      "note": "Selected apps and the backend APIs behind them."
     },
     "links": {
       "repository": "View repository",
-      "live": "View live project"
+      "live": "View live project",
+      "release": "Download latest release"
     },
     "items": {
+      "flix-music": {
+        "title": "Flix Music (Android)",
+        "summary": "A native Android music player: search, synced lyrics, offline downloads and autoplay.",
+        "description": "A native Android app in Kotlin and Jetpack Compose that talks to YouTube Music directly, with no server of its own. It has a full player with a reorderable queue, synced lyrics, offline downloads, favorites and playlists, listening stats, and autoplay that keeps going with similar songs. Built on Media3, Room, DataStore and Hilt, with a custom design system and unit tests for the view models.",
+        "imageAlt": "Flix Music design mockups: home, search, genre and song screens on a dark theme"
+      },
+      "flix-desktop": {
+        "title": "Flix Desktop (Windows)",
+        "summary": "The Windows version of Flix: Compose Desktop, libmpv audio, media keys, tray and an MSI installer.",
+        "description": "A Windows music player built with Kotlin and Compose Multiplatform Desktop, sharing its logic with the Android app. It plays through libmpv, supports media keys, a system tray and a single running instance, and remembers where the music was. It ships as an MSI installer with the Java runtime bundled, and it has a unit-test suite run through Gradle.",
+        "imageAlt": "Flix Desktop now-playing screen with the album cover and synced lyrics"
+      },
       "project-one": {
         "title": "E-commerce Platform",
         "summary": "A scalable e-commerce platform with a Next.js frontend and Strapi headless CMS.",
-        "description": "A modern e-commerce application built with Next.js, TypeScript, and modular SASS. Strapi powers product, user, and order management, while the frontend integrates the CMS API and uses server-side rendering to support a responsive, SEO-conscious shopping experience."
-      },
-      "project-two": {
-        "title": "Todo App",
-        "summary": "A task management app with filtering, checklists, due dates, themes, and offline persistence.",
-        "description": "A React, TypeScript, and SASS task manager that lets users create, search, classify, and filter tasks by status. Tasks support descriptions, checklists, due dates, and command-based actions, with IndexedDB persistence for retaining data across reloads and offline use."
+        "description": "A modern e-commerce application built with Next.js, TypeScript, and modular SASS. Strapi powers product, user, and order management, while the frontend integrates the CMS API and uses server-side rendering to support a responsive, SEO-conscious shopping experience.",
+        "imageAlt": "E-commerce storefront home page with a hero banner and product navigation"
       },
       "project-three": {
         "title": "StoreFrontEnd",
         "summary": "An e-commerce frontend with product browsing, cart management, PayPal payments, and administration.",
-        "description": "A React, TypeScript, SASS, and Redux storefront connected to a FastAPI backend. Users can browse products by category, manage their cart, pay through PayPal, and add reviews, while an administration panel supports product and category management."
+        "description": "A React, TypeScript, SASS, and Redux storefront connected to a FastAPI backend. Users can browse products by category, manage their cart, pay through PayPal, and add reviews, while an administration panel supports product and category management.",
+        "imageAlt": "StoreFrontEnd home page with a purple navigation bar and a product banner"
+      },
+      "project-two": {
+        "title": "Todo App",
+        "summary": "A task management app with filtering, checklists, due dates, themes, and offline persistence.",
+        "description": "A React, TypeScript, and SASS task manager that lets users create, search, classify, and filter tasks by status. Tasks support descriptions, checklists, due dates, and command-based actions, with IndexedDB persistence for retaining data across reloads and offline use.",
+        "imageAlt": "To-do app task form with title, description, due date, status and checklist"
+      },
+      "api-ecommerce": {
+        "title": "E-commerce API (Spring Boot)",
+        "summary": "A REST API in Java 21 with JWT authentication, a public catalog and admin endpoints.",
+        "description": "A REST API for an e-commerce platform built with Java 21, Spring Boot, Spring Security and PostgreSQL. It is organized by domain (controller, service, repository), exposes DTOs instead of JPA entities, secures routes with JWT, validates input and returns consistent errors through a global handler. The catalog supports search, sorting and pagination, and a JUnit test suite covers the main flows."
+      },
+      "api-store": {
+        "title": "Store API (FastAPI)",
+        "summary": "A Python FastAPI backend for products, categories, orders, reviews and PayPal payments.",
+        "description": "A RESTful backend built with Python and FastAPI. It handles users with registration and login, product and category CRUD, orders with status tracking, product reviews and PayPal payment confirmation, and generates interactive Swagger documentation automatically. It is the backend of the StoreFrontEnd React app."
       }
+    },
+    "groups": {
+      "apps": "Applications",
+      "apis": "Backend APIs"
     }
   },
   "github": {
