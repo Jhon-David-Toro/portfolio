@@ -59,7 +59,12 @@ export function ProjectsSection() {
                     }}
                     {...spotlight}
                   >
-                    <ProjectVisual project={project} alt={t(`projects.items.${project.slug}.imageAlt`, { defaultValue: '' })} />
+                    {project.image && (
+                      <ProjectVisual
+                        project={project}
+                        alt={t(`projects.items.${project.slug}.imageAlt`, { defaultValue: '' })}
+                      />
+                    )}
                     <span className={styles.cardNumber}>
                       {String(projects.indexOf(project) + 1).padStart(2, '0')}
                     </span>

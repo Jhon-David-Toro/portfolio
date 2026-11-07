@@ -2,22 +2,23 @@
 @use '@/styles/abstracts/mixins' as mixins;
 
 .grid {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; // an incomplete last row (1 or 2 cards) stays centered
   gap: var(--space-6);
   margin-top: var(--space-8);
 
-  @include breakpoints.respond-to('md') {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  @include breakpoints.respond-to('lg') {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  // <ol>'s <li> is only a semantic wrapper here — the grid sizing lives on
-  // .grid itself, so each item just needs to stretch to fill its cell.
+  // <ol>'s <li> sets the column width; the card inside stretches to its height.
   > li {
-    height: 100%;
+    width: 100%;
+
+    @include breakpoints.respond-to('md') {
+      width: calc((100% - var(--space-6)) / 2);
+    }
+
+    @include breakpoints.respond-to('lg') {
+      width: calc((100% - 2 * var(--space-6)) / 3);
+    }
   }
 }
 
