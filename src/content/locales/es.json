@@ -201,6 +201,12 @@
       "release": "Descargar la última versión"
     },
     "items": {
+      "beacon-ui": {
+        "title": "Beacon UI (design system en Lit)",
+        "summary": "Un design system de Web Components independientes del framework, construido con Lit, y la consola de estado de servicios que lo usa.",
+        "description": "Quince Web Components construidos con Lit 3 y TypeScript estricto, con estilos SCSS y design tokens que tematizan cada shadow root, y una consola de estado construida encima: uptime de 90 días, gráficas de latencia, línea de tiempo de incidentes y un formulario para reportarlos. Los controles del formulario son form-associated custom elements (ElementInternals), así que un <form> nativo maneja la validación, FormData y el reinicio sin librería de formularios. El estado va por @lit/context y los datos asíncronos por @lit/task. 182 tests corren en Chromium real con el modo navegador de Vitest, incluidos flujos de punta a punta y revisiones con axe-core contra WCAG 2.2 AA en ambos temas, y CI lo despliega en GitHub Pages.",
+        "imageAlt": "Vista general de Beacon: un titular grande que dice que tres servicios necesitan atención, una cuadrícula de uptime de 90 días para ocho servicios y una lista de servicios con gráficas de latencia"
+      },
       "convet": {
         "title": "VT Aruba (CONVET)",
         "summary": "El sitio web y la app de clientes de una clínica veterinaria en Aruba, construidos a partir de su diseño en Figma.",

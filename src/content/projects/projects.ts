@@ -6,6 +6,14 @@ import type { ProjectMeta } from './project.types'
  */
 const projects: readonly ProjectMeta[] = [
   {
+    slug: 'beacon-ui',
+    category: 'app',
+    tags: ['Lit 3', 'Web Components', 'TypeScript', 'SCSS', 'Vitest'],
+    repositoryUrl: 'https://github.com/Jhon-David-Toro/beacon-ui',
+    liveUrl: 'https://jhon-david-toro.github.io/beacon-ui/',
+    image: '/projects/beacon-ui.jpg',
+  },
+  {
     slug: 'convet',
     category: 'app',
     tags: ['Next.js', 'React 19', 'TypeScript', 'SASS', 'Vitest'],
