@@ -213,6 +213,30 @@
         "description": "Una aplicación moderna de comercio electrónico construida con Next.js, TypeScript y SASS modular. Strapi gestiona productos, usuarios y pedidos, mientras el frontend integra la API del CMS y utiliza renderizado del lado del servidor para ofrecer una experiencia responsive y orientada al SEO.",
         "imageAlt": "Página de inicio de la tienda con un banner principal y la navegación de productos"
       },
+      "beacon-ui": {
+        "title": "Beacon UI",
+        "summary": "Un design system de Web Components independientes del framework y una consola de estado de servicios.",
+        "description": "Un design system construido con Web Components de Lit 3, independiente del framework y reutilizable entre proyectos. Incluye una consola de estado de servicios que muestra tiempo de actividad, latencia, incidentes y un formulario de reporte. Construido con TypeScript, SCSS y Vitest para pruebas con verificaciones de accesibilidad mediante axe-core. Actualmente es un demo front-end con datos de ejemplo.",
+        "imageAlt": "Consola de estado de servicios de Beacon UI mostrando métricas de tiempo de actividad y línea de tiempo de incidentes"
+      },
+      "matiz-studio": {
+        "title": "Matiz Studio",
+        "summary": "Un generador de design systems: un color se convierte en una paleta completa y accesible con tokens.",
+        "description": "Una herramienta web que genera paletas de colores OKLCH completas, temas claros y oscuros que cumplen WCAG 2.2 AA, y escalas de tipografía, espaciado, bordes y sombras a partir de un solo color y personalidad. Exporta como CSS, SCSS, tokens de diseño W3C o TypeScript. Construido con Next.js 16, React 19, TypeScript en modo estricto y módulos SCSS con design tokens.",
+        "imageAlt": "Interfaz del generador de paletas de colores de Matiz Studio con vista previa de tema y opciones de exportación"
+      },
+      "gymwarrior": {
+        "title": "GymWarrior",
+        "summary": "Una plataforma de gimnasio con planes de membresía, tienda de suplementos, calculadoras de salud y panel de administración.",
+        "description": "Una plataforma web para un gimnasio de barrio con planes de membresía en línea, tienda de suplementos con carrito de compras, calculadoras de salud (IMC y calorías) y panel de administración. Construida con Next.js 16, TypeScript, PostgreSQL con Drizzle ORM, Better Auth para autenticación, Zustand para gestión de estado y módulos SCSS. Incluye pagos simulados para demostración de portafolio.",
+        "imageAlt": "Página de inicio de GymWarrior con planes de membresía y muestra de instalaciones del gimnasio"
+      },
+      "weather": {
+        "title": "App del Clima",
+        "summary": "Una app del clima que convierte datos de pronóstico en consejos prácticos con alertas en segundo plano.",
+        "description": "Una aplicación del clima construida con Angular 22 que transforma datos de pronóstico en recomendaciones accionables, como 'Lleva paraguas: probable lluvia desde las 3:00 p.m.' Envía alertas de tormentas, lluvia intensa, calor, frío, UV, viento y mala calidad del aire. Usa la API de Periodic Background Sync para verificar condiciones incluso cuando la app está cerrada. Construida con TypeScript, SCSS, Vitest y la API de Open-Meteo.",
+        "imageAlt": "App del clima mostrando condiciones actuales con recomendaciones prácticas y alertas"
+      },
       "project-three": {
         "title": "StoreFrontEnd",
         "summary": "Un frontend de comercio electrónico con catálogo, carrito, pagos con PayPal y administración.",

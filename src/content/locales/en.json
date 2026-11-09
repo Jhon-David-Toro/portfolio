@@ -213,6 +213,30 @@
         "description": "A modern e-commerce application built with Next.js, TypeScript, and modular SASS. Strapi powers product, user, and order management, while the frontend integrates the CMS API and uses server-side rendering to support a responsive, SEO-conscious shopping experience.",
         "imageAlt": "E-commerce storefront home page with a hero banner and product navigation"
       },
+      "beacon-ui": {
+        "title": "Beacon UI",
+        "summary": "A design system of framework-agnostic Web Components and a service status console.",
+        "description": "A design system built with Lit 3 Web Components, framework-agnostic and reusable across projects. It includes a service status console that displays uptime, latency, incidents, and an incident report form. Built with TypeScript, SCSS, and Vitest for testing with accessibility checks via axe-core. Currently a front-end demo with mock data.",
+        "imageAlt": "Beacon UI service status console showing uptime metrics and incident timeline"
+      },
+      "matiz-studio": {
+        "title": "Matiz Studio",
+        "summary": "A design system generator: one color becomes a complete, accessible palette with tokens.",
+        "description": "A web tool that generates complete OKLCH color palettes, light and dark themes meeting WCAG 2.2 AA, and type, spacing, radius, and shadow scales from a single color and personality. Exports as CSS, SCSS, W3C design tokens, or TypeScript. Built with Next.js 16, React 19, TypeScript in strict mode, and SCSS modules with design tokens.",
+        "imageAlt": "Matiz Studio color palette generator interface with theme preview and export options"
+      },
+      "gymwarrior": {
+        "title": "GymWarrior",
+        "summary": "A gym platform with membership plans, a supplement store, health calculators, and an admin panel.",
+        "description": "A web platform for a neighborhood gym with online membership plans, a supplement store with shopping cart, health calculators (BMI and calories), and an admin panel. Built with Next.js 16, TypeScript, PostgreSQL with Drizzle ORM, Better Auth for authentication, Zustand for state management, and SCSS modules. Features simulated payments for portfolio demonstration.",
+        "imageAlt": "GymWarrior homepage with membership plans and gym facilities showcase"
+      },
+      "weather": {
+        "title": "Weather App",
+        "summary": "A weather app that turns forecast data into practical advice with background alerts.",
+        "description": "A weather application built with Angular 22 that transforms forecast data into actionable recommendations, like 'Take an umbrella: rain likely from 3:00 p.m.' It sends alerts for storms, heavy rain, heat, cold, UV, wind, and poor air quality. Uses the Periodic Background Sync API to check conditions even when the app is closed. Built with TypeScript, SCSS, Vitest, and the Open-Meteo API.",
+        "imageAlt": "Weather app showing current conditions with practical recommendations and alerts"
+      },
       "project-three": {
         "title": "StoreFrontEnd",
         "summary": "An e-commerce frontend with product browsing, cart management, PayPal payments, and administration.",
