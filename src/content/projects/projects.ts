@@ -41,7 +41,7 @@ const projects: readonly ProjectMeta[] = [
     category: 'app',
     tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Drizzle', 'Zustand'],
     repositoryUrl: 'https://github.com/Jhon-David-Toro/GymWarrior',
-    liveUrl: 'https://gym-warrior.vercel.app',
+    liveUrl: 'https://gymwarrior.doxel.dev/',
     image: '/projects/GymWarrior.png',
   },
   {
@@ -49,7 +49,7 @@ const projects: readonly ProjectMeta[] = [
     category: 'app',
     tags: ['Angular 22', 'TypeScript', 'SCSS', 'Vitest', 'Open-Meteo'],
     repositoryUrl: 'https://github.com/Jhon-David-Toro/clima-app',
-    liveUrl: 'https://jhon-david-toro.github.io/clima-app/',
+    liveUrl: 'hhttps://weather.doxel.dev/',
     image: '/projects/Weather.png',
   },
   {
